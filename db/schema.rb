@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140711205750) do
+ActiveRecord::Schema.define(version: 20140712210753) do
 
   create_table "books", force: true do |t|
     t.integer  "group_id"
@@ -33,13 +33,17 @@ ActiveRecord::Schema.define(version: 20140711205750) do
   end
 
   create_table "requests", force: true do |t|
-    t.integer  "requester"
-    t.integer  "requested"
-    t.integer  "group"
     t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "requested_id"
+    t.integer  "requester_id"
+    t.integer  "group_id"
   end
+
+  add_index "requests", ["group_id"], name: "index_requests_on_group_id"
+  add_index "requests", ["requested_id"], name: "index_requests_on_requested_id"
+  add_index "requests", ["requester_id"], name: "index_requests_on_requester_id"
 
   create_table "users", force: true do |t|
     t.string   "fname"
