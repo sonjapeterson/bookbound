@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'omniauth-facebook'
 gem 'omniauth'
+gem 'foundation-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
