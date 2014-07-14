@@ -1,3 +1,3 @@
 class Book < ActiveRecord::Base
-	belongs_to_many :groups
+	belongs_to :group
 end
