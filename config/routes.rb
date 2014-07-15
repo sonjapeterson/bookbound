@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get 'users/dashboard'
 
   resources :users
-  
+  resources :groups, only: [:new, :show, :create, :destroy]
+
   root :to => 'static_pages#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
