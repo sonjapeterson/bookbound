@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
 	def update
 		current_user.update_attributes(user_params)
+		current_user.genre.create()
 		redirect_to user_path
 	end
 
@@ -15,6 +16,6 @@ class UsersController < ApplicationController
 
 	private
 		def user_params
-			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :genre, :fav_authors, :description, :classic, :comedy, :comic, :educational, :historical, :memoir, :mystery, :nonfiction, :poetry, :pulp, :romance, :scifi, :shortstory)
+			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :fav_author)
 		end
 end
