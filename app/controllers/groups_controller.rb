@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
 
-  autocomplete :user, :name, :extra_data => [:image], :display_value => :display_user_name_and_image
+  autocomplete :user, :name, :extra_data => [:image]
 
   def new
     @group = Group.new

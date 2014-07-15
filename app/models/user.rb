@@ -26,8 +26,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  def display_user_name_and_image
-    return "#{name}".upcase + "<img src='#{image}'>"
-  end
-
 end
