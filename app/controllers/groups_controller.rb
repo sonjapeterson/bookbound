@@ -1,4 +1,7 @@
 class GroupsController < ApplicationController
+
+  autocomplete :user, :name
+
   def new
     @group = Group.new
   end
@@ -9,7 +12,7 @@ class GroupsController < ApplicationController
     @group.users << current_user
     # @group.book << params[:book]
     @group.save
-    @request = Request.new(requester_id: current_user.id, requested_id: params[:group][:users], group_id: @group.id)
+    @request = Request.new(requester_id: current_user.id, requested_id: User.find_by(name: params[:group][:users]).id, group_id: @group.id)
     @request.save
     redirect_to root_url
   end
