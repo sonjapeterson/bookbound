@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :groups, only: [:new, :show, :create, :destroy]
+  resources :requests, only: [:create, :destroy, :update]
 
   root :to => 'static_pages#index'
 

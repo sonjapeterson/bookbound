@@ -31,6 +31,7 @@ gem 'spring'
 
 group :development, :test do
     gem 'railroady'
+    gem 'pry-rails'
 end
 
 # Use ActiveModel has_secure_password
