@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
 	def update
 		current_user.update_attributes(user_params)
-		redirect_to edit_user_path
+		redirect_to user_path
 	end
 
 	def show
@@ -16,6 +16,6 @@ class UsersController < ApplicationController
 
 	private
 		def user_params
-			params.require(:user).permit(:email, :location, :gender)
+			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :fav_genres, :fav_authors, :description)
 		end
 end

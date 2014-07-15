@@ -1,5 +1,10 @@
 <h1>Edit profile</h1>
 
+<img src=<%= current_user.image %>>
+<%= current_user.fname %>
+<%= current_user.lname %>
+<br>
+
 <%= form_for(current_user) do |f| %>
 	<%= f.label :email %>
 	<%= f.text_field :email %>
@@ -11,6 +16,26 @@
 
 	<%= f.label :gender %>
 	<%= f.select :gender, options_for_select([["Female", "female"], ["Male", "male"], ["Other", "other"]], current_user.gender) %>
+	<br>
+
+	<%= f.label :age %>
+	<%= f.text_field :age %>
+	<br>	
+
+	<%= f.label :description %>
+	<%= f.text_field :description %>
+	<br>
+
+	<%= f.label "Favorite Books" %>
+	<%= f.text_field :fav_books %>
+	<br>
+
+	<%= f.label "Favorite Genres" %>
+	<%= f.text_field :fav_genres %>
+	<br>
+
+	<%= f.label "Favorite Authors" %>
+	<%= f.text_field :fav_authors %>
 	<br>
 
 	<%= f.submit %>
