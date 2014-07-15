@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
       user.email ||= auth.info.email
       user.location ||= auth.info.location
       user.gender ||= auth.extra.raw_info.gender
+      user.birthday ||= auth.extra.raw_info.birthday
       user.image = auth.info.image
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)

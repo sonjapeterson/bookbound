@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714181147) do
+ActiveRecord::Schema.define(version: 20140715133313) do
 
   create_table "books", force: true do |t|
     t.integer  "group_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140714181147) do
     t.string   "image"
     t.string   "gender"
     t.string   "location"
+    t.date     "birthday"
   end
 
 end
