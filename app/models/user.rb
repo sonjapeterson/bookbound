@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :requesters, through: :reverse_requests, source: :requester
   has_and_belongs_to_many :groups
+  has_one :genre
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|

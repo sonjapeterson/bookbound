@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140715141626) do
+ActiveRecord::Schema.define(version: 20140715151851) do
 
   create_table "books", force: true do |t|
     t.integer  "group_id"
@@ -21,6 +21,24 @@ ActiveRecord::Schema.define(version: 20140715141626) do
     t.string   "isbn"
     t.text     "summary"
     t.string   "author"
+  end
+
+  create_table "genres", force: true do |t|
+    t.integer  "classic"
+    t.integer  "comedy"
+    t.integer  "comic"
+    t.integer  "educational"
+    t.integer  "historical"
+    t.integer  "memoir"
+    t.integer  "mystery"
+    t.integer  "nonfiction"
+    t.integer  "poetry"
+    t.integer  "pulp"
+    t.integer  "romance"
+    t.integer  "scifi"
+    t.integer  "shortstory"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "groups", force: true do |t|

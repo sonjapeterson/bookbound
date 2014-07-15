@@ -11,11 +11,10 @@ class UsersController < ApplicationController
 	end
 
 	def show
-
 	end
 
 	private
 		def user_params
-			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :fav_genres, :fav_authors, :description)
+			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :genre, :fav_authors, :description, :classic, :comedy, :comic, :educational, :historical, :memoir, :mystery, :nonfiction, :poetry, :pulp, :romance, :scifi, :shortstory)
 		end
 end
