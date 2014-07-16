@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
+  get 'invite', to: 'static_pages#invite'
+  match 'sendinvite', to: 'static_pages#sendinvite', via: 'post', as: :sendinvite
 
   get 'users/dashboard'
   match 'users/:id/groups', to: 'users#groups', via: 'get', as: :groups_user

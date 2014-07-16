@@ -11,6 +11,7 @@ class RequestsController < ApplicationController
 		# put requested user into the group
 		group.users << User.find(current_request.requested_id)
 		group.save
+		flash[:notice] = "Request confirmed!"
 		redirect_to groups_user_path(current_user)
 	end
 

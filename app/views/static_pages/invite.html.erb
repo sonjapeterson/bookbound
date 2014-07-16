@@ -1,12 +1,6 @@
 <h3>Invite your friend:</h3>
 
-<form action="MAILTO:sonjapeterson@example.com" method="post" enctype="text/plain">
-Name:<br>
-<input type="text" name="name" value="your name"><br>
-E-mail:<br>
-<input type="text" name="mail" value="your email"><br>
-Comment:<br>
-<input type="text" name="comment" value="your comment" size="50"><br><br>
-<input type="submit" value="Send">
-<input type="reset" value="Reset">
-</form>
+<%= form_tag('sendinvite') do %>
+<%= email_field_tag("address") %>
+<%= submit_tag 'Send your invite' %>
+<% end %>

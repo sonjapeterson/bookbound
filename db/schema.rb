@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716175118) do
+ActiveRecord::Schema.define(version: 20140716195134) do
 
   create_table "books", force: true do |t|
     t.integer  "group_id"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20140716175118) do
     t.string   "isbn"
     t.text     "summary"
     t.string   "author"
+  end
+
+  create_table "contact_forms", force: true do |t|
+    t.string   "name"
+    t.string   "toemail"
+    t.string   "fromemail"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "genres", force: true do |t|
