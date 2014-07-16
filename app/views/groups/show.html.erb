@@ -1,4 +1,21 @@
-Reading <%= @group.book.title %> with <%= @group.users.where.not(id: current_user.id).first.name %>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<!-- BEGIN TimelineJS -->
+<script type="text/javascript" src="http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>
+
+<script>
+        $(document).ready(function() {
+            createStoryJS({
+                type:       'timeline',
+                width:      $(window).width(),
+                height:     '500',
+                source:     '<%= @notes %>',
+                embed_id:   'my-timeline'
+            });
+        });
+</script>
+
+<div id="my-timeline"></div>
 
 <%= form_for(@note) do |f| %>
 	<%= f.label :body %>

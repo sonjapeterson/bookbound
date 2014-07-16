@@ -5,6 +5,7 @@ gem 'omniauth'
 gem 'foundation-rails'
 gem 'pry'
 gem 'rails4-autocomplete'
+gem 'timelineJS-rails', '~> 1.1.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
