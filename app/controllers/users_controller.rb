@@ -14,6 +14,11 @@ class UsersController < ApplicationController
 	def show
 	end
 
+	def groups
+		@groups = User.find(params[:id]).groups
+		@requests = Request.where(status: false)
+	end
+
 	private
 		def user_params
 			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :fav_author, :genre)

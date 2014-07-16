@@ -4,7 +4,13 @@ class RequestsController < ApplicationController
 	end
 
 	def confirm
-		# @group.users << User.find(params[:group][:users])
+		# set request status to true
+		# put requested user into the group
+		@group.users << User.find(params[:requested_user_id])
+	end
+
+	def destroy
+		# delete request
 	end
 
 end
