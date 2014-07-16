@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
   get 'users/dashboard'
-  get 'users/:id/groups', to: 'users#groups'
+  match 'users/:id/groups', to: 'users#groups', via: 'get', as: :groups_user
+  post 'users/:id/requests/confirm', to: 'requests#confirm'
+  post 'users/:id/requests/delete', to: 'requests#destroy'
 
   resources :users
   resources :groups, only: [:new, :show, :create, :destroy] do

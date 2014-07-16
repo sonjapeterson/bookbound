@@ -1,7 +1,19 @@
+<h1><%= User.find(params[:id]).name %>'s Books</h1>
+
 <h2>Requested partnerships</h2>
 	<!-- Requests where your user_id = requested_id and request.status = false -->
 	<% @requests.where(requested_id: params[:id]).each do |request| %>
-		Person who requested you: <%= User.find(request.requester_id).name %>, for <%= Group.find(request.group_id).book.title %><br>
+		<p>
+			Person who requested you: <%= User.find(request.requester_id).name %>, for <%= Group.find(request.group_id).book.title %><br>
+			<%= form_tag('requests/confirm') do %>
+				<%= hidden_field_tag("request", request.id) %>
+				<%= submit_tag "Confirm" %>
+			<% end %>
+			<%= form_tag('requests/delete') do %>
+				<%= hidden_field_tag("request", request.id) %>
+				<%= submit_tag "Decline" %>
+			<% end %>
+		</p>
 	<% end %>
 
 <h2>Confirmed partnerships</h2>
@@ -15,5 +27,10 @@
 <h2>Partnerships you have requested</h2>
 	<!-- Requests where your user_id = requester_id and request.status = false -->
 	<% @requests.where(requester_id: params[:id]).each do |request| %>
-		Person you requested: <%= User.find(request.requested_id).name %>, for <%= Group.find(request.group_id).book.title %><br>
+		<p>
+			Person you requested: <%= User.find(request.requested_id).name %>, for <%= Group.find(request.group_id).book.title %><br>
+			<%= form_tag('requests/delete') do %>
+				<%= hidden_field_tag("request", request.id) %>
+				<%= submit_tag "Decline" %>
+			<% end %>
 	<% end %>
