@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get :autocomplete_user_name, :on => :collection
   end
   resources :requests, only: [:create, :destroy, :update]
+  resources :notes
 
   root :to => 'static_pages#index'
 

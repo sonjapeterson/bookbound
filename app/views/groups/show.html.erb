@@ -1,0 +1,23 @@
+Reading <%= @group.book.title %> with <%= @group.users.where.not(id: current_user.id).first.name %>
+
+<%= form_for(@note) do |f| %>
+	<%= f.label :body %>
+	<%= f.text_field :body %>
+
+	<%= f.label :pagenumber %>
+	<%= f.text_field :pagenumber %>
+
+	<%= f.hidden_field(:group_id, value: @group.id) %>
+	<%= f.hidden_field(:user_id, value: current_user.id) %>
+
+	<%= f.submit %>
+<% end %>
+
+<% @group.notes.each do |note| %>
+<p>
+	written by: <%= User.find(note.user_id).name %>
+	<%= note.body %>, 
+	pg <%= note.pagenumber %>
+	<br>
+</p>
+<% end %>

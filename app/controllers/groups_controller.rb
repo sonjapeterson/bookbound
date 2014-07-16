@@ -18,6 +18,11 @@ class GroupsController < ApplicationController
     redirect_to root_url
   end
 
+  def show
+    @note = Note.new
+    @group = Group.find(params[:id])
+  end
+
   private
 
   # def group_params
