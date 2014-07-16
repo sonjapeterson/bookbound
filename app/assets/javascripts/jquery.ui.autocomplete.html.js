@@ -32,7 +32,7 @@ $.extend( proto, {
 	_renderItem: function( ul, item) {
 		return $( "<li></li>" )
 			.data( "item.autocomplete", item )
-			.append("<a>" +"<img src='" + item.image + "'>" + item.label + "</a>" )
+			.append($( "<a></a>" )[ this.options.html ? "html" : "text" ]( item.label ))
 			.appendTo( ul );
 	}
 });
