@@ -20,11 +20,26 @@ class User < ActiveRecord::Base
       user.location ||= auth.info.location
       user.gender ||= auth.extra.raw_info.gender
       user.genre ||= Genre.new
-      #user.birthday = auth.extra.raw_info.birthday.to_s
       user.image = auth.info.image
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
     end
   end
+
+  def show_name_and_image
+    name = self.name
+    # image = self.image
+    # if !image.nil?
+    #   return "<img src='#{image}'> #{name}"
+    # else
+    #   return "#{name}"
+    # end
+    return "#{name}"
+  end
+
+  def set_name_as_value
+    self.name
+  end
+
 end

@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   get 'users/dashboard'
 
   resources :users
-  
+  resources :groups, only: [:new, :show, :create, :destroy] do
+    get :autocomplete_user_name, :on => :collection
+  end
+  resources :requests, only: [:create, :destroy, :update]
+
   root :to => 'static_pages#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
