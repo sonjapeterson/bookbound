@@ -16,13 +16,10 @@ class UsersController < ApplicationController
 
 	private
 		def user_params
-			genreforuser = Genre.new
-			genreforuser.update_attributes(user_id: current_user.id)
 			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :fav_author, :genre)
 		end
 
 		def genre_params
-		
-			params.permit(:comic, :comedy)
+			params[:user][:genre].permit(:classic, :comedy, :comic, :educational, :historical, :memoir, :mystery, :nonfiction, :poetry, :pulp, :romance, :scifi, :shortstory)
 		end
 end
