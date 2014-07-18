@@ -4,16 +4,18 @@
 <script type="text/javascript" src="http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>
 
 <script>
-        $(document).ready(function() {
-            createStoryJS({
-                type:       'timeline',
-                width:      $(window).width(),
-                height:     '500',
-                source:     '<%= @notes %>',
-                embed_id:   'my-timeline'
-            });
+    $(document).on('ready page:load',function() {
+        createStoryJS({
+            type:       'timeline',
+            width:      $(window).width(),
+            height:     '500',
+            source:     '<%= @notes %>',
+            embed_id:   'my-timeline'
         });
+    });
 </script>
+
+<%= link_to "Show list view", groups_list_path(params[:id]) %>
 
 <div id="my-timeline"></div>
 
@@ -26,15 +28,27 @@
 
 	<%= f.hidden_field(:group_id, value: @group.id) %>
 	<%= f.hidden_field(:user_id, value: current_user.id) %>
+    <%= f.hidden_field(:view_type, value: "timeline") %>
 
 	<%= f.submit %>
 <% end %>
 
-<% @group.notes.each do |note| %>
-<p>
-	written by: <%= User.find(note.user_id).name %>
-	<%= note.body %>, 
-	pg <%= note.pagenumber %>
-	<br>
-</p>
+<% if @group.request.requester_id == current_user.id %>
+    <p>
+        <%= form_tag('finish_book') do %>
+            <%= hidden_field_tag("group", @group.id) %>
+            <%= submit_tag "Mark book as completed" %>
+        <% end %>
+    </p>
 <% end %>
+
+<script type="text/javascript">
+//Place as last thing before the closing </body> tag
+if(location.search.indexOf('reloaded=yes') < 0){
+    var hash = window.location.hash;
+    var loc = window.location.href.replace(hash, '');
+    loc += (loc.indexOf('?') < 0? '?' : '&') + 'reloaded=yes';
+    // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):
+    setTimeout(function(){window.location.href = loc + hash;}, 1);
+}
+</script>

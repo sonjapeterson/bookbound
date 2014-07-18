@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new
+    @group = Group.new(status: true)
     @group.save
     @group.users << current_user
     books = GoogleBooks.search(params[:group][:book], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI'})
@@ -27,28 +27,39 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @note = Note.new
-    @notes = Note.all    
+    @notes = Note.all
 
     respond_to do |format|
     format.html # show.html.erb
     format.json { render json: json_out = {
-      "timeline"=>
-      {
-        "headline"=> @group.book.title,
-        "type"=>"default",
-        "text"=> "With " + @group.users.where.not(id: current_user.id).first.name,
+        "timeline"=>
+        {
+          "headline"=> @group.book.title,
+          "type"=>"default",
+          "text"=> "With " + @group.users.where.not(id: current_user.id).first.name,
 
-        "asset" => {
-            "media" => "http://www.beaglepuppybreeders.co.uk/userimages/K%20litter.jpg",
-            "credit" => "Credit Name Goes Here",
-            "caption" => "Caption text goes here"
-        },
+          "asset" => {
+              "media" => "http://www.beaglepuppybreeders.co.uk/userimages/K%20litter.jpg",
+              "credit" => "Credit Name Goes Here",
+              "caption" => "Caption text goes here"
+          },
 
-        "date"=> @notes.map { |note| {"startDate" => note.pagenumber,"endDate" => note.pagenumber, "text" => note.body, "headline" => User.find(note.user_id).name }},
+          "date"=> @notes.map { |note| {"startDate" => note.pagenumber.to_s,"endDate" => note.pagenumber.to_s, "text" => note.body, "headline" => User.find(note.user_id).name }},
 
-      }
-    } }
+        }
+      } }
+    end
   end
+
+  def list
+    @group = Group.find(params[:id])
+    @note = Note.new
+  end
+
+  def finish_book
+    current_group = Group.find(params[:group])
+    current_group.update_attributes(status: false)
+    redirect_to groups_user_path(current_user)
   end
 
   private
