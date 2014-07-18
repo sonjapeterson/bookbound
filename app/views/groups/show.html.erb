@@ -17,7 +17,7 @@
 
 <%= link_to "Show list view", groups_list_path(params[:id]) %>
 
-<div id="my-timeline"></div>
+<div style="z-index: 1;" id="my-timeline"></div>
 
 <%= form_for(@note) do |f| %>
 	<%= f.label :body %>
