@@ -6,17 +6,24 @@ class GroupsController < ApplicationController
 
   autocomplete :user, :name, :extra_data => [:image], :display_value => :show_name_and_image, :select_value => :set_name_as_value
 
+  autocomplete :book, :title
+
   def new
     @group = Group.new
+   @isbn = params[:isbn]
   end
+
+
+  
 
   def create
     @group = Group.new(status: true)
     @group.save
     @group.users << current_user
-    books = GoogleBooks.search(params[:group][:book], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI'})
-    specimen = books.first
-    @book = Book.new(title: specimen.title, author: specimen.authors, publisher: specimen.publisher, datepublished: specimen.published_date, pagecount: specimen.page_count, summary: specimen.description, imagelinklarge: specimen.image_link(:zoom => 4), imagelinksmall: specimen.image_link(:zoom => 4), previewlink: specimen.preview_link)
+    @bookz = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI'})
+
+    chosenbook = @bookz.first
+    @book = Book.new(title: chosenbook.title, author: chosenbook.authors, publisher: chosenbook.publisher, datepublished: chosenbook.published_date, pagecount: chosenbook.page_count, summary: chosenbook.description, imagelinklarge: chosenbook.image_link, imagelinksmall: chosenbook.image_link, previewlink: chosenbook.preview_link)
     @group.book = @book
     @group.save
     @note = Note.new(group_id: @group.id, pagenumber: 1, body: "This is an example of what a note looks like. Start writing notes to each other using the form below!", user_id: current_user.id)
@@ -25,6 +32,15 @@ class GroupsController < ApplicationController
     @request.save
     redirect_to root_url
   end
+
+  def searchbooks
+    @sbooks = GoogleBooks.search(params[:query], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :count => 30, :country => 'us'})
+
+  end
+
+  def displaybooksearch
+  end
+
 
   def show
     @group = Group.find(params[:id])

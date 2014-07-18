@@ -4,17 +4,22 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'invite', to: 'static_pages#invite'
   match 'sendinvite', to: 'static_pages#sendinvite', via: 'post', as: :sendinvite
+  match 'displaybooksearch', to: 'groups#displaybooksearch', via: 'get', as: :displaybooksearch
+  
 
   get 'users/dashboard'
   match 'users/:id/groups', to: 'users#groups', via: 'get', as: :groups_user
   post 'users/:id/requests/confirm', to: 'requests#confirm'
   post 'users/:id/requests/delete', to: 'requests#destroy'
+  post '/searchbooks', to: 'groups#searchbooks'
+  get '/searchbooks', to: 'groups#searchbooks'
   post 'groups/finish_book', to: 'groups#finish_book'
   match 'groups/:id/list', to: 'groups#list', via: 'get', as: :groups_list
-
+  
   resources :users
   resources :groups, only: [:new, :show, :create, :destroy] do
     get :autocomplete_user_name, :on => :collection
+    get :autocomplete_book_title, :on => :collection
   end
   resources :requests, only: [:create, :destroy, :update]
   resources :notes

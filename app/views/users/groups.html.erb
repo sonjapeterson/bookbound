@@ -32,6 +32,6 @@
 			Person you requested: <%= User.find(request.requested_id).name %>, for <%= Group.find(request.group_id).book.title %><br>
 			<%= form_tag('requests/delete') do %>
 				<%= hidden_field_tag("request", request.id) %>
-				<%= submit_tag "Decline" %>
+				<%= submit_tag "Delete" %>
 			<% end %>
 	<% end %>
