@@ -16,9 +16,11 @@ class GroupsController < ApplicationController
     @group.users << current_user
     books = GoogleBooks.search(params[:group][:book], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI'})
     specimen = books.first
-    @book = Book.new(title: specimen.title, author: specimen.authors, publisher: specimen.publisher, datepublished: specimen.published_date, pagecount: specimen.page_count, summary: specimen.description, imagelinklarge: specimen.image_link, imagelinksmall: specimen.image_link, previewlink: specimen.preview_link)
+    @book = Book.new(title: specimen.title, author: specimen.authors, publisher: specimen.publisher, datepublished: specimen.published_date, pagecount: specimen.page_count, summary: specimen.description, imagelinklarge: specimen.image_link(:zoom => 4), imagelinksmall: specimen.image_link(:zoom => 4), previewlink: specimen.preview_link)
     @group.book = @book
     @group.save
+    @note = Note.new(group_id: @group.id, pagenumber: 1, body: "This is an example of what a note looks like. Start writing notes to each other using the form below!", user_id: current_user.id)
+    @note.save
     @request = Request.new(requester_id: current_user.id, requested_id: User.find_by(name: params[:group][:users]).id, group_id: @group.id, status: false)
     @request.save
     redirect_to root_url
@@ -27,7 +29,7 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @note = Note.new
-    @notes = Note.all
+    @notes = @group.notes.all
 
     respond_to do |format|
     format.html # show.html.erb
@@ -39,9 +41,9 @@ class GroupsController < ApplicationController
           "text"=> "With " + @group.users.where.not(id: current_user.id).first.name,
 
           "asset" => {
-              "media" => "http://www.beaglepuppybreeders.co.uk/userimages/K%20litter.jpg",
-              "credit" => "Credit Name Goes Here",
-              "caption" => "Caption text goes here"
+              "media" => " ",
+              "credit" => " ",
+              "caption" => "<img src='" + @group.book.imagelinklarge + "'>"
           },
 
           "date"=> @notes.map { |note| {"startDate" => note.pagenumber.to_s,"endDate" => note.pagenumber.to_s, "text" => note.body, "headline" => User.find(note.user_id).name }},
