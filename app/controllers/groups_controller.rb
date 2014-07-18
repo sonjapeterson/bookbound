@@ -17,7 +17,7 @@ class GroupsController < ApplicationController
   
 
   def create
-    @group = Group.new
+    @group = Group.new(status: true)
     @group.save
     @group.users << current_user
     @bookz = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI'})
@@ -26,6 +26,8 @@ class GroupsController < ApplicationController
     @book = Book.new(title: chosenbook.title, author: chosenbook.authors, publisher: chosenbook.publisher, datepublished: chosenbook.published_date, pagecount: chosenbook.page_count, summary: chosenbook.description, imagelinklarge: chosenbook.image_link, imagelinksmall: chosenbook.image_link, previewlink: chosenbook.preview_link)
     @group.book = @book
     @group.save
+    @note = Note.new(group_id: @group.id, pagenumber: 1, body: "This is an example of what a note looks like. Start writing notes to each other using the form below!", user_id: current_user.id)
+    @note.save
     @request = Request.new(requester_id: current_user.id, requested_id: User.find_by(name: params[:group][:users]).id, group_id: @group.id, status: false)
     @request.save
     redirect_to root_url
@@ -43,28 +45,39 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @note = Note.new
-    @notes = Note.all    
+    @notes = @group.notes.all
 
     respond_to do |format|
     format.html # show.html.erb
     format.json { render json: json_out = {
-      "timeline"=>
-      {
-        "headline"=> @group.book.title,
-        "type"=>"default",
-        "text"=> "With " + @group.users.where.not(id: current_user.id).first.name,
+        "timeline"=>
+        {
+          "headline"=> @group.book.title,
+          "type"=>"default",
+          "text"=> "With " + @group.users.where.not(id: current_user.id).first.name,
 
-        "asset" => {
-            "media" => "http://www.beaglepuppybreeders.co.uk/userimages/K%20litter.jpg",
-            "credit" => "Credit Name Goes Here",
-            "caption" => "Caption text goes here"
-        },
+          "asset" => {
+              "media" => " ",
+              "credit" => " ",
+              "caption" => "<img src='" + @group.book.imagelinklarge + "'>"
+          },
 
-        "date"=> @notes.map { |note| {"startDate" => note.pagenumber,"endDate" => note.pagenumber, "text" => note.body, "headline" => User.find(note.user_id).name }},
+          "date"=> @notes.map { |note| {"startDate" => note.pagenumber.to_s,"endDate" => note.pagenumber.to_s, "text" => note.body, "headline" => User.find(note.user_id).name }},
 
-      }
-    } }
+        }
+      } }
+    end
   end
+
+  def list
+    @group = Group.find(params[:id])
+    @note = Note.new
+  end
+
+  def finish_book
+    current_group = Group.find(params[:group])
+    current_group.update_attributes(status: false)
+    redirect_to groups_user_path(current_user)
   end
 
   private

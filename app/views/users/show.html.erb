@@ -1,20 +1,20 @@
 <h1>My Profile</h1>
 
-<img src=<%= current_user.image %>>
-<%= current_user.fname %>
-<%= current_user.lname %>
+<img src=<%= @user.image %>>
+<%= @user.fname %>
+<%= @user.lname %>
 <br>
 
-Email: <%= current_user.email %><br>
-Location: <%= current_user.location %><br>
-Gender: <%= current_user.gender %><br>
-Age: <%= current_user.age %><br>
-Description: <%= current_user.description %><br>
-Favorite books: <%= current_user.fav_books %><br>
+Email: <%= @user.email %><br>
+Location: <%= @user.location %><br>
+Gender: <%= @user.gender %><br>
+Age: <%= @user.age %><br>
+Description: <%= @user.description %><br>
+Favorite books: <%= @user.fav_books %><br>
 
 Favorite genres:
 <% result = "" %>
-<% current_user.genre.attributes.each_pair do |key, value| %>
+<% @user.genre.attributes.each_pair do |key, value| %>
 	<% if value == 1 && key != "user_id" && key != "id"%>
 		<% result += key + ", " %>
 	<% end %>
@@ -22,6 +22,6 @@ Favorite genres:
 <%= result[0..(result.length - 3)] %>
 <br>
 
-Favorite authors: <%= current_user.fav_authors %><br>
+Favorite authors: <%= @user.fav_authors %><br>
 
-<%= link_to "Edit Profile", edit_user_path(current_user) %>
+<%= link_to "Edit Profile", edit_user_path(@user) %>

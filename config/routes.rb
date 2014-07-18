@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   post 'users/:id/requests/delete', to: 'requests#destroy'
   post '/searchbooks', to: 'groups#searchbooks'
   get '/searchbooks', to: 'groups#searchbooks'
-
+  post 'groups/finish_book', to: 'groups#finish_book'
+  match 'groups/:id/list', to: 'groups#list', via: 'get', as: :groups_list
+  
   resources :users
   resources :groups, only: [:new, :show, :create, :destroy] do
     get :autocomplete_user_name, :on => :collection
