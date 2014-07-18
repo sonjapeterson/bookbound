@@ -21,6 +21,7 @@
 	<% @groups.each do |group| %>
 		<% if group.users.count > 1 %>
 			Reading <%= group.book.title %> with <%= group.users.where.not(id: params[:id]).first.name %><br>
+			<%= link_to "Show group", group_path(group.id) %><br>
 		<% end %>
 	<% end %>
 
