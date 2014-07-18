@@ -6,6 +6,8 @@ class GroupsController < ApplicationController
 
   autocomplete :user, :name, :extra_data => [:image], :display_value => :show_name_and_image, :select_value => :set_name_as_value
 
+  autocomplete :book, :title
+  
   def new
     @group = Group.new
   end
@@ -14,8 +16,8 @@ class GroupsController < ApplicationController
     @group = Group.new
     @group.save
     @group.users << current_user
-    books = GoogleBooks.search(params[:group][:book], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI'})
-    specimen = books.first
+    @books = GoogleBooks.search(params[:group][:book], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :count => 10})
+    specimen = @books.first
     @book = Book.new(title: specimen.title, author: specimen.authors, publisher: specimen.publisher, datepublished: specimen.published_date, pagecount: specimen.page_count, summary: specimen.description, imagelinklarge: specimen.image_link, imagelinksmall: specimen.image_link, previewlink: specimen.preview_link)
     @group.book = @book
     @group.save

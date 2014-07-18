@@ -4,8 +4,8 @@
 	<%= f.autocomplete_field :users, autocomplete_user_name_groups_path, :value => "" %>
 
 	<%= f.label(:book, "Enter ISBN")%>
-	<%= f.text_field :book %>
-
+	<%= f.autocomplete_field :book, autocomplete_book_title_groups_path, :value => "" %>
+	
 
 	<%= f.submit "Submit" %>
 <% end %> 
