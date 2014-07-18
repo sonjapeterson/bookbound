@@ -3,8 +3,9 @@
 	<% if false %><%= f.text_field :users, :value => "" %><% end %>
 	<%= f.autocomplete_field :users, autocomplete_user_name_groups_path, :value => "" %>
 
-	<%= f.label :book %>
+	<%= f.label(:book, "Enter ISBN")%>
 	<%= f.text_field :book %>
+
 
 	<%= f.submit "Submit" %>
 <% end %> 
