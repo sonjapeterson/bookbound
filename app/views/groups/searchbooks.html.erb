@@ -1,0 +1,22 @@
+<h1>Select Your Book</h1>
+<table >
+<% if !@sbooks.nil?  %>
+		<% @sbooks.each do |onebook| %>
+		<tr>
+			<td> <a class="button" href="/groups/new?isbn=<%= onebook.isbn %>">Select</a></td>
+			<td> <img src='<%= onebook.image_link %>'> </td>
+			<td> <%= onebook.title %> </td>
+			<td> <%= onebook.authors %> </td>
+			<td> <%= onebook.description %> </td>
+			<td> <%= onebook.isbn %> </td>
+			<td> <%= onebook.publisher %> </td>
+		</tr>
+		<%end%>
+<%else %> 
+ search failed
+<% end %> 
+</table>
+
+<div class="text-centered">
+  
+</div>

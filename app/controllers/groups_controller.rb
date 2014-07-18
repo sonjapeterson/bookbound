@@ -7,24 +7,38 @@ class GroupsController < ApplicationController
   autocomplete :user, :name, :extra_data => [:image], :display_value => :show_name_and_image, :select_value => :set_name_as_value
 
   autocomplete :book, :title
-  
+
   def new
     @group = Group.new
+   @isbn = params[:isbn]
   end
+
+
+  
 
   def create
     @group = Group.new
     @group.save
     @group.users << current_user
-    @books = GoogleBooks.search(params[:group][:book], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :count => 10})
-    specimen = @books.first
-    @book = Book.new(title: specimen.title, author: specimen.authors, publisher: specimen.publisher, datepublished: specimen.published_date, pagecount: specimen.page_count, summary: specimen.description, imagelinklarge: specimen.image_link, imagelinksmall: specimen.image_link, previewlink: specimen.preview_link)
+    @bookz = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI'})
+
+    chosenbook = @bookz.first
+    @book = Book.new(title: chosenbook.title, author: chosenbook.authors, publisher: chosenbook.publisher, datepublished: chosenbook.published_date, pagecount: chosenbook.page_count, summary: chosenbook.description, imagelinklarge: chosenbook.image_link, imagelinksmall: chosenbook.image_link, previewlink: chosenbook.preview_link)
     @group.book = @book
     @group.save
     @request = Request.new(requester_id: current_user.id, requested_id: User.find_by(name: params[:group][:users]).id, group_id: @group.id, status: false)
     @request.save
     redirect_to root_url
   end
+
+  def searchbooks
+    @sbooks = GoogleBooks.search(params[:query], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :count => 30, :country => 'us'})
+
+  end
+
+  def displaybooksearch
+  end
+
 
   def show
     @group = Group.find(params[:id])

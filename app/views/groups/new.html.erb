@@ -1,11 +1,11 @@
-<%= form_for(@group) do |f| %>
-	<%= f.label :users %>
-	<% if false %><%= f.text_field :users, :value => "" %><% end %>
-	<%= f.autocomplete_field :users, autocomplete_user_name_groups_path, :value => "" %>
+<h1>Pick a Friend</h1>
 
-	<%= f.label(:book, "Enter ISBN")%>
-	<%= f.autocomplete_field :book, autocomplete_book_title_groups_path, :value => "" %>
-	
+<%= form_for(@group) do |f| %>
+
+	<%= f.label :users, "Find a Fellow Reader"%>
+	<% if false %><%= f.text_field :users, :value => "" %><% end %>
+	<%= f.autocomplete_field :users, autocomplete_user_name_groups_path, :value=> "" %>
+	<%= hidden_field_tag("isbn", params[:isbn]) %>
 
 	<%= f.submit "Submit" %>
 <% end %> 
