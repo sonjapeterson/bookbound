@@ -30,6 +30,11 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @note = Note.new
     @notes = @group.notes.all
+    if Note.where(user_id: current_user.id).count > 0
+      last_page_read = Note.where(group_id: params[:id], user_id: current_user.id).order('pagenumber DESC').first.pagenumber
+    else
+      last_page_read = 0
+    end
 
     respond_to do |format|
     format.html # show.html.erb
@@ -46,7 +51,10 @@ class GroupsController < ApplicationController
               "caption" => "<img src='" + @group.book.imagelinklarge + "'>"
           },
 
-          "date"=> @notes.map { |note| {"startDate" => note.pagenumber.to_s,"endDate" => note.pagenumber.to_s, "text" => note.body, "headline" => User.find(note.user_id).name }},
+          "date"=> @notes.map { |note| {"startDate" => note.pagenumber.to_s,
+                                        "endDate" => note.pagenumber.to_s,
+                                        "text" => note_display(note, last_page_read),
+                                        "headline" => User.find(note.user_id).name }},
 
         }
       } }
@@ -65,7 +73,13 @@ class GroupsController < ApplicationController
   end
 
   private
-
+    def note_display(note, last_page_read)
+      if note.pagenumber <= last_page_read
+        note.body
+      else
+        "Read further to unlock this note!"
+      end
+    end
   # def group_params
   #   params.require(:group).permit(:users, :book)
   # end
