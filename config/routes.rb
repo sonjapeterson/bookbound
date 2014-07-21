@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   match 'displaybooksearch', to: 'groups#displaybooksearch', via: 'get', as: :displaybooksearch
   
 
-  get 'users/dashboard'
   match 'users/:id/groups', to: 'users#groups', via: 'get', as: :groups_user
   post 'users/:id/requests/confirm', to: 'requests#confirm'
   post 'users/:id/requests/delete', to: 'requests#destroy'

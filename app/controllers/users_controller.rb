@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
+	before_action :signed_in_user, only: [:edit, :groups]
+	before_action :correct_user, only: [:edit, :groups]
+
 	def dashboard
 	end
 
 	def edit
+		@user = User.find(params[:id])
 	end
 
 	def update

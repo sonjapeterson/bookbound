@@ -1,11 +1,11 @@
 <h1>Edit profile</h1>
 
-<img src=<%= current_user.image %>>
-<%= current_user.fname %>
-<%= current_user.lname %>
+<img src=<%= @user.image %>>
+<%= @user.fname %>
+<%= @user.lname %>
 <br>
 
-<%= form_for(current_user) do |f| %>
+<%= form_for(@user) do |f| %>
 	<%= f.label :email %>
 	<%= f.text_field :email %>
 	<br>
@@ -15,7 +15,7 @@
 	<br>
 
 	<%= f.label :gender %>
-	<%= f.select :gender, options_for_select([["Female", "female"], ["Male", "male"], ["Other", "other"]], current_user.gender) %>
+	<%= f.select :gender, options_for_select([["Female", "female"], ["Male", "male"], ["Other", "other"]], @user.gender) %>
 	<br>
 
 	<%= f.label :age %>
@@ -30,46 +30,46 @@
 	<%= f.text_field :fav_books %>
 	<br>
 
-	<%= f.fields_for current_user.genre do |builder| %>
+	<%= f.fields_for @user.genre do |builder| %>
 		<p>
 			<%= builder.label "Favorite Genres" %>
-			<%= builder.check_box(:classic, :checked => checked?(current_user.genre.classic)) %>
+			<%= builder.check_box(:classic, :checked => checked?(@user.genre.classic)) %>
 			<%= builder.label(:classic, "Classic Literature") %>
 
-			<%= builder.check_box(:comedy, :checked => checked?(current_user.genre.comedy)) %>
+			<%= builder.check_box(:comedy, :checked => checked?(@user.genre.comedy)) %>
 			<%= builder.label(:comedy, "Comedy") %>
 
-			<%= builder.check_box(:comic, :checked => checked?(current_user.genre.comic)) %>
+			<%= builder.check_box(:comic, :checked => checked?(@user.genre.comic)) %>
 			<%= builder.label(:comic, "Comic/Graphic Novel") %>
 
-			<%= builder.check_box(:educational, :checked => checked?(current_user.genre.educational)) %>
+			<%= builder.check_box(:educational, :checked => checked?(@user.genre.educational)) %>
 			<%= builder.label(:educational, "Educational/Textbook") %>
 
-			<%= builder.check_box(:historical, :checked => checked?(current_user.genre.historical)) %>
+			<%= builder.check_box(:historical, :checked => checked?(@user.genre.historical)) %>
 			<%= builder.label(:historical, "Historical") %>
 
-			<%= builder.check_box(:memoir, :checked => checked?(current_user.genre.memoir)) %>
+			<%= builder.check_box(:memoir, :checked => checked?(@user.genre.memoir)) %>
 			<%= builder.label(:memoir, "Memoir/Biography") %>
 
-			<%= builder.check_box(:mystery, :checked => checked?(current_user.genre.mystery)) %>
+			<%= builder.check_box(:mystery, :checked => checked?(@user.genre.mystery)) %>
 			<%= builder.label(:mystery, "Mystery") %>
 
-			<%= builder.check_box(:nonfiction, :checked => checked?(current_user.genre.nonfiction)) %>
+			<%= builder.check_box(:nonfiction, :checked => checked?(@user.genre.nonfiction)) %>
 			<%= builder.label(:nonfiction, "Non-fiction") %>
 
-			<%= builder.check_box(:poetry, :checked => checked?(current_user.genre.poetry)) %>
+			<%= builder.check_box(:poetry, :checked => checked?(@user.genre.poetry)) %>
 			<%= builder.label(:poetry, "Poetry") %>
 
-			<%= builder.check_box(:pulp, :checked => checked?(current_user.genre.pulp)) %>
+			<%= builder.check_box(:pulp, :checked => checked?(@user.genre.pulp)) %>
 			<%= builder.label(:pulp, "Pulp") %>
 
-			<%= builder.check_box(:romance, :checked => checked?(current_user.genre.romance)) %>
+			<%= builder.check_box(:romance, :checked => checked?(@user.genre.romance)) %>
 			<%= builder.label(:romance, "Romance") %>
 
-			<%= builder.check_box(:scifi, :checked => checked?(current_user.genre.scifi)) %>
+			<%= builder.check_box(:scifi, :checked => checked?(@user.genre.scifi)) %>
 			<%= builder.label(:scifi, "SciFi/Fantasy") %>
 
-			<%= builder.check_box(:shortstory, :checked => checked?(current_user.genre.shortstory)) %>
+			<%= builder.check_box(:shortstory, :checked => checked?(@user.genre.shortstory)) %>
 			<%= builder.label(:shortstory, "Short Story") %>
 		</p>
 	<% end %>

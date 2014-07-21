@@ -1,20 +1,15 @@
-
-
-
 class GroupsController < ApplicationController
 
-
   autocomplete :user, :name, :extra_data => [:image], :display_value => :show_name_and_image, :select_value => :set_name_as_value
-
   autocomplete :book, :title
+
+  before_action :signed_in_user, only: [:show]
+  before_action :member_of_group, only: [:show]
 
   def new
     @group = Group.new
-   @isbn = params[:isbn]
+    @isbn = params[:isbn]
   end
-
-
-  
 
   def create
     @group = Group.new(status: true)
@@ -41,7 +36,6 @@ class GroupsController < ApplicationController
   def displaybooksearch
   end
 
-
   def show
     @group = Group.find(params[:id])
     @note = Note.new
@@ -59,7 +53,7 @@ class GroupsController < ApplicationController
         {
           "headline"=> @group.book.title,
           "type"=>"default",
-          "text"=> "With " + @group.users.where.not(id: current_user.id).first.name,
+          "text"=> (@group.users.count < 2 ? " " : ("With " + @group.users.where.not(id: current_user.id).first.name)),
 
           "asset" => {
               "media" => " ",
