@@ -1,7 +1,11 @@
 
-<h1>Find a User</h1>
+<h1>Find a Friend</h1>
 <%= form_tag('searchusers') do %>
 <%= text_field_tag 'starts_with', nil, placeholder: 'Enter name' %>
 <%= hidden_field_tag("isbn", params[:isbn]) %>
 <%= submit_tag "Search" %>
 <% end %>
+
+<p>
+<h1>Read with a Rando</h1>
+</p>

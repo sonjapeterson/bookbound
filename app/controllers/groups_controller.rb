@@ -33,6 +33,7 @@ class GroupsController < ApplicationController
   end
 
   def displayusersearch
+    
   end
 
   def searchusers
