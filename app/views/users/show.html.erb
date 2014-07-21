@@ -23,5 +23,17 @@ Favorite genres:
 <br>
 
 Favorite authors: <%= @user.fav_authors %><br>
+Completed books:
+<% @user.groups.each do |group| %>
+	<% if group.status == false %>
+		<%= group.book.title %><br>
+	<% end %>
+<% end %><br>
+Ongoing books:
+<% @user.groups.each do |group| %>
+	<% if group.status == true %>
+		<%= group.book.title %><br>
+	<% end %>
+<% end %><br>
 
 <%= link_to "Edit Profile", edit_user_path(@user) %>

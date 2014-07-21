@@ -1,12 +1,10 @@
-
-
-
 class GroupsController < ApplicationController
 
-
   autocomplete :user, :name, :extra_data => [:image], :display_value => :show_name_and_image, :select_value => :set_name_as_value
-
   autocomplete :book, :title
+
+  before_action :signed_in_user, only: [:show]
+  before_action :member_of_group, only: [:show]
 
   def new
    @group = Group.new
@@ -46,10 +44,7 @@ class GroupsController < ApplicationController
 
   def displaybooksearch
   end
-
-
-
-
+  
   def show
     @group = Group.find(params[:id])
     @note = Note.new
@@ -67,7 +62,7 @@ class GroupsController < ApplicationController
         {
           "headline"=> @group.book.title,
           "type"=>"default",
-          "text"=> "With " + @group.users.where.not(id: current_user.id).first.name,
+          "text"=> (@group.users.count < 2 ? " " : ("With " + @group.users.where.not(id: current_user.id).first.name)),
 
           "asset" => {
               "media" => " ",
@@ -79,7 +74,7 @@ class GroupsController < ApplicationController
                                         "endDate" => note.pagenumber.to_s,
                                         "text" => note_display(note, last_page_read),
                                         "headline" => User.find(note.user_id).name,
-                                        "asset" => {"media" => "/assets/lock.jpg"}}}
+                                        "asset" => {"media" => "http://news.distractify.com/wp-content/uploads/2014/01/new-userguide-image.jpg"}}}
 
         }
       } }
