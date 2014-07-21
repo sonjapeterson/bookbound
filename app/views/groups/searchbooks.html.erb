@@ -2,16 +2,28 @@
 <table >
 <% if !@sbooks.nil?  %>
 		<% @sbooks.each do |onebook| %>
+		<% if onebook.isbn != nil %>
 		<tr>
 			<td> <a class="button" href="/displayusersearch?isbn=<%= onebook.isbn %>">Select</a></td>
 			<td> <img src='<%= onebook.image_link %>'> </td>
-			<td> <%= onebook.title %> </td>
-			<td> <%= onebook.authors %> </td>
-			<td> <%= onebook.description %> </td>
-			<td> <%= onebook.isbn %> </td>
-			<td> <%= onebook.publisher %> </td>
+			<td><b> <%= onebook.title %> </b>
+			<br>
+			by <%= onebook.authors %>
+			<br> 
+			ISBN: <%= onebook.isbn %>
+			<br>
+			Published by: <%= onebook.publisher %>	
+			</td>
+			<td> 
+				<% if onebook.description.to_s.length > 450 %>
+				<%= onebook.description.to_s[0..450] %> ...
+				<% else %>
+				<%= onebook.description %>
+				<% end %>
+			</td>
 		</tr>
-		<%end%>
+		<% end %>
+		<% end %>
 <%else %> 
  search failed
 <% end %> 
