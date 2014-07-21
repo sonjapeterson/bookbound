@@ -3,18 +3,52 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // Hide the jquery autocomplete helper text
+
 .ui-helper-hidden-accessible {
 	display:none;
 }
 
 .ui-autocomplete {
-  background-color: white;
+  	background-color: white;
 }
 
 #my-timeline {
 	border: none;
 }
 
-.media-image img {
-	border: none;
+img.media-image {
+	border: none !important;
+}
+
+img.media-image::before {
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+div.media-image.media-shadow::after {
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+div.media-image.media-shadow::before {
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+div.text-media {
+	width: 50%;
+	padding-right: 27% !important;
+}
+
+div.text {
+	width: 50% !important;
+}
+
+h2.start {
+	width: 600px !important;
+	font-size: 48px !important;
+	line-height: 1em !important;
 }

@@ -65,7 +65,7 @@ class GroupsController < ApplicationController
                                         "endDate" => note.pagenumber.to_s,
                                         "text" => note_display(note, last_page_read),
                                         "headline" => User.find(note.user_id).name,
-                                        "asset" => {"media" => "http://news.distractify.com/wp-content/uploads/2014/01/new-userguide-image.jpg"}}}
+                                        "asset" => {"media" => "/assets/lock.jpg", "thumbnail" => User.find(note.user_id).image}}}
 
         }
       } }
