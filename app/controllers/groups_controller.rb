@@ -9,12 +9,9 @@ class GroupsController < ApplicationController
   autocomplete :book, :title
 
   def new
-    @group = Group.new
+   @group = Group.new
    @isbn = params[:isbn]
   end
-
-
-  
 
   def create
     @group = Group.new(status: true)
@@ -28,18 +25,29 @@ class GroupsController < ApplicationController
     @group.save
     @note = Note.new(group_id: @group.id, pagenumber: 1, body: "This is an example of what a note looks like. Start writing notes to each other using the form below!", user_id: current_user.id)
     @note.save
-    @request = Request.new(requester_id: current_user.id, requested_id: User.find_by(name: params[:group][:users]).id, group_id: @group.id, status: false)
+    @request = Request.new(requester_id: current_user.id, requested_id: params[:newuser], group_id: @group.id, status: false)
     @request.save
     redirect_to root_url
   end
 
   def searchbooks
     @sbooks = GoogleBooks.search(params[:query], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :count => 30, :country => 'us'})
+  end
 
+  def displayusersearch
+  end
+
+  def searchusers
+     @susers = User.where(nil) # creates an anonymous scope
+     @susers = @susers.starts_with(params[:starts_with]) if params[:starts_with].present?
+     @group = Group.new
+     @isbn = params[:isbn]
   end
 
   def displaybooksearch
   end
+
+
 
 
   def show

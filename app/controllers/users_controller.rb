@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
+
+
 	def dashboard
+	end
+
+	def index
+		@users = User.all
 	end
 
 	def edit
@@ -19,6 +25,11 @@ class UsersController < ApplicationController
 		@groups = User.find(params[:id]).groups
 		@requests = Request.where(status: false)
 	end
+
+
+
+
+
 
 	private
 		def user_params

@@ -3,7 +3,7 @@
 <% if !@sbooks.nil?  %>
 		<% @sbooks.each do |onebook| %>
 		<tr>
-			<td> <a class="button" href="/groups/new?isbn=<%= onebook.isbn %>">Select</a></td>
+			<td> <a class="button" href="/displayusersearch?isbn=<%= onebook.isbn %>">Select</a></td>
 			<td> <img src='<%= onebook.image_link %>'> </td>
 			<td> <%= onebook.title %> </td>
 			<td> <%= onebook.authors %> </td>

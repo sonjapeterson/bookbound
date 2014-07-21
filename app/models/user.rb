@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base  
   has_many :requests, foreign_key: "requester_id",
   							dependent: :destroy
   has_many :requesteds, through: :requests, source: :requested
@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
   has_one :genre
 
+  scope :starts_with, -> (name) { where("name like ?", "%#{name}%")}
+  
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
