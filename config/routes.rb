@@ -5,14 +5,11 @@ Rails.application.routes.draw do
   get 'invite', to: 'static_pages#invite'
   match 'sendinvite', to: 'static_pages#sendinvite', via: 'post', as: :sendinvite
   match 'displaybooksearch', to: 'groups#displaybooksearch', via: 'get', as: :displaybooksearch
-<<<<<<< HEAD
+
   match 'displayusersearch', to: 'groups#displayusersearch', via: 'get', as: :displayusersearch
   resources :users
   get 'users/dashboard'
-=======
-  
 
->>>>>>> 56075bb5979a80cec4a19dcb1c7463d66d07a31a
   match 'users/:id/groups', to: 'users#groups', via: 'get', as: :groups_user
   post 'users/:id/requests/confirm', to: 'requests#confirm'
   post 'users/:id/requests/delete', to: 'requests#destroy'
