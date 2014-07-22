@@ -4,7 +4,7 @@
 		<% @sbooks.each do |onebook| %>
 		<% if onebook.isbn != nil %>
 		<tr>
-			<td> <a class="button radius" href="/displayusersearch?isbn=<%= onebook.isbn %>">Select</a></td>
+			<td> <a class="button radius" href="/displayusersearch">Select</a></td>
 			<td> <img src='<%= onebook.image_link %>'> </td>
 			<td><b> <%= onebook.title %> </b>
 			<br>

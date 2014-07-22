@@ -39,8 +39,8 @@ class GroupsController < ApplicationController
   end
 
   def displayusersearch
-    user_ip = request.remote_ip
-    @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :count => 1, :country => 'US'}, user_ip).first
+    # user_ip = request.remote_ip
+    # @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'}, user_ip).first
     @randos = find_matching_users
     @group = Group.new
   end
