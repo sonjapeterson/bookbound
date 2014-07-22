@@ -29,7 +29,7 @@ Completed books:
 		<%= group.book.title %><br>
 	<% end %>
 <% end %><br>
-Ongoing books:
+Currently reading:
 <% @user.groups.each do |group| %>
 	<% if group.status == true %>
 		<%= group.book.title %><br>
@@ -37,5 +37,5 @@ Ongoing books:
 <% end %><br>
 
 <% if current_user.id == @user.id %>
-<%= link_to "Edit Profile", edit_user_path(@user) %>
+<%= link_to "Edit Profile", edit_user_path(@user), :class => "button" %>
 <% end %> 
