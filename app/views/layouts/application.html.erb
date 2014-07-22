@@ -28,8 +28,12 @@
       <div class="alert"><%= flash[:alert] %></div>
     <% end %> 
   </div>
+
+  
     <%= yield %>
     <%= javascript_include_tag "application" %>
+
+    <script type="text/javascript">$(function(){ $(document).foundation(); });</script>
 
   </body>
 </html>
