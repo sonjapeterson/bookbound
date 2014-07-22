@@ -1,3 +1,7 @@
+<%= render 'groups/user_search' %> 
+
+<div class="row">
+  <div class="large-12 small-12 small-centered columns">
 <table>
 <% @susers.each do |user| %>
 <tr>
@@ -22,7 +26,9 @@
       <%= form_for(@group) do |f| %>
         <%= hidden_field_tag("newuser", user.id) %>
         <%= hidden_field_tag("isbn", params[:isbn]) %>
-        <%= f.submit "Submit" %>
+        <%= f.submit "Select", :class => "button small radius" %>
       <% end %> 
     </td>
 <% end %>
+</div>
+</div>

@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
   has_one :genre
 
-  scope :starts_with, -> (name) { where("name like ?", "%#{name}%")}
+  scope :starts_with, -> (lambda) { where("name like ? OR location like ? OR description like ?", "%#{lambda}%", "%#{lambda}%", "%#{lambda}%") }
   
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|

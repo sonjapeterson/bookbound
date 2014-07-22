@@ -1,7 +1,7 @@
 <nav style="z-index: 500;" class="top-bar" data-topbar>
-  <ul class="title-area">
+  <ul class="title-area" id="logo">
     <li class="name">
-      <h1><%= link_to "BookBound", root_url %></h1>
+      <h1><%= link_to image_tag('logo100100.png'), root_url %></h1>
     </li>
      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -11,18 +11,13 @@
     <!-- Right Nav Section -->
     <% if current_user %>
         <ul class="right">
-          <li class="has-dropdown">
-            <a href="#">Books</a>
-            <ul class="dropdown">
               <li><%= link_to "My Books", groups_user_path(current_user) %></li>
               <li><%= link_to "Start a Book", displaybooksearch_path %></li>
-              <li><a href="#">Suggestions from Recto and Verso</a></li>
-            </ul>
-          </li>
           <li class="has-dropdown">
-            <a href="#">Account</a>
+            <%= link_to image_tag(current_user.image, :class => "thumbnail") + current_user.name, current_user %>
+
             <ul class="dropdown">
-              <li><%= link_to "My Profile", current_user %></li>
+              <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
               <li><%= link_to "Sign out", signout_path, id: "sign_out" %>
               </li>
             </ul>

@@ -1,10 +1,10 @@
-<h1>Select Your Book</h1>
-<table >
+<%= render 'groups/book_search' %> 
+<table>
 <% if !@sbooks.nil?  %>
 		<% @sbooks.each do |onebook| %>
 		<% if onebook.isbn != nil %>
 		<tr>
-			<td> <a class="button" href="/displayusersearch?isbn=<%= onebook.isbn %>">Select</a></td>
+			<td> <a class="button radius" href="/displayusersearch?isbn=<%= onebook.isbn %>">Select</a></td>
 			<td> <img src='<%= onebook.image_link %>'> </td>
 			<td><b> <%= onebook.title %> </b>
 			<br>

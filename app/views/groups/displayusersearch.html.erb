@@ -1,7 +1,1 @@
-
-<h1>Find a User</h1>
-<%= form_tag('searchusers') do %>
-<%= text_field_tag 'starts_with', nil, placeholder: 'Enter name' %>
-<%= hidden_field_tag("isbn", params[:isbn]) %>
-<%= submit_tag "Search" %>
-<% end %>
+<%= render 'groups/user_search' %> 

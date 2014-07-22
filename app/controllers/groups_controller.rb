@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
     @note.save
     @request = Request.new(requester_id: current_user.id, requested_id: params[:newuser], group_id: @group.id, status: false)
     @request.save
-    redirect_to root_url
+    redirect_to groups_user_path(current_user)
   end
 
   def searchbooks
@@ -33,18 +33,21 @@ class GroupsController < ApplicationController
   end
 
   def displayusersearch
+    @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'us'}).first
   end
 
   def searchusers
+     @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'us'}).first
      @susers = User.where(nil) # creates an anonymous scope
      @susers = @susers.starts_with(params[:starts_with]) if params[:starts_with].present?
+     @susers = @susers.location_starts_with(params[:location]) if params[:location].present?
      @group = Group.new
      @isbn = params[:isbn]
   end
 
   def displaybooksearch
   end
-  
+
   def show
     @group = Group.find(params[:id])
     @note = Note.new

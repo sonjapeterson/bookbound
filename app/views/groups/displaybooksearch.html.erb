@@ -1,6 +1,1 @@
-
-<h1>Find a Book</h1>
-<%= form_tag('/searchbooks') do %>
-<%= text_field_tag 'query', nil, placeholder: 'Enter author, title, or ISBN' %>
-<%= submit_tag "Search" %>
-<% end %>
+<%= render 'groups/book_search' %>
