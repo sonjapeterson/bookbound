@@ -37,6 +37,7 @@ class GroupsController < ApplicationController
   def displayusersearch
     @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'us'}).first
     @randos = find_matching_users
+    @group = Group.new
   end
 
   def searchusers

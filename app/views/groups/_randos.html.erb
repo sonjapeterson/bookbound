@@ -1,0 +1,67 @@
+<p>
+	<h1>Read with a Rando</h1>
+
+		<div class="row">
+		  <div class="large-12 small-12 small-centered columns">
+			<table>
+				<% @randos.each do |rando, score| %>
+					<tr>
+					  <td>
+					    <td><img src=<%= rando.image %>></td>
+					    <td><%= link_to rando.name, "#", "data-reveal-id" => "myModal" %></td>
+					    <td><%= rando.age %></td>
+					    <td><%= rando.location %></td>
+					    <td><%= rando.description %></td>
+					    <td>
+					      <%= score.to_i %>% compatible
+					    <td>
+					      <%= form_for(@group) do |f| %>
+					        <%= hidden_field_tag("newuser", rando.id) %>
+					        <%= hidden_field_tag("isbn", params[:isbn]) %>
+					        <%= f.submit "Select", :class => "button small radius" %>
+					      <% end %>
+					    </td>
+					   </td>
+					</div>
+						<div id="myModal" class="reveal-modal" data-reveal>
+						  <h2><%= rando.name %></h2>
+						  <p class="lead"><%= rando.description %></p>
+						  <img src=<%= rando.image %>>
+							<br>
+
+							Email: <%= rando.email %><br>
+							Location: <%= rando.location %><br>
+							Gender: <%= rando.gender %><br>
+							Age: <%= rando.age %><br>
+							Description: <%= rando.description %><br>
+							Favorite books: <%= rando.fav_books %><br>
+
+							Favorite genres:
+							<% result = "" %>
+							<% rando.genre.attributes.each_pair do |key, value| %>
+								<% if value == 1 && key != "user_id" && key != "id"%>
+									<% result += key + ", " %>
+								<% end %>
+							<% end %>
+							<%= result[0..(result.length - 3)] %>
+							<br>
+
+							Favorite authors: <%= rando.fav_authors %><br>
+							Completed books:
+							<% rando.groups.each do |group| %>
+								<% if group.status == false %>
+									<%= group.book.title %><br>
+								<% end %>
+							<% end %><br>
+							Ongoing books:
+							<% rando.groups.each do |group| %>
+								<% if group.status == true %>
+									<%= group.book.title %><br>
+								<% end %>
+							<% end %><br>
+						  <a class="close-reveal-modal">&#215;</a>
+						</div>
+				<% end %>
+		</div>
+
+</p>
