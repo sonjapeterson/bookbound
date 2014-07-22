@@ -16,8 +16,8 @@
 
 <% @group.notes.order('pagenumber DESC').each do |note| %>
 	<p>
-		<em><%= User.find(note.user_id).name %></em>:
-		<%= note.body %> (Page <%= note.pagenumber %>)
-		<br>
+		<em><%= User.find(note.user_id).name %></em>:<%= note.body %> (Page <%= note.pagenumber %>)<br>
+		<%= link_to "Edit", edit_note_path(note) %><br>
+		<%= link_to "Delete", note, method: :delete %><br>
 	</p>
 <% end %>

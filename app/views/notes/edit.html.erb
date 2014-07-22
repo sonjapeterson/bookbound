@@ -1,0 +1,16 @@
+<h2>Edit Note</h2>
+
+<%= form_for(@note) do |f| %>
+	<%= f.label :body %>
+	<%= f.text_field :body %>
+
+	<%= f.label :pagenumber %>
+	<%= f.text_field :pagenumber %>
+
+	<%= f.hidden_field(:group_id, value: @note.group_id) %>
+	<%= f.hidden_field(:user_id, value: current_user.id) %>
+	<%= f.hidden_field(:id, value: @note.id) %>
+	<%= f.hidden_field(:view_type, value: "list") %>
+
+	<%= f.submit "Submit" %>
+<% end %>
