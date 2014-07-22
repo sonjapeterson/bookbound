@@ -6,15 +6,3 @@
 	</div>
 </div>
 
-<%= form_tag('searchusers') do %>
-	<div class="row">
-		<div class="large-10 small-12 columns">
-			<%= text_field_tag 'starts_with', nil, placeholder: 'Search by name, location, or description keyword' %>
-		</div>
-			<%= hidden_field_tag("isbn", params[:isbn]) %>
-			<%= submit_tag "Search", :class => 'button small radius' %>
-		</div>
-	</div>
-<% end %>
-
-
