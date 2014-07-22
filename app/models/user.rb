@@ -1,4 +1,13 @@
 class User < ActiveRecord::Base
+  validates :name,  presence: true, length: { maximum: 50 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
+  VALID_ZIPCODE_REGEX = /\A(\d{5}\z)/
+  validates :zipcode, format: { with: VALID_ZIPCODE_REGEX }
+  VALID_AGE_REGEX = /\A(\d{1,3})\z/
+  validates :age, format: { with: VALID_AGE_REGEX }
+  validates :description, length: { maximum: 400 }
+
   has_many :requests, foreign_key: "requester_id",
   							dependent: :destroy
   has_many :requesteds, through: :requests, source: :requested
@@ -22,26 +31,11 @@ class User < ActiveRecord::Base
       user.location ||= auth.info.location
       user.gender ||= auth.extra.raw_info.gender
       user.genre ||= Genre.new
-      user.image = auth.info.image
+      auth.info.image ? user.image = auth.info.image : user.image = "/assets/defaultProfile.jpg"
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
     end
-  end
-
-  def show_name_and_image
-    name = self.name
-    # image = self.image
-    # if !image.nil?
-    #   return "<img src='#{image}'> #{name}"
-    # else
-    #   return "#{name}"
-    # end
-    return "#{name}"
-  end
-
-  def set_name_as_value
-    self.name
   end
 
 end

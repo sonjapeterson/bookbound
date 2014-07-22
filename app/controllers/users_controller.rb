@@ -3,10 +3,6 @@ class UsersController < ApplicationController
 	before_action :signed_in_user, only: [:edit, :groups]
 	before_action :correct_user, only: [:edit, :groups]
 
-
-	def dashboard
-	end
-
 	def index
 		@users = User.all
 	end
@@ -16,9 +12,14 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		current_user.update_attributes(user_params)
-		current_user.genre.update_attributes(genre_params)
-		redirect_to user_path
+		if current_user.update_attributes(user_params) && current_user.genre.update_attributes(genre_params)
+			current_user.update_attributes(location: params[:user][:zipcode].to_region)
+			flash[:notice] = "Profile successfully updated"
+			redirect_to user_path
+		else
+			flash[:notice] = "Invalid value in one or more form fields"
+			redirect_to :action => "edit", :id => current_user.id
+		end
 	end
 
 	def show
@@ -30,15 +31,9 @@ class UsersController < ApplicationController
 		@requests = Request.where(status: false)
 	end
 
-
-
-
-
-
-
 	private
 		def user_params
-			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :fav_authors, :genre, :description)
+			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :fav_authors, :genre, :description, :zipcode)
 		end
 
 		def genre_params
