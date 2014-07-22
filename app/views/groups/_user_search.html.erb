@@ -1,2 +1,34 @@
+<div class="row">
+<div class="large-12 small-12 small-centered columns roundbox outer">
+<h3>Book Selected</h3>
+<table>
+  <tr>
+    <td><%= image_tag(@book.image_link, :size => "60") %></td>
+    <td><%= @book.title %></td>
+    <td><%= @book.authors %></td>
+    <td>ISBN: <%= @book.isbn %>
+      <br>
+      Published by: <%= #@book.publisher %>  
+    </td>
+  </tr>
+</table>
+</div>
+</div>
 
+<div class="row">
+	<div class="large-12 small-12 small-centered columns">
+		<h1>Find a Friend</h1>
+	</div>
+</div>
+
+<%= form_tag('searchusers') do %>
+	<div class="row">
+		<div class="large-10 small-12 columns">
+			<%= text_field_tag 'starts_with', nil, placeholder: 'Search by name, location, or description keyword' %>
+		</div>
+			<%= hidden_field_tag("isbn", params[:isbn]) %>
+			<%= submit_tag "Search", :class => 'button small radius' %>
+		</div>
+	</div>
+<% end %>
 
