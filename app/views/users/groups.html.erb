@@ -4,7 +4,7 @@
 	<!-- Requests where your user_id = requested_id and request.status = false -->
 	<% @requests.where(requested_id: params[:id]).each do |request| %>
 		<p>
-			Person who requested you: <%= User.find(request.requester_id).name %>, for <%= Group.find(request.group_id).book.title %><br>
+			Person who requested you: <%= link_to user_path(User.find(request.requester_id).name, User.find(request.requester_id)) %>, for <%= link_to Group.find(request.group_id).book.title, book_path(Group.find(request.group_id).book) %><br>
 			<%= form_tag('requests/confirm') do %>
 				<%= hidden_field_tag("request", request.id) %>
 				<%= submit_tag "Confirm" %>
@@ -20,7 +20,7 @@
 
 	<% @groups.each do |group| %>
 		<% if group.users.count > 1 %>
-			Reading <%= group.book.title %> with <%= group.users.where.not(id: params[:id]).first.name %><br>
+			Reading <%= link_to group.book.title, book_path(group.book) %> with <%= link_to group.users.where.not(id: params[:id]).first.name, user_path(group.users.where.not(id: params[:id]).first) %><br>
 			<%= link_to "Show group", group_path(group.id) %><br>
 		<% end %>
 	<% end %>
@@ -29,7 +29,7 @@
 	<!-- Requests where your user_id = requester_id and request.status = false -->
 	<% @requests.where(requester_id: params[:id]).each do |request| %>
 		<p>
-			Person you requested: <%= User.find(request.requested_id).name %>, for <%= Group.find(request.group_id).book.title %><br>
+			Person you requested: <%= link_to User.find(request.requested_id).name, user_path(User.find(request.requested_id)) %>, for <%= link_to Group.find(request.group_id).book.title, book_path(Group.find(request.group_id).book) %><br>
 			<%= form_tag('requests/delete') do %>
 				<%= hidden_field_tag("request", request.id) %>
 				<%= submit_tag "Delete" %>
