@@ -1,34 +1,40 @@
-<%= render 'groups/book_search' %> 
-<table>
-<% if !@sbooks.nil?  %>
-		<% @sbooks.each do |onebook| %>
-		<% if onebook.isbn != nil %>
-		<tr>
-			<td> <a class="button radius" href="/displayusersearch?isbn=<%= onebook.isbn %>">Select</a></td>
-			<td> <img src='<%= onebook.image_link %>'> </td>
-			<td><b> <%= onebook.title %> </b>
-			<br>
-			by <%= onebook.authors %>
-			<br> 
-			ISBN: <%= onebook.isbn %>
-			<br>
-			Published by: <%= onebook.publisher %>	
-			</td>
-			<td> 
-				<% if onebook.description.to_s.length > 450 %>
-				<%= onebook.description.to_s[0..450] %> ...
-				<% else %>
-				<%= onebook.description %>
-				<% end %>
-			</td>
-		</tr>
-		<% end %>
-		<% end %>
-<%else %> 
- search failed
-<% end %> 
-</table>
+<%= render 'groups/book_search' %>
 
-<div class="text-centered">
-  
+
+<div class="row">
+	<div class="large-12 small-12 roundbox outer">
+		<% if !@sbooks.nil?  %>
+				<% @sbooks.each do |onebook| %>
+					<% if onebook.isbn != nil %>
+
+						<a href="/displayusersearch?isbn=<%= onebook.isbn %>">
+				 		<div class="row">
+				 			<div class="large-2 small-2 columns roundbox">
+					 			<img src='<%= onebook.image_link %>' class="bookimage">
+							</div>
+							<div class="large-4 small-4 columns roundbox">
+								<b> <%= onebook.title %> </b>
+								<br>
+								by <%= onebook.authors %>
+								<br> 
+								ISBN: <%= onebook.isbn %>
+								<br>
+								Published by: <%= onebook.publisher %>
+							</div>
+							<div class="large-6 small-6 columns roundbox">	
+								<% if onebook.description.to_s.length > 450 %>
+								<%= onebook.description.to_s[0..450] %>
+								<% else %>
+								<%= onebook.description %>
+								<% end %>
+							</div>
+						</div>
+						</a>
+
+				<% end %>
+			<% end %>
+		<% else %> 
+		 Search failed.
+		<% end %> 
+</div>
 </div>
