@@ -7,6 +7,7 @@ gem 'pry'
 gem 'rails4-autocomplete'
 gem 'timelineJS-rails', '~> 1.1.5'
 gem 'googlebooks', '~> 0.0.8'
+gem 'area'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
