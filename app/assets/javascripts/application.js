@@ -15,7 +15,7 @@
 //= require jquery-ui
 //= require timelineJS/embed
 //= require foundation
-//= require turbolinks
+
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
