@@ -1,55 +1,111 @@
-<h1>Edit profile</h1>
 
-<img src=<%= @user.image %>>
-<%= @user.fname %>
-<%= @user.lname %>
-<br>
+
+<div class="large-12 small-12 small-centered columns end">
+
 
 <%= form_for(@user) do |f| %>
-	<%= f.label :email %>
-	<%= f.text_field :email %>
-	<br>
 
-	<%= f.label :location %>
-	<%= f.text_field :location %>
-	<br>
+<div class="row">
+		<div class="large-3 small-3 columns " style="background-image: url(<%= @user.image + '?type=large'%>); background-position: center center; background-size: cover; height:250px; width: 250px; border-radius: 100%;" >
+		</div>
 
-	<%= f.label :gender %>
-	<%= f.select :gender, options_for_select([["Female", "female"], ["Male", "male"], ["Other", "other"]], @user.gender) %>
-	<br>
+	    <div class="large-3 small-3 columns end" style="font-size: 100%">
+	    			<h1> 	
+					<%= @user.fname %> 	<br>
+					<%= @user.lname %> <br>
+					</h1>
+	    </div>
+</div>
+<div class="row">
+	<div class="large-4 columns">
+					<%= f.label :email %>
+				<%= f.text_field :email %>
+	</div>
+</div>
+<div class="row">
+	<div class="large-4 columns">
+			<%= f.label :location %>
+	<%= f.text_field :location, :readonly => true %>
+	</div>
+</div>
 
-	<%= f.label :age %>
-	<%= f.text_field :age %>
-	<br>	
+<div class="row">
+			<div class="large-2 columns">
+		       	<%= f.label :age %>
+				<%= f.text_field :age %>
+	    	</div>
+	    	 <div class="large-3 columns" >
+		        <%= f.label "Zipcode (5 digits)" %>
+				<%= f.number_field :zipcode %>
+	   		 </div>
+	    	<div class="large-3 columns end">
+		       	<%= f.label :gender %>
+				<%= f.select :gender, options_for_select([["Female", "female"], ["Male", "male"], ["Other", "other"]], @user.gender) %>
+	    	</div>
+</div>
 
-	<%= f.label :description %>
-	<%= f.text_field :description %>
-	<br>
+<div class="row">
+	    	<div class="large-8 columns end">
+				<%= f.label :description %>
+				<%= f.text_field :description %>
+	    	</div>
+</div>
 
-	<%= f.label "Favorite Books" %>
-	<%= f.text_field :fav_books %>
-	<br>
+<div class="row">
+	    	<div class="large-8 columns end">
+					<%= f.label "Favorite Books" %>
+					<%= f.text_field :fav_books %>
+	    	</div>
+</div>
+	
 
+<div class="row">
+	    	<div class="large-8 columns end">
+				<%= f.label "Favorite Authors" %>
+				<%= f.text_field :fav_authors %>
+	    	</div>
+</div>
+
+<div class="row">
 	<%= f.fields_for @user.genre do |builder| %>
-		<p>
+
+	<div class="large-8 columns end">
+
 			<%= builder.label "Favorite Genres" %>
 			<%= builder.check_box(:classic, :checked => checked?(@user.genre.classic)) %>
 			<%= builder.label(:classic, "Classic Literature") %>
-
+	
 			<%= builder.check_box(:comedy, :checked => checked?(@user.genre.comedy)) %>
 			<%= builder.label(:comedy, "Comedy") %>
 
 			<%= builder.check_box(:comic, :checked => checked?(@user.genre.comic)) %>
 			<%= builder.label(:comic, "Comic/Graphic Novel") %>
 
-			<%= builder.check_box(:educational, :checked => checked?(@user.genre.educational)) %>
-			<%= builder.label(:educational, "Educational/Textbook") %>
-
 			<%= builder.check_box(:historical, :checked => checked?(@user.genre.historical)) %>
 			<%= builder.label(:historical, "Historical") %>
 
+			<%= builder.check_box(:romance, :checked => checked?(@user.genre.romance)) %>
+			<%= builder.label(:romance, "Romance") %>
+
+	</div>
+
+	<div class="large-8 columns end">
+
+			<%= builder.check_box(:educational, :checked => checked?(@user.genre.educational)) %>
+			<%= builder.label(:educational, "Educational/Textbook") %>
+
+			<%= builder.check_box(:scifi, :checked => checked?(@user.genre.scifi)) %>
+			<%= builder.label(:scifi, "SciFi/Fantasy") %>
+
+			<%= builder.check_box(:shortstory, :checked => checked?(@user.genre.shortstory)) %>
+			<%= builder.label(:shortstory, "Short Story") %>
+
 			<%= builder.check_box(:memoir, :checked => checked?(@user.genre.memoir)) %>
 			<%= builder.label(:memoir, "Memoir/Biography") %>
+
+	</div>
+
+	<div class="large-8 columns end">
 
 			<%= builder.check_box(:mystery, :checked => checked?(@user.genre.mystery)) %>
 			<%= builder.label(:mystery, "Mystery") %>
@@ -62,22 +118,17 @@
 
 			<%= builder.check_box(:pulp, :checked => checked?(@user.genre.pulp)) %>
 			<%= builder.label(:pulp, "Pulp") %>
+	</div>
 
-			<%= builder.check_box(:romance, :checked => checked?(@user.genre.romance)) %>
-			<%= builder.label(:romance, "Romance") %>
-
-			<%= builder.check_box(:scifi, :checked => checked?(@user.genre.scifi)) %>
-			<%= builder.label(:scifi, "SciFi/Fantasy") %>
-
-			<%= builder.check_box(:shortstory, :checked => checked?(@user.genre.shortstory)) %>
-			<%= builder.label(:shortstory, "Short Story") %>
-		</p>
 	<% end %>
+</div>
 
-
-	<%= f.label "Favorite Authors" %>
-	<%= f.text_field :fav_authors %>
-	<br>
-
-	<%= f.submit %>
+<div class="row">
+<div class="large-8 columns end">
+	<%= f.submit "Submit", :class => "button right"%>
+</div>
+</div>
 <% end %>
+
+<%= link_to "Delete account", current_user, method: :delete, :class => "button right" %>
+
