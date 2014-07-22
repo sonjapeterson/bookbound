@@ -1,7 +1,6 @@
 class NotesController < ApplicationController
 	def create
 		@note = Note.new(note_params)
-		binding.pry
 		if @note.save == true
 			@note.save
 		else
