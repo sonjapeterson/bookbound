@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
   resources :requests, only: [:create, :destroy, :update]
   resources :notes
+  resources :books, only: [:show]
 
   root :to => 'static_pages#index'
 

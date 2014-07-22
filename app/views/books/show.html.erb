@@ -1,0 +1,9 @@
+<img src="<%= @book.imagelinklarge %>"><br>
+
+Title: <%= @book.title %><br>
+Author: <%= @book.author %><br>
+Publisher: <%= @book.publisher %><br>
+Summary: <%= @book.summary %><br>
+Pages: <%= @book.pagecount %><br>
+Published: <%= @book.datepublished %><br>
+<%= link_to "Preview or buy book", @book.previewlink %>
