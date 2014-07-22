@@ -15,10 +15,9 @@
 <% end %>
 
 <% @group.notes.order('pagenumber DESC').each do |note| %>
-<p>
-	written by: <%= User.find(note.user_id).name %>
-	<%= note.body %>, 
-	pg <%= note.pagenumber %>
-	<br>
-</p>
+	<p>
+		<em><%= User.find(note.user_id).name %></em>:
+		<%= note.body %> (Page <%= note.pagenumber %>)
+		<br>
+	</p>
 <% end %>

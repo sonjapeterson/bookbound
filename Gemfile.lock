@@ -27,6 +27,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    area (0.10.0)
+      fastercsv (~> 1.5)
     arel (5.0.1.20140414130214)
     builder (3.2.2)
     coderay (1.1.0)
@@ -41,6 +43,7 @@ GEM
     execjs (2.2.1)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    fastercsv (1.5.5)
     foundation-rails (5.3.0.1)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -85,6 +88,7 @@ GEM
       multi_json (~> 1.3)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    pg (0.17.1)
     polyglot (0.3.5)
     pry (0.10.0)
       coderay (~> 1.1.0)
@@ -108,6 +112,11 @@ GEM
       sprockets-rails (~> 2.0)
     rails4-autocomplete (1.1.0)
       rails (>= 3.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.2)
+    rails_stdout_logging (0.0.3)
     railties (4.1.1)
       actionpack (= 4.1.1)
       activesupport (= 4.1.1)
@@ -157,6 +166,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  area
   coffee-rails (~> 4.0.0)
   foundation-rails
   googlebooks (~> 0.0.8)
@@ -164,11 +174,13 @@ DEPENDENCIES
   jquery-rails (~> 2.3.0)
   omniauth
   omniauth-facebook
+  pg
   pry
   pry-rails
   railroady
   rails (= 4.1.1)
   rails4-autocomplete
+  rails_12factor
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring
