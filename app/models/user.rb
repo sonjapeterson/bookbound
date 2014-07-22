@@ -2,10 +2,10 @@ class User < ActiveRecord::Base
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
-  VALID_ZIPCODE_REGEX = /\A(\d{5}\z)/
-  validates :zipcode, format: { with: VALID_ZIPCODE_REGEX }
+  VALID_ZIPCODE_REGEX = /\A(\d{5})\z/
+  validates :zipcode, format: { with: VALID_ZIPCODE_REGEX }, :allow_blank => true
   VALID_AGE_REGEX = /\A(\d{1,3})\z/
-  validates :age, format: { with: VALID_AGE_REGEX }
+  validates :age, format: { with: VALID_AGE_REGEX }, :allow_blank => true
   validates :description, length: { maximum: 400 }
 
   has_many :requests, foreign_key: "requester_id",

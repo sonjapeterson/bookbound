@@ -13,7 +13,9 @@ class UsersController < ApplicationController
 
 	def update
 		if current_user.update_attributes(user_params) && current_user.genre.update_attributes(genre_params)
-			current_user.update_attributes(location: params[:user][:zipcode].to_region)
+			if (params[:user][:zipcode] =~ /\A(\d{5})\z/) == 0
+				current_user.update_attributes(location: params[:user][:zipcode].to_region)
+			end
 			flash[:notice] = "Profile successfully updated"
 			redirect_to user_path
 		else
