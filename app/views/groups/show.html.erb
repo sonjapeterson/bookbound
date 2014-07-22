@@ -7,7 +7,7 @@
     $(document).on('ready page:load',function() {
         createStoryJS({
             type:       'timeline',
-            width:      $(window).width(),
+            width:      "100%",
             height:     '500',
             source:     '<%= @notes %>',
             embed_id:   'my-timeline'
@@ -42,13 +42,20 @@
     </p>
 <% end %>
 
+<%= debug(params) %>
+
 <script type="text/javascript">
-//Place as last thing before the closing </body> tag
-if(location.search.indexOf('reloaded=yes') < 0){
-    var hash = window.location.hash;
-    var loc = window.location.href.replace(hash, '');
-    loc += (loc.indexOf('?') < 0? '?' : '&') + 'reloaded=yes';
-    // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):
-    setTimeout(function(){window.location.href = loc + hash;}, 1);
-}
+    //Place as last thing before the closing </body> tag
+    if(location.search.indexOf('reloaded=yes') < 0){
+        var hash = window.location.hash;
+        var loc = window.location.href.replace(hash, '');
+        loc += (loc.indexOf('?') < 0? '?' : '&') + 'reloaded=yes';
+        // SET THE ONE TIME AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS):
+        setTimeout(function(){window.location.href = loc + hash;}, 1);
+
+        // <% binding.pry %>
+        // <% if params[:unsaved] == true %>
+        // <%= flash[:notice] = "Please fill out both fields." %>
+        // <% end %>
+    }
 </script>
