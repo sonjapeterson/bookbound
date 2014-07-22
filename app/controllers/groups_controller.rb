@@ -17,7 +17,10 @@ class GroupsController < ApplicationController
     @group = Group.new(status: true)
     @group.save
     @group.users << current_user
-    @bookz = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'})
+
+    user_ip = request.remote_ip
+
+    @bookz = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'}, user_ip)
 
     chosenbook = @bookz.first
     @book = Book.new(title: chosenbook.title, author: chosenbook.authors, publisher: chosenbook.publisher, datepublished: chosenbook.published_date, pagecount: chosenbook.page_count, summary: chosenbook.description, imagelinklarge: chosenbook.image_link, imagelinksmall: chosenbook.image_link, previewlink: chosenbook.preview_link)
@@ -31,17 +34,20 @@ class GroupsController < ApplicationController
   end
 
   def searchbooks
-    @sbooks = GoogleBooks.search(params[:query], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :count => 30, :country => 'US'})
+    user_ip = request.remote_ip
+    @sbooks = GoogleBooks.search(params[:query], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :count => 30, :country => 'US'}, user_ip)
   end
 
   def displayusersearch
-    @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'}).first
+    user_ip = request.remote_ip
+    @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'}, user_ip).first
     @randos = find_matching_users
     @group = Group.new
   end
 
   def searchusers
-     @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'}).first
+    user_ip = request.remote_ip
+     @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'}, user_ip).first
      @susers = User.where(nil) # creates an anonymous scope
      @susers = @susers.starts_with(params[:starts_with]) if params[:starts_with].present?
      @susers = @susers.location_starts_with(params[:location]) if params[:location].present?
