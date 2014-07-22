@@ -1,9 +1,15 @@
 <h1>My Profile</h1>
+<div class="row">
+		<div class="large-3 small-3 columns " style="background-image: url(<%= @user.image + '?type=large'%>); background-position: center center; background-size: cover; height:250px; width: 250px; border-radius: 100%;" ></div>
 
-<img src=<%= @user.image %>>
-<%= @user.fname %>
-<%= @user.lname %>
-<br>
+
+	    <div class="large-3 small-3 columns end" style=" border-radius: 50%">
+	    			<h1> 	
+					<%= @user.name %> 	<br>
+					</h1>
+	    </div>
+
+</div>
 
 Email: <%= @user.email %><br>
 Location: <%= @user.location %><br>
