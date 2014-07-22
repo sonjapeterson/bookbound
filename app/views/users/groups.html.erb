@@ -1,37 +1,87 @@
-<h1><%= User.find(params[:id]).name %>'s Books</h1>
+<div class="grayback">
+<div class="row">
+<div class="large-12 small-12 columns roundbox outer">
 
-<h2>Requested partnerships</h2>
-	<!-- Requests where your user_id = requested_id and request.status = false -->
-	<% @requests.where(requested_id: params[:id]).each do |request| %>
-		<p>
-			Person who requested you: <%= User.find(request.requester_id).name %>, for <%= Group.find(request.group_id).book.title %><br>
-			<%= form_tag('requests/confirm') do %>
-				<%= hidden_field_tag("request", request.id) %>
-				<%= submit_tag "Confirm" %>
-			<% end %>
-			<%= form_tag('requests/delete') do %>
-				<%= hidden_field_tag("request", request.id) %>
-				<%= submit_tag "Decline" %>
-			<% end %>
-		</p>
-	<% end %>
-
-<h2>Confirmed partnerships</h2>
-
+<h2>Currently Reading</h2>
+<ul class="small-block-grid-3 large-block-grid-6 text-center">
 	<% @groups.each do |group| %>
-		<% if group.users.count > 1 %>
-			Reading <%= group.book.title %> with <%= group.users.where.not(id: params[:id]).first.name %><br>
-			<%= link_to "Show group", group_path(group.id) %><br>
+		<% if group.users.count > 1 && group.status == true %>
+			<li><%= link_to image_tag(group.book.imagelinksmall), group_path(group.id) %>
+			<br>
+			<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %></li>
 		<% end %>
 	<% end %>
+</ul>
 
-<h2>Partnerships you have requested</h2>
-	<!-- Requests where your user_id = requester_id and request.status = false -->
-	<% @requests.where(requester_id: params[:id]).each do |request| %>
-		<p>
-			Person you requested: <%= User.find(request.requested_id).name %>, for <%= Group.find(request.group_id).book.title %><br>
-			<%= form_tag('requests/delete') do %>
-				<%= hidden_field_tag("request", request.id) %>
-				<%= submit_tag "Delete" %>
-			<% end %>
+</div>
+</div>
+<% if !@requests.where(requested_id: params[:id]).first.nil? || !@requests.where(requester_id: params[:id]).first.nil? %>
+<div class="row">
+	<div class="large-12 small-12 columns roundbox outer">
+<h2>To Read</h2>
+<div class="row">
+	<div class="large-6 small-12 columns roundbox">
+		<h3>Requests for you</h3>
+			<ul class="small-block-grid-4 large-block-grid-3 text-center">
+						<% @requests.where(requested_id: params[:id]).each do |request| %>
+							<li><%= link_to image_tag(Group.find(request.group_id).book.imagelinksmall), group_path(Group.find(request.group_id)) %>
+							<br>
+							<%= link_to "with " + User.find(request.requested_id).name, group_path(Group.find(request.group_id)) %>
+							<ul class="text-center buttonlist">
+								<li>
+									<%= form_tag('requests/confirm') do %>
+										<%= hidden_field_tag("request", request.id) %>
+										<%= submit_tag "&#x2713".html_safe, :class=> "yesbutton", :confirm => 'Sure?' %>
+									<% end %>
+								</li>
+								<li>
+									<%= form_tag('requests/delete') do %>
+										<%= hidden_field_tag("request", request.id) %>
+										<%= submit_tag "&#x2717;".html_safe, :class => "nobutton", :confirm => 'Sure?' %>
+									<% end %></li>
+								</ul>
+							</li>
+						<% end %>
+					</ul>
+	</div>
+	<div class="large-6 small-12 columns roundbox">
+		<h3>Your Requests</h3>
+				<ul class="small-block-grid-4 large-block-grid-3 text-center">
+						<% @requests.where(requester_id: params[:id]).each do |request| %>
+							<li><%= link_to image_tag(Group.find(request.group_id).book.imagelinksmall), group_path(Group.find(request.group_id)) %>
+							<br>
+							<%= link_to "with " + User.find(request.requested_id).name, group_path(Group.find(request.group_id)) %>
+							<br>
+								<%= form_tag('requests/delete') do %>
+									<%= hidden_field_tag("request", request.id) %>
+									<%= submit_tag "&#x2717;".html_safe, :class => "nobutton", :confirm => 'Sure?' %>
+								<% end %>
+							</li>
+						<% end %>
+					</ul>
+	</div>
+</div>
+</div>
+</div>
+<% end %>
+
+<div class="row">
+<div class="large-12 small-12 columns roundbox outer last">
+<h2>Have Read</h2>
+<ul class="small-block-grid-3 large-block-grid-6 text-center roundbox">
+	<% @groups.each do |group| %>
+		<% if group.users.count > 1 && group.status == false %>
+			<li><%= link_to image_tag(group.book.imagelinksmall), group_path(group.id) %>
+			<br>
+			<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %></li>
+		<% end %>
 	<% end %>
+</ul>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+

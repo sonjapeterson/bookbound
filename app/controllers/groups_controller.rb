@@ -52,7 +52,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @note = Note.new
     @notes = @group.notes.all
-    if Note.where(user_id: current_user.id).count > 0
+    if Note.where(user_id: current_user.id, group_id: params[:id]).count > 0
       last_page_read = Note.where(group_id: params[:id], user_id: current_user.id).order('pagenumber DESC').first.pagenumber
     else
       last_page_read = 0

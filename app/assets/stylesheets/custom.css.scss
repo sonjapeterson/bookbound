@@ -1,3 +1,28 @@
+div:not(.row) {
+  background-color: white;
+  border-radius: 10px;
+}
+
+body {
+  background-color: #EAEAEA;
+}
+
+div.grayback {
+  background-color: #EAEAEA;
+}
+
+.roundbox {
+    border-radius: 10px;
+}
+
+.roundbox.outer {
+  margin-top: 1em;
+}
+
+.roundbox.outer.last {
+  margin-bottom: 1em;
+}
+
 .notice {
   background-color: #8CC63F;
   padding: 20px;
@@ -66,3 +91,38 @@ h1, h2, h3 {
   text-transform: uppercase;
   vertical-align: middle;
 }
+
+.nobutton {
+  background-color: red;
+  height: 2em;
+  width: 2em;
+  border-radius: 1em;
+  font-size: 1.2em;
+  border: none;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+}
+
+.yesbutton {
+ background-color: green;
+  height: 2em;
+  width: 2em;
+  border-radius: 1em;
+  font-size: 1.2em;
+  border: none;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+}
+
+.buttonlist {
+list-style-type: none;
+margin: 0 auto;
+li {
+  display: inline-block;
+  padding-right: 3px;
+  }
+}
+
+

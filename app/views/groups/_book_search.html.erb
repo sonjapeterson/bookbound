@@ -1,16 +1,16 @@
 <div class="row">
-<div class="large-12 small-12 small-centered columns">
+<div class="large-12 small-12 small-centered columns roundbox outer">
 <h1>Find a Book</h1>
-</div>
-</div>
 <%= form_tag('/searchbooks') do %>
 <div class="row">
-<div class="large-10 small-12 columns">
+<div class="large-10 small-12 columns roundbox">
 <%= text_field_tag 'query', nil, placeholder: 'Enter author, title, or ISBN' %>
 </div>
-<div class="large-2 small-12 columns">
+<div class="large-2 small-12 columns roundbox">
 <%= submit_tag "Search", :class => "button small radius" %>
 </div>
 </div>
 <% end %>
 
+</div>
+</div>
