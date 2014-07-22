@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
 
+  include GroupsHelper
+
   autocomplete :user, :name, :extra_data => [:image], :display_value => :show_name_and_image, :select_value => :set_name_as_value
   autocomplete :book, :title
 
@@ -33,7 +35,7 @@ class GroupsController < ApplicationController
   end
 
   def displayusersearch
-    
+    @randos = find_matching_users
   end
 
   def searchusers
