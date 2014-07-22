@@ -16,7 +16,7 @@
 </div>
 <div class="row">
 <div class="large-12 small-12 small-centered columns">
-<h1>Find a User</h1>
+<h1>Find a Friend</h1>
 </div>
 </div>
 <%= form_tag('searchusers') do %>
@@ -29,3 +29,52 @@
 </div>
 </div>
 <% end %>
+
+<p>
+<h1>Read with a Rando</h1>
+	<% @randos.each do |rando, score| %>
+		<p>
+			<%= link_to rando.name, "#", "data-reveal-id" => "myModal" %><br>
+			<% if !rando.description.nil? %><%= rando.description %><br><% end %>
+			<%= score.to_i %>%
+			<div id="myModal" class="reveal-modal" data-reveal>
+			  <h2><%= rando.name %></h2>
+			  <p class="lead"><%= rando.description %></p>
+			  <img src=<%= rando.image %>>
+				<br>
+
+				Email: <%= rando.email %><br>
+				Location: <%= rando.location %><br>
+				Gender: <%= rando.gender %><br>
+				Age: <%= rando.age %><br>
+				Description: <%= rando.description %><br>
+				Favorite books: <%= rando.fav_books %><br>
+
+				Favorite genres:
+				<% result = "" %>
+				<% rando.genre.attributes.each_pair do |key, value| %>
+					<% if value == 1 && key != "user_id" && key != "id"%>
+						<% result += key + ", " %>
+					<% end %>
+				<% end %>
+				<%= result[0..(result.length - 3)] %>
+				<br>
+
+				Favorite authors: <%= rando.fav_authors %><br>
+				Completed books:
+				<% rando.groups.each do |group| %>
+					<% if group.status == false %>
+						<%= group.book.title %><br>
+					<% end %>
+				<% end %><br>
+				Ongoing books:
+				<% rando.groups.each do |group| %>
+					<% if group.status == true %>
+						<%= group.book.title %><br>
+					<% end %>
+				<% end %><br>
+			  <a class="close-reveal-modal">&#215;</a>
+			</div>
+		</p>
+	<% end %>
+</p>
