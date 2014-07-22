@@ -31,6 +31,13 @@ class UsersController < ApplicationController
 		@requests = Request.where(status: false)
 	end
 
+	def destroy
+	    User.find(params[:id]).destroy
+	    session[:user_id] = nil
+	    flash[:notice] = "Account deleted."
+	    redirect_to root_url
+	end
+
 	private
 		def user_params
 			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :fav_authors, :genre, :description, :zipcode)

@@ -86,3 +86,7 @@
 
 	<%= f.submit %>
 <% end %>
+
+<p>
+<%= link_to "Delete account", current_user, method: :delete, data: { confirm: "Are you sure?" } %>
+</p>
