@@ -1,12 +1,13 @@
 /*div:not(.row) {
+
   background-color: white;
   border-radius: 10px;
 }*/
 
-.columns {
+/*.columns {
   background-color: white;
   border-radius: 10px;
-}
+}*/
 
 body {
   background-color: #EAEAEA;
@@ -23,6 +24,7 @@ div.grayback {
 .roundbox.outer {
   margin-top: 1em;
   padding: 1em;
+  background-color: white;
 }
 
 .roundbox.outer.last {
@@ -132,5 +134,33 @@ li {
 }
 
 .bookimage {
-  height: 120px;
+  width: 80px;
+  max-height: 200px;
+}
+
+.booklist {
+  height: 200px;
+  padding: 1em;
+}
+
+.clickable:hover, .clickable:hover > div, .clickable:hover > div > div {
+  cursor: pointer;
+  background-color: #D8B2BA;
+}
+
+.roundbox.outer.clear {
+  background-color: #EAEAEA;
+}
+
+.extraspace {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+h2.start {
+font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+#active {
+  background-color: #A01530;
 }

@@ -1,5 +1,11 @@
-<%= link_to "Show timeline view", group_path(params[:id]) %>
-
+<div class="row">
+    <div class="large-12 small-12 columns text-center extraspace">
+<ul class="button-group radius even-2">
+  <li><%= link_to "Timeline View", @group, :class => "button" %></li>
+  <li><%= link_to "List View", groups_list_path(@group), :class => "button", :id => "active" %></li>
+</ul>
+</div>
+</div>
 <%= form_for(@note) do |f| %>
 	<%= f.label :body %>
 	<%= f.text_field :body %>

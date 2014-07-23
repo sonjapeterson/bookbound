@@ -1,27 +1,39 @@
 <div class="row">
 <div class="large-12 small-12 small-centered columns roundbox outer">
 <h3>Book Selected</h3>
-<table>
-  <tr>
-    <td><%= image_tag(@book.image_link, :size => "60") %></td>
-    <td><%= @book.title %></td>
-    <td><%= @book.authors %></td>
-    <td>ISBN: <%= @book.isbn %>
-      <br>
-      Published by: <%= @book.publisher %>  
-    </td>
-  </tr>
-</table>
+  <div class="row roundbox outer">
+      <div class="large-1 small-2 columns">
+        <img src='<%= @book.image_link %>' class="bookimage">
+      </div>
+      <div class="large-4 small-4 columns">
+        <b> <%= @book.title %> </b>
+        <br>
+        by <%= @book.authors %>
+        <br> 
+        ISBN: <%= @book.isbn %>
+        <br>
+        Published by: <%= @book.publisher %>
+      </div>
+      <div class="large-7 small-6 columns"> 
+        <% if @book.description.to_s.length > 450 %>
+        <%= @book.description.to_s[0..450] %>
+        <% else %>
+        <%= @book.description %>
+        <% end %>
+      </div>
+    </div>
 </div>
 </div>
 
 <div class="row">
-	<div class="large-12 small-12 small-centered columns">
+	<div class="large-12 small-12 columns roundbox outer">
+    <div class="row">
+      <div class="large-12 small-12 columns">
 		<h1>Find a Friend</h1>
-	</div>
-</div>
+      </div>
+    </div>
 
-<%= form_tag('searchusers') do %>
+<%= form_tag('searchusers', {id: "searchusers"}) do %>
 	<div class="row">
 		<div class="large-10 small-12 columns">
 			<%= text_field_tag 'starts_with', nil, placeholder: 'Search by name, location, or description keyword' %>
@@ -33,3 +45,5 @@
 	</div>
 <% end %>
 
+</div>
+</div>
