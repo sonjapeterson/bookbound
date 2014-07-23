@@ -26,7 +26,7 @@
 						<% @requests.where(requested_id: params[:id]).each do |request| %>
 							<li><%= link_to image_tag(Group.find(request.group_id).book.imagelinksmall), group_path(Group.find(request.group_id)) %>
 							<br>
-							<%= link_to "with " + User.find(request.requested_id).name, group_path(Group.find(request.group_id)) %>
+							<%= link_to "with " + User.find(request.requester_id).name, group_path(Group.find(request.group_id)) %>
 							<ul class="text-center buttonlist">
 								<li>
 									<%= form_tag('requests/confirm') do %>
