@@ -16,8 +16,17 @@
 
 <% @group.notes.order('pagenumber DESC').each do |note| %>
 	<p>
-		<em><%= User.find(note.user_id).name %></em>:
-		<%= note.body %> (Page <%= note.pagenumber %>)
-		<br>
+		<em><%= User.find(note.user_id).name %></em>:<%= note.body %> (Page <%= note.pagenumber %>)<br>
+		<% if note.user_id == current_user.id %>
+			<%= link_to "Edit", edit_note_path(note) %><br>
+			<%= link_to "Delete", "#", "data-reveal-id" => "myModal" %><br>
+			<div id="myModal" class="reveal-modal" data-reveal>
+				<div class="text-center">
+					<h2>Are you sure you want to delete this note?</h2>
+					<%= link_to "Yes, delete my note", note, method: :delete, :class => "button" %>
+				</div>
+				<a class="close-reveal-modal">&#215;</a>
+			</div>
+		<% end %>
 	</p>
 <% end %>
