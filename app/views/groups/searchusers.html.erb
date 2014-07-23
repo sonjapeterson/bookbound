@@ -5,30 +5,29 @@
     <table>
       <% @susers.each do |user| %>
         <tr>
+          <td><img src=<%= user.image %>></td>
+          <td><%= link_to user.name, user %></td>
+          <td><%= user.age %></td>
+          <td><%= user.location %></td>
+          <td><%= user.description %></td>
           <td>
-            <td><img src=<%= user.image %>></td>
-            <td><%= link_to user.name, user %></td>
-            <td><%= user.age %></td>
-            <td><%= user.location %></td>
-            <td><%= user.description %></td>
-            <td>
-              <% if user.genre.attributes != nil %>
-              <% result = "" %>
-              <% user.genre.attributes.each_pair do |key, value| %>
-                <% if value == 1 && key != "user_id" && key != "id"%>
-                  <% result += key + ", " %>
-                <% end %>
+            <% if user.genre.attributes != nil %>
+            <% result = "" %>
+            <% user.genre.attributes.each_pair do |key, value| %>
+              <% if value == 1 && key != "user_id" && key != "id"%>
+                <% result += key + ", " %>
               <% end %>
-              <%= result[0..(result.length - 3)] %>
-              <% end %>
-            </td>
-            <td>
-              <%= form_for(@group) do |f| %>
-                <%= hidden_field_tag("newuser", user.id) %>
-                <%= hidden_field_tag("isbn", params[:isbn]) %>
-                <%= f.submit "Select", :class => "button small radius" %>
-              <% end %>
-            </td>
+            <% end %>
+            <%= result[0..(result.length - 3)] %>
+            <% end %>
+          </td>
+
+          <td>
+            <%= form_for(@group) do |f| %>
+              <%= hidden_field_tag("newuser", user.id) %>
+              <%= hidden_field_tag("isbn", params[:isbn]) %>
+              <%= f.submit "Select", :class => "button small radius" %>
+            <% end %>
           </td>
         </tr>
       <% end %>

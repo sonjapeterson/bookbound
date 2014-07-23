@@ -12,7 +12,6 @@
 					<% if @randos != nil %>
 					<% @randos.each do |rando, score| %>
 						<tr>
-						  <td>
 						    <td><img src=<%= rando.image %>></td>
 						    <td><%= link_to rando.name, "#", "data-reveal-id" => "myModal" %></td>
 						    <td><%= rando.age %></td>
@@ -26,7 +25,6 @@
 						        <%= f.submit "Select", :class => "button small radius" %>
 						      <% end %>
 						    </td>
-						  </td>
 						</tr>
 
 						<div id="myModal" class="reveal-modal" data-reveal>
