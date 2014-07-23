@@ -9,10 +9,12 @@
 		<h2><%= @user.name %> </h2>
 		<div class="large-6 small-12 columns">
 			<div  style="background-image: url(<%= @user.image + '?type=large'%>); background-position: center center; background-size: cover; height:200px; width: 200px; border-radius: 10%;" ></div> <br>
+			<% if (@user.age >= 0 && @user.location != nil && @user.location != '' ) %>
 			Personal info <h4><%= @user.location %></h4>
 			<h4><%= @user.gender.capitalize + ', ' + @user.age.to_s %></h4>
-		
-
+			<% else %>
+			No personal info yet!
+			<% end %>
 		</div>
 
 
