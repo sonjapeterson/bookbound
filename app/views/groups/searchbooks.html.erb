@@ -21,7 +21,7 @@
 							</div>
 							<div class="large-7 small-6 columns">	
 								<% if onebook.description.to_s.length > 450 %>
-								<%= onebook.description.to_s[0..450] %>
+								<%= onebook.description.to_s[0..450] %> ..
 								<% else %>
 								<%= onebook.description %>
 								<% end %>

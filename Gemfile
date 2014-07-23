@@ -9,6 +9,8 @@ gem 'timelineJS-rails', '~> 1.1.5'
 gem 'googlebooks', '~> 0.0.8'
 gem 'area'
 gem 'jquery-validation-rails'
+gem 'fabrication'
+gem 'faker'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'

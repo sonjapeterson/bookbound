@@ -70,7 +70,7 @@ class GroupsController < ApplicationController
         {
           "headline"=> @group.book.title,
           "type"=>"default",
-          "text"=> (@group.users.count < 2 ? " " : ("With " + @group.users.where.not(id: current_user.id).first.name)),
+          "text"=> (@group.users.count < 2 ? " " : ("with " + @group.users.where.not(id: current_user.id).first.name)),
 
           "asset" => {
               "media" => " ",
