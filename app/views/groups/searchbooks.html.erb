@@ -1,7 +1,7 @@
 <%= render 'groups/book_search' %>
 
-
-
+<div class="row">
+	<div class="large-12 small-12 roundbox outer">
 		<% if !@sbooks.nil?  %>
 				<% @sbooks.each do |onebook| %>
 					<% if onebook.isbn != nil %>
@@ -32,5 +32,5 @@
 				<% end %>
 			<% end %>
 		<% else %> 
-		 Search failed.
+			Search failed.
 		<% end %> 
