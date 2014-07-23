@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722174054) do
+ActiveRecord::Schema.define(version: 20140722193943) do
 
   create_table "books", force: true do |t|
     t.integer  "group_id"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20140722174054) do
     t.text     "fav_genres"
     t.text     "fav_authors"
     t.integer  "age"
-    t.integer  "zipcode"
+    t.string   "zipcode"
   end
 
 end

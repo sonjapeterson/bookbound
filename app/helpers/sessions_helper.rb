@@ -30,4 +30,9 @@ module SessionsHelper
     redirect_to groups_user_path(current_user) unless @users.include?(current_user)
   end
 
+  def writer_of_note
+    @user = User.find(Note.find(params[:id]).user_id)
+    redirect_to groups_user_path(current_user) unless current_user == @user
+  end
+
 end
