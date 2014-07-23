@@ -33,7 +33,7 @@
       </div>
     </div>
 
-<%= form_tag('searchusers') do %>
+<%= form_tag('searchusers', {id: "searchusers"}) do %>
 	<div class="row">
 		<div class="large-10 small-12 columns">
 			<%= text_field_tag 'starts_with', nil, placeholder: 'Search by name, location, or description keyword' %>
