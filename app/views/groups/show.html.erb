@@ -14,12 +14,11 @@
         });
     });
 </script>
-</div>
 <div class="row">
     <div class="large-12 small-12 columns text-center extraspace">
 <ul class="button-group radius even-2">
-  <li><a href="#" class="button">Timeline View</a></li>
-  <li><a href="#" class="button">List View</a></li>
+  <li><%= link_to "Timeline View", @group, :class => "button", :id => "active" %></li>
+  <li><%= link_to "List View", groups_list_path(@group), :class => "button" %></li>
 </ul>
 </div>
 </div>
@@ -40,7 +39,7 @@
 </div>
 
 <div class="large-8 small-10 columns">
-    	<%= f.text_field :body, :placeholder => "Your brilliant comment here..." %>
+    	<%= f.text_area :body, :placeholder => "Your brilliant comment here...", :cols => 40, :rows => 5 %>
 </div>
 
 <div class="large-2 small-12 columns">
