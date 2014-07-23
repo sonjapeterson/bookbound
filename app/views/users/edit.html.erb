@@ -34,7 +34,7 @@
 	    	</div>
 	    	 <div class="large-3 columns" >
 		        <%= f.label "Zipcode (5 digits)" %>
-				<%= f.number_field :zipcode %>
+				<%= f.text_field :zipcode %>
 	   		 </div>
 	    	<div class="large-3 columns end">
 		       	<%= f.label :gender %>
@@ -124,7 +124,7 @@
 <div class="row">
 <div class="large-8 columns end">
 	<%= f.submit "Submit", :class => "tiny button right"%>
-	<%= link_to "Delete account", "#", "data-reveal-id" => "myModal", :class => "button right"  %>
+	<%= link_to "Delete account", "#", "data-reveal-id" => "myModal"  %>
 </div>
 </div>
 <% end %>
