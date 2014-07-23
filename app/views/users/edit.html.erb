@@ -125,10 +125,10 @@
 
 <div class="row">
 <div class="large-8 columns end">
-	<%= f.submit "Submit", :class => "button right"%>
+	<%= f.submit "Submit", :class => "tiny button right"%>
+	<%= link_to "Delete account", current_user, method: :delete %>
 </div>
 </div>
 <% end %>
 
-<%= link_to "Delete account", current_user, method: :delete, :class => "button right" %>
 
