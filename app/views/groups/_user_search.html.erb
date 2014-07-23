@@ -8,7 +8,7 @@
     <td><%= @book.authors %></td>
     <td>ISBN: <%= @book.isbn %>
       <br>
-      Published by: <%= #@book.publisher %>  
+      Published by: <%= @book.publisher %>  
     </td>
   </tr>
 </table>
@@ -26,6 +26,7 @@
 		<div class="large-10 small-12 columns">
 			<%= text_field_tag 'starts_with', nil, placeholder: 'Search by name, location, or description keyword' %>
 		</div>
+		<div class="large-2 small-12 columns">
 			<%= hidden_field_tag("isbn", params[:isbn]) %>
 			<%= submit_tag "Search", :class => 'button small radius' %>
 		</div>
