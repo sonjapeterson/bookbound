@@ -1,4 +1,8 @@
-class NotesController < ApplicationController
+class NotesController < ApplicationController 
+
+	before_action :signed_in_user, only: [:edit, :destroy]
+	before_action :writer_of_note, only: [:edit, :destroy]
+
 	def create
 		@note = Note.new(note_params)
 		if @note.save == true
@@ -15,10 +19,23 @@ class NotesController < ApplicationController
 	end
 
 	def destroy
+		group_id = Note.find(params[:id]).group_id
+		Note.find(params[:id]).destroy
+	    redirect_to groups_list_path(group_id)
+	end
+
+	def edit
+		@note = Note.find(params[:id])
+	end
+
+	def update
+		@note = Note.find(params[:note][:id])
+		@note.update_attributes(note_params)
+		redirect_to groups_list_path(params[:note][:group_id])
 	end
 
 	private
 		def note_params
-			params.require(:note).permit(:body, :pagenumber, :group_id, :user_id)
+			params.require(:note).permit(:body, :pagenumber, :group_id, :user_id, :id)
 		end
 end
