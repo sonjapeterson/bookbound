@@ -5,13 +5,12 @@
 		<% if !@sbooks.nil?  %>
 				<% @sbooks.each do |onebook| %>
 					<% if onebook.isbn != nil %>
-
-						<a href="/displayusersearch?isbn=<%= onebook.isbn %>">
-				 		<div class="row">
-				 			<div class="large-2 small-2 columns roundbox">
+				<a href="/displayusersearch?isbn=<%= onebook.isbn %>">
+					<div class="row roundbox outer clickable">
+				 			<div class="large-1 small-2 columns">
 					 			<img src='<%= onebook.image_link %>' class="bookimage">
 							</div>
-							<div class="large-4 small-4 columns roundbox">
+							<div class="large-4 small-4 columns">
 								<b> <%= onebook.title %> </b>
 								<br>
 								by <%= onebook.authors %>
@@ -20,7 +19,7 @@
 								<br>
 								Published by: <%= onebook.publisher %>
 							</div>
-							<div class="large-6 small-6 columns roundbox">	
+							<div class="large-7 small-6 columns">	
 								<% if onebook.description.to_s.length > 450 %>
 								<%= onebook.description.to_s[0..450] %>
 								<% else %>
@@ -35,5 +34,3 @@
 		<% else %> 
 			Search failed.
 		<% end %> 
-</div>
-</div>
