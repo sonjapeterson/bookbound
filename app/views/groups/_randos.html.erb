@@ -8,9 +8,7 @@
 		<div class="row">
 		  <div class="large-12 small-12 small-centered columns">
 				<table>
-					<%= @randos.inspect %>
-
-					<% if !@randos == nil %>
+					<% if @randos != nil %>
 					<% @randos.each do |rando, score| %>
 						<tr>
 						  <td>
