@@ -71,7 +71,12 @@ module GroupsHelper
 
 		# return top 10 users
 		topMatches = {}
-		while (topMatches.length < 2)
+		if User.all.count < 11
+			numberOfMatches = User.all.count - 1
+		else
+			numberOfMatches = 10
+		end
+		while (topMatches.length < numberOfMatches)
 			userWithHighestCompatibility = userScores.key(userScores.values.max)
 			topMatches[userWithHighestCompatibility] = userScores.values.max
 			userScores.delete(userWithHighestCompatibility)
