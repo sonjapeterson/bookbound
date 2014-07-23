@@ -1,5 +1,6 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
+
 <!-- BEGIN TimelineJS -->
 <script type="text/javascript" src="http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js"></script>
 
@@ -14,53 +15,19 @@
         });
     });
 </script>
-<div class="row">
-    <div class="large-12 small-12 columns text-center extraspace">
-<ul class="button-group radius even-2">
-  <li><%= link_to "Timeline View", @group, :class => "button", :id => "active" %></li>
-  <li><%= link_to "List View", groups_list_path(@group), :class => "button" %></li>
-</ul>
-</div>
-</div>
-<div class="row">
+<%= render 'groups/timelineactive' %>
+<%= render 'groups/addnote' %>
+
+<div class="row show-for-medium-up">
 <div class="large-12 small-12 columns roundbox outer">
 <div style="z-index: 1;" id="my-timeline" class="large-12 small-12 columns"></div>
 </div>
 </div>
 
-<div class="row">
-    <div class="large-12 small-12 columns roundbox outer">
-        <h2>Add a note</h2>
-<div class="row">
-
-<%= form_for(@note) do |f| %>
-<div class="large-2 small-2 columns">
-    <%= f.text_field :pagenumber, :placeholder => "Page Number" %>
+<div class="show-for-small-only">
+<%= render 'groups/listview' %>
 </div>
-
-<div class="large-8 small-10 columns">
-    	<%= f.text_area :body, :placeholder => "Your brilliant comment here...", :cols => 40, :rows => 5 %>
-</div>
-
-<div class="large-2 small-12 columns">
-    <%= f.hidden_field(:group_id, value: @group.id) %>
-    <%= f.hidden_field(:user_id, value: current_user.id) %>
-    <%= f.hidden_field(:view_type, value: "timeline") %>
-	<%= f.submit :class => "button small radius" %>
-<% end %>
-</div>
-</div>
-</div>
-</div>
-
-<% if @group.request.requester_id == current_user.id %>
-    <p>
-        <%= form_tag('finish_book') do %>
-            <%= hidden_field_tag("group", @group.id) %>
-            <%= submit_tag "Mark book as completed" %>
-        <% end %>
-    </p>
-<% end %>
+<%= render 'groups/markbookcomplete' %>
 
 <script type="text/javascript">
     //Place as last thing before the closing </body> tag
