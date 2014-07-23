@@ -4,7 +4,14 @@ class NotesController < ApplicationController
 	before_action :writer_of_note, only: [:edit, :destroy]
 
 	def create
+
 		@note = Note.new(note_params)
+
+		# make sure page number for note does not exceed page count for book
+		if params[:note][:pagenumber].to_i > Book.find(params[:note][:group_id]).pagecount
+			@note.update_attributes(pagenumber: Book.find(params[:note][:group_id]).pagecount)
+		end
+
 		if @note.save == true
 			@note.save
 		else
