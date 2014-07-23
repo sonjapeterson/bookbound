@@ -4,6 +4,10 @@
 
 <h2>Currently Reading</h2>
 <ul class="small-block-grid-3 large-block-grid-6 text-center">
+	<% if @groups.empty? %>
+		You are not reading any books. <%= link_to "Start a book!", displaybooksearch_path %>
+	<% end %>
+
 	<% @groups.each do |group| %>
 		<% if group.users.count > 1 && group.status == true %>
 			<li><%= link_to image_tag(group.book.imagelinksmall), group_path(group.id) %>
@@ -64,11 +68,15 @@
 </div>
 </div>
 <% end %>
-
+	
 <div class="row">
 <div class="large-12 small-12 columns roundbox outer last">
 <h2>Have Read</h2>
 <ul class="small-block-grid-3 large-block-grid-6 text-center roundbox">
+	<% if @groups.empty? %>
+		You have not read any books. What are you waiting for?
+	<% end %>
+
 	<% @groups.each do |group| %>
 		<% if group.users.count > 1 && group.status == false %>
 			<li><%= link_to image_tag(group.book.imagelinksmall), group_path(group.id) %>
@@ -77,7 +85,6 @@
 		<% end %>
 	<% end %>
 </ul>
-
 </div>
 </div>
 
