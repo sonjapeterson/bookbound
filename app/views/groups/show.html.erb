@@ -14,24 +14,45 @@
         });
     });
 </script>
+</div>
+<div class="row">
+    <div class="large-12 small-12 columns text-center extraspace">
+<ul class="button-group radius even-2">
+  <li><a href="#" class="button">Timeline View</a></li>
+  <li><a href="#" class="button">List View</a></li>
+</ul>
+</div>
+</div>
+<div class="row">
+<div class="large-12 small-12 columns roundbox outer">
+<div style="z-index: 1;" id="my-timeline" class="large-12 small-12 columns"></div>
+</div>
+</div>
 
-<%= link_to "Show list view", groups_list_path(params[:id]) %>
-
-<div style="z-index: 1;" id="my-timeline"></div>
+<div class="row">
+    <div class="large-12 small-12 columns roundbox outer">
+        <h2>Add a note</h2>
+<div class="row">
 
 <%= form_for(@note) do |f| %>
-	<%= f.label :body %>
-	<%= f.text_field :body %>
+<div class="large-2 small-2 columns">
+    <%= f.text_field :pagenumber, :placeholder => "Page Number" %>
+</div>
 
-	<%= f.label :pagenumber %>
-	<%= f.text_field :pagenumber %>
+<div class="large-8 small-10 columns">
+    	<%= f.text_field :body, :placeholder => "Your brilliant comment here..." %>
+</div>
 
-	<%= f.hidden_field(:group_id, value: @group.id) %>
-	<%= f.hidden_field(:user_id, value: current_user.id) %>
+<div class="large-2 small-12 columns">
+    <%= f.hidden_field(:group_id, value: @group.id) %>
+    <%= f.hidden_field(:user_id, value: current_user.id) %>
     <%= f.hidden_field(:view_type, value: "timeline") %>
-
-	<%= f.submit %>
+	<%= f.submit :class => "button small radius" %>
 <% end %>
+</div>
+</div>
+</div>
+</div>
 
 <% if @group.request.requester_id == current_user.id %>
     <p>
@@ -41,8 +62,6 @@
         <% end %>
     </p>
 <% end %>
-
-<%= debug(params) %>
 
 <script type="text/javascript">
     //Place as last thing before the closing </body> tag
