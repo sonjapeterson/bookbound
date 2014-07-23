@@ -21,9 +21,10 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 
 # Use sqlite3 as the database for Active Record
-#gem 'sqlite3', group: [:development, :test]
-gem 'pg'#, group: [:production]
-gem 'rails_12factor', group: :production
+group :production do
+	gem 'pg'
+	gem 'rails_12factor'
+end
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 2.3.0'
@@ -40,9 +41,10 @@ gem 'spring'
 group :development, :test do
     gem 'railroady'
     gem 'pry-rails'
+    gem 'sqlite3'
 end
 
-
+ruby '2.0.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
