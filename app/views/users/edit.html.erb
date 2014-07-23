@@ -123,12 +123,14 @@
 
 <div class="row">
 <div class="large-8 columns end">
-	<%= f.submit "Submit", :class => "button right"%>
+	<%= f.submit "Submit", :class => "tiny button right"%>
+	<%= link_to "Delete account", "#", "data-reveal-id" => "myModal", :class => "button right"  %>
 </div>
 </div>
 <% end %>
 
-<%= link_to "Delete account", "#", "data-reveal-id" => "myModal", :class => "button right"  %>
+
+
 <div id="myModal" class="reveal-modal" data-reveal>
 	<div class="text-center">
 		<h2>Are you sure you want to delete your account?</h2>
