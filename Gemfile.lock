@@ -41,6 +41,9 @@ GEM
     coffee-script-source (1.7.1)
     erubis (2.7.0)
     execjs (2.2.1)
+    fabrication (2.11.3)
+    faker (1.4.1)
+      i18n (~> 0.5)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
@@ -168,6 +171,8 @@ PLATFORMS
 DEPENDENCIES
   area
   coffee-rails (~> 4.0.0)
+  fabrication
+  faker
   foundation-rails
   googlebooks (~> 0.0.8)
   jbuilder (~> 2.0)
