@@ -128,5 +128,14 @@
 </div>
 <% end %>
 
-<%= link_to "Delete account", current_user, method: :delete, :class => "button right" %>
+<%= link_to "Delete account", "#", "data-reveal-id" => "myModal", :class => "button right"  %>
+<div id="myModal" class="reveal-modal" data-reveal>
+	<div class="text-center">
+		<h2>Are you sure you want to delete your account?</h2>
+		<%= link_to "Yes, delete my account", current_user, method: :delete, :class => "button" %>
+	</div>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+
+
 

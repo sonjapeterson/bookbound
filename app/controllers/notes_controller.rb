@@ -1,4 +1,8 @@
 class NotesController < ApplicationController 
+
+	before_action :signed_in_user, only: [:edit, :destroy]
+	before_action :writer_of_note, only: [:edit, :destroy]
+
 	def create
 		@note = Note.new(note_params)
 		if @note.save == true
