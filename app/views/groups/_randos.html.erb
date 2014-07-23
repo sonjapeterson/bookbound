@@ -8,6 +8,7 @@
 		<div class="row">
 		  <div class="large-12 small-12 small-centered columns">
 				<table>
+					<% if !@randos == nil %>
 					<% @randos.each do |rando, score| %>
 						<tr>
 						  <td>
@@ -66,6 +67,7 @@
 						  <a class="close-reveal-modal">&#215;</a>
 						</div>
 
+					<% end %>
 					<% end %>
 				</table>
 			</div>
