@@ -1,62 +1,69 @@
-<h1>My Profile</h1>
-<div class="row">
-		<div class="large-3 medium-12 small-12 columns " style="background-image: url(<%= @user.image + '?type=large'%>); background-position: center center; background-size: cover; height:300px; width: 300px; border-radius: 10%;" >
-		</div>
 
-		<div class="large-9 medium-12 small-12 columns roundbox outer">
+
+<div class="row">
+
+
+
+		<div class="large-12 medium-12 small-12 columns roundbox outer">
 
 		<h2><%= @user.name %> </h2>
-		<ul class="small-block-grid-3 large-block-grid-6 ">
-			Email: <%= @user.email %><br>
-			Location: <%= @user.location %><br>
-			Gender: <%= @user.gender.capitalize %><br>
-			Age: <%= @user.age %><br>
-			Description: <%= @user.description %><br>
-			Favorite books: <%= @user.fav_books %><br>
-			Favorite genres:
+		<div class="large-6 small-12 columns">
+			<div  style="background-image: url(<%= @user.image + '?type=large'%>); background-position: center center; background-size: cover; height:200px; width: 200px; border-radius: 10%;" ></div> <br>
+			Personal info <h4><%= @user.location %></h4>
+			<h4><%= @user.gender.capitalize + ', ' + @user.age.to_s %></h4>
+		
+
+		</div>
+
+
+		<div class="large-6 small-12 columns">
+		Description: <h5> <%= @user.description %> </h5>
+			Favorite books <h5><%= @user.fav_books %></h5>
+			Favorite genres <h5>
 		<% result = "" %>
 		<% @user.genre.attributes.each_pair do |key, value| %>
 			<% if value == 1 && key != "user_id" && key != "id"%>
 				<% result += key + ", " %>
 			<% end %>
 		<% end %>
-		<%= result[0..(result.length - 3)] %>
-		<br>
+		<%= result[0..(result.length - 3)] %> </h5>
+	
 
-		Favorite authors: <%= @user.fav_authors %><br>
-		Completed books:
+		Favorite authors <h5><%= @user.fav_authors %></h5>
+		Completed books <h5>
 		<% @user.groups.each do |group| %>
 			<% if group.status == false %>
-				<%= group.book.title %><br>
+				<%= group.book.title.split(":")[0]  %><br>
 			<% end %>
-		<% end %><br>
-
-		<% if current_user.id == @user.id %>
-		<%= link_to "Edit Profile", edit_user_path(@user), :class => "button tiny" %>
+		<% end %><br><h5>
+					<% if current_user.id == @user.id %><br>
+		<%= link_to "Edit Profile", edit_user_path(@user), :class => "button tiny radius" %>
 		<% end %> 
 
+	</div>
 		</div>
 </div>
 
+<div class="row">
 <div class="large-12 small-12 columns roundbox outer">
 
 <h2>Currently Reading </h2>
-<div class="row">
+<div class="small-block-grid-3">
 <% @user.groups.each do |group| %>
 	<% if group.status == true %>
-			<div class="large-4 columns">
-			<br><div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 100px; width: 100px; border-radius: 10%;" ></div>
-			<br><%= group.book.title %><br>
-			Completion: <%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '%' %><br><br>
-			<div class="progress small-# radius round">
+			<li>
+			<div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 100px; width: 100px; border-radius: 10%;" ></div><br>
+			<%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '% Complete' %><br>
+			<div class="progress small-#  radius round">
   			<span class="meter" style="width: <%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '%' %>"></span>
 			</div>
-			</div>
+			<%= group.book.title.split(":")[0] %><br>
+			</li>
 		<% end %>
 <% end %><br>
 	</div>
 </ul>
-
+</div>
 </div>
 
 
