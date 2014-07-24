@@ -1,63 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--[if !IE 7]>
-      <style type="text/css">
-        #wrap {display:table;height:100%}
-      </style>
-    <![endif]-->
+<div id="home">
+	<div class ="large-4 large-offset-6 medium-4 medium-offset-6 small-12 columns roundbox outer" id="hero">
+	<h3>Read with anyone, anywhere</h3>
+		<ol>
+			<li><span class="num">1.</span> Pick a book</li>
+			<li><span class="num">2.</span> Pick a friend</li>
+			<li><span class="num">3.</span> Share your thoughts and progress with each other online as you read</li>
+		</ol>
 
-    <title><%= content_for?(:title) ? yield(:title) : "BookBound" %></title>
-
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
-    <%= csrf_meta_tags %>
-    <%= javascript_include_tag "autocomplete-rails.js" %>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic' rel='stylesheet' type='text/css'>
-  </head>
-
-  <body>
-	<%= render 'layouts/navbar' %>
-  <div class="row">
-   <div class="large-12 small-12 columns">
-      <% if flash[:error] %>
-        <div class="error"><%= flash[:error] %></div>
-      <% end %>
-
-      <%if flash[:notice] %>
-        <div class="notice"><%= flash[:notice] %></div>
-      <% end %>
-
-      <%if flash[:alert] %>
-        <div class="alert"><%= flash[:alert] %></div>
-      <% end %> 
-    </div>
-  </div>
-
-
-   <div id="home">
-		<div class ="large-4 large-offset-6 medium-4 medium-offset-6 small-12 columns roundbox outer" id="hero">
-		<h3>Read with anyone, anywhere</h3>
-			<ol>
-				<li><span class="num">1.</span> Pick a book</li>
-				<li><span class="num">2.</span> Pick a friend</li>
-				<li><span class="num">3.</span> Share your thoughts and progress with each other online as you read</li>
-			</ol>
-
-			<% if current_user.nil? %>
-				<div class="centered">
-					<a href="/auth/facebook" class="button radius">Sign in with Facebook</a>
-				</div>
-			<% end %>
-		</div>
+		<% if current_user.nil? %>
+			<div class="centered">
+				<a href="/auth/facebook" class="button radius">Sign in with Facebook</a>
+			</div>
+		<% end %>
 	</div>
-
-    <%= javascript_include_tag "application" %>
-
-    <script type="text/javascript">$(function(){ $(document).foundation(); });</script>
-
-  </body>
-</html>
+</div>

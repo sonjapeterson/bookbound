@@ -4,8 +4,6 @@ class StaticPagesController < ApplicationController
 	def index
     if !current_user.nil?
       redirect_to groups_user_path(current_user)
-    else
-      render :layout => false
     end
 	end
 

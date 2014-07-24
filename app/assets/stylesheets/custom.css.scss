@@ -218,14 +218,13 @@ font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Helvetica, Arial,
   }
 
   #home {
-background: url(bookbench.jpg) no-repeat;
-background-size: 2000px;
-background-position: 25% 25%;
-height: 100%;
-width: 100%;
-overflow: visible;
-top: -110px;
-position: relative;
+    background: url(bookbench.jpg) no-repeat;
+    background-size: 2000px;
+    background-position: 25% 25%;
+    width: 100%;
+    overflow: visible;
+    top: -110px;
+    position: relative;
 }
 
 }
