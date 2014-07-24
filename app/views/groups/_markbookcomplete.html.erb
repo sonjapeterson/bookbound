@@ -1,0 +1,9 @@
+<div class="row">
+<div class="large-12 small-12 columns roundbox outer text-center extraspace">
+<%# if @group.request.requester_id == current_user.id %>
+          <%= form_tag('finish_book') do %>
+            <%= hidden_field_tag("group", @group.id) %>
+            <%= submit_tag "Mark book as finished", :class => "button small radius" %>
+        <% end %>
+</div>
+</div>

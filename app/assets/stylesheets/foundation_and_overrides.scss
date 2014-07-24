@@ -35,7 +35,7 @@
 // $include-html-block-grid-classes: $include-html-classes; 
 // $include-xl-html-grid-classes: false;
 
- $row-width: rem-calc(1280);
+ $row-width: rem-calc(1100);
 // $total-columns: 12;
 
 // Global
@@ -241,10 +241,10 @@ $header-text-transform: uppercase;
 
 // $include-html-accordion-classes: $include-html-classes;
 
-// $accordion-navigation-padding: rem-calc(16);
-// $accordion-navigation-bg-color: #efefef  ;
-// $accordion-navigation-hover-bg-color: scale-color($accordion-navigation-bg-color, $lightness: -5%);
-// $accordion-navigation-active-bg-color: scale-color($accordion-navigation-bg-color, $lightness: -3%);
+ $accordion-navigation-padding: rem-calc(0);
+ $accordion-navigation-bg-color: #fff;
+ $accordion-navigation-hover-bg-color: #fff;
+ $accordion-navigation-active-bg-color: #fff;
 // $accordion-navigation-font-color: #222;
 // $accordion-navigation-font-size: rem-calc(16);
 // $accordion-navigation-font-family: $body-font-family;
@@ -344,7 +344,7 @@ $header-text-transform: uppercase;
 // $include-html-button-classes: $include-html-classes;
 
 // We use these to build padding for buttons.
-// $button-tny: rem-calc(10);
+ $button-tny: rem-calc(8);
 // $button-sml: rem-calc(14);
 // $button-med: rem-calc(16);
 // $button-lrg: rem-calc(18);
@@ -357,7 +357,7 @@ $button-margin-bottom: rem-calc(2);
 // $button-font-family: $body-font-family;
 // $button-font-color: #fff;
 // $button-font-color-alt: #333;
-// $button-font-tny: rem-calc(11);
+$button-font-tny: rem-calc(12);
 // $button-font-sml: rem-calc(13);
 // $button-font-med: rem-calc(16);
 // $button-font-lrg: rem-calc(20);
@@ -1094,8 +1094,8 @@ $button-radius: $global-radius;
 // $table-even-row-bg: #f9f9f9  ;
 
 // These control the table cell border style
-// $table-border-style: solid;
-// $table-border-size: 1px;
+ $table-border-style: none;
+ $table-border-size: 0px;
 // $table-border-color: #ddd;
 
 // These control the table head styles
