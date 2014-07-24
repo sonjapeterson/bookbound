@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  helper_method :note_display, :find_last_page_read
 
   include GroupsHelper
 
@@ -31,6 +32,10 @@ class GroupsController < ApplicationController
     @note.save
     @request = Request.new(requester_id: current_user.id, requested_id: params[:newuser], group_id: @group.id, status: false)
     @request.save
+
+    notification = User.find_by(id: @request.requested_id).notifications.build(read: false, content: User.find_by(id: @request.requester_id).fname + " has requested to read with you")
+    notification.save
+
     redirect_to groups_user_path(current_user)
   end
 
@@ -60,11 +65,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @note = Note.new
     @notes = @group.notes.all
-    if Note.where(user_id: current_user.id, group_id: params[:id]).count > 0
-      last_page_read = Note.where(group_id: params[:id], user_id: current_user.id).order('pagenumber DESC').first.pagenumber
-    else
-      last_page_read = 0
-    end
+    last_page_read = find_last_page_read
 
     respond_to do |format|
     format.html # show.html.erb
@@ -100,18 +101,28 @@ class GroupsController < ApplicationController
   def finish_book
     current_group = Group.find(params[:group])
     current_group.update_attributes(status: false)
+
+    partner = current_group.where.not(id: current_user.id)[0]
+    notification = partner.notifications.build(read: false, content: partner.fname + " has finished " + current_group.book)
+    notification.save
+
     redirect_to groups_user_path(current_user)
   end
 
   private
     def note_display(note, last_page_read)
       if note.pagenumber <= last_page_read
-        note.body
+        return note.body
       else
-        "Read further to unlock this note!"
+        return "Read further to unlock this note!"
       end
     end
-  # def group_params
-  #   params.require(:group).permit(:users, :book)
-  # end
+
+    def find_last_page_read
+      if Note.where(user_id: current_user.id, group_id: params[:id]).count > 0
+        return Note.where(group_id: params[:id], user_id: current_user.id).order('pagenumber DESC').first.pagenumber
+      else
+        return 0
+      end
+    end
 end

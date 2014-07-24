@@ -12,6 +12,10 @@ class RequestsController < ApplicationController
 		group.users << User.find(current_request.requested_id)
 		group.save
 		flash[:notice] = "Request confirmed!"
+
+	    notification = User.find_by(id: current_request.requester_id).notifications.build(read: false, content: User.find_by(id: current_request.requested_id).fname + " has accepted your request to read")
+	    notification.save
+
 		redirect_to groups_user_path(current_user)
 	end
 

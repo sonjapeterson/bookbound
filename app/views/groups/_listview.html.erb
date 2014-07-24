@@ -1,28 +1,32 @@
 <% @group.notes.order('pagenumber DESC').each do |note| %>
-<div class="row">
-	<div class="large-12 small-12 columns roundbox outer">
-		<div class="large-12 small-12 columns">	
-			<div  style="background-image: url(<%= User.find(note.user_id).image + '?type=large'%>); background-position: center center; background-size: cover; height:60px; width: 60px; border-radius: 10%; float: left; margin-right: 1em;" ></div>
-				<h4><%= User.find(note.user_id).name %> <span class="pagenum">(Page <%= note.pagenumber %>)</span></h4>
-				<p><%= note.body %></p>
-				<% if note.user_id == current_user.id %>
-					<ul class="button-group round" id="editdelete">
-						<li>
-							<%= link_to "Edit", edit_note_path(note), :class => "button tiny" %>
-						</li>
-						<li>
-						<%= link_to "Delete", "#", "data-reveal-id" => "myModal", :class => "button tiny" %>
-						</li>
-					</ul>
-				<% end %>
+	<div class="row">
+		<div class="large-12 small-12 columns roundbox outer">
+			<div class="large-12 small-12 columns">	
+				<div  style="background-image: url(<%= User.find(note.user_id).image + '?type=large'%>); background-position: center center; background-size: cover; height:60px; width: 60px; border-radius: 10%; float: left; margin-right: 1em;" ></div>
+					<h4><%= User.find(note.user_id).name %> <span class="pagenum">(Page <%= note.pagenumber %>)</span></h4>
+					<p>
+						<% last_page_read = find_last_page_read %>
+						<%= note_display(note, last_page_read) %>
+					</p>
+					<% if note.user_id == current_user.id %>
+						<ul class="button-group round" id="editdelete">
+							<li>
+								<%= link_to "Edit", edit_note_path(note), :class => "button tiny" %>
+							</li>
+							<li>
+							<%= link_to "Delete", "#", "data-reveal-id" => "myModal", :class => "button tiny" %>
+							</li>
+						</ul>
+					<% end %>
 			</div>
 		</div>
 	</div>
-<div id="myModal" class="reveal-modal" data-reveal>
-	<div class="text-center">
-		<h2>Are you sure you want to delete this note?</h2>
-			<%= link_to "Yes, delete my note", note, method: :delete, :class => "button" %>
+
+	<div id="myModal" class="reveal-modal" data-reveal>
+		<div class="text-center">
+			<h2>Are you sure you want to delete this note?</h2>
+				<%= link_to "Yes, delete my note", note, method: :delete, :class => "button" %>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
 	</div>
-	<a class="close-reveal-modal">&#215;</a>
-</div>
-	<% end %>
+<% end %>

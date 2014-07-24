@@ -1,0 +1,28 @@
+<h3>New Notifications</h3>
+<% if !@user.notifications.where(read: false).empty? %>
+	<% @user.notifications.where(read: false).order('updated_at DESC').each do |notification| %>
+		<%= notification.content %> at <%= notification.updated_at.strftime(" %H:%M%p, on %m/%d/%Y") %><br>
+	<% end %>
+<% else %>
+	No new notifications.
+<% end %>
+
+
+<h3>Notification History</h3>
+<% if !@user.notifications.where(read: true).empty? %>
+	<% @user.notifications.where(read: true).order('updated_at DESC').each do |notification| %>
+		<!-- link notifications to proper pages -->
+		<%# if notification.content.include?("has written a note for") %> 
+		<%#= link_to notification.content + " at " notification.updated_at.strftime(" %H:%M%p, on %m/%d/%Y"), group_path(@user) %>
+		<%# end %>
+
+		<%= notification.content %> at <%= notification.updated_at.strftime(" %H:%M%p, on %m/%d/%Y") %><br>
+	<% end %>
+<% else%>
+	No notifications to display.
+<% end %>
+
+<!-- mark all notfications as read -->
+<% @user.notifications.each do |notification| %>
+	<% notification.update_attributes(read: true) %>
+<% end %>
