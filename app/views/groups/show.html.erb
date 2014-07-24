@@ -27,7 +27,9 @@
 <div class="show-for-small-only">
 <%= render 'groups/listview' %>
 </div>
-<%= render 'groups/markbookcomplete' %>
+<% if @group.status = true %>
+    <%= render 'groups/markbookcomplete' %>
+<% end %>
 
 <script type="text/javascript">
     //Place as last thing before the closing </body> tag
