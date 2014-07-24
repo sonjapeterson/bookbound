@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.validate
+//= require jquery.validate.additional-methods
 //= require timelineJS/embed
 //= require foundation
 
