@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :requesters, through: :reverse_requests, source: :requester
   has_and_belongs_to_many :groups
   has_one :genre
+  has_many :notifications, dependent: :destroy
 
   scope :starts_with, -> (lambda) { where("name like ? OR location like ? OR description like ?", "%#{lambda}%", "%#{lambda}%", "%#{lambda}%") }
 

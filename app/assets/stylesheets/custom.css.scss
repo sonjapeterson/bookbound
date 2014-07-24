@@ -36,7 +36,7 @@ div.grayback {
 }
 
 .notice {
-  background-color: #43AC6A;
+  background-color: #9EC646;
   padding: 20px;
   margin: 10px 0px;
   border-radius: 10px;
@@ -106,8 +106,8 @@ h1, h2, h3 {
   vertical-align: middle;
 }
 
-.nobutton {
-  background-color: red;
+input[type=submit].nobutton {
+  background-color: #D51B36;
   height: 2em;
   width: 2em;
   border-radius: 1em;
@@ -118,8 +118,12 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.yesbutton {
- background-color: green;
+input[type=submit].nobutton:hover {
+  background-color: #E5BEC7; 
+}
+
+input[type=submit].yesbutton {
+ background-color: #9EC646;
   height: 2em;
   width: 2em;
   border-radius: 1em;
