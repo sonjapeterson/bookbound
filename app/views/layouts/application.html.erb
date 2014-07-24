@@ -3,6 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--[if !IE 7]>
+      <style type="text/css">
+        #wrap {display:table;height:100%}
+      </style>
+    <![endif]-->
 
     <title><%= content_for?(:title) ? yield(:title) : "BookBound" %></title>
 
@@ -17,23 +22,29 @@
   <body>
 	<%= render 'layouts/navbar' %>
   <div class="row">
- <div class="large-12 small-12 columns">
-    <% if flash[:error] %>
-      <div class="error"><%= flash[:error] %></div>
-    <% end %>
+   <div class="large-12 small-12 columns">
+      <% if flash[:error] %>
+        <div class="error"><%= flash[:error] %></div>
+      <% end %>
 
-    <%if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
+      <%if flash[:notice] %>
+        <div class="notice"><%= flash[:notice] %></div>
+      <% end %>
 
-    <%if flash[:alert] %>
-      <div class="alert"><%= flash[:alert] %></div>
-    <% end %> 
+      <%if flash[:alert] %>
+        <div class="alert"><%= flash[:alert] %></div>
+      <% end %> 
+    </div>
   </div>
-</div>
 
-  
-    <%= yield %>
+
+    <div id="wrap">
+      <div id="main">
+       <%= yield %>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <%= render 'layouts/footer' unless @disable_footer %>
     <%= javascript_include_tag "application" %>
 
     <script type="text/javascript">$(function(){ $(document).foundation(); });</script>

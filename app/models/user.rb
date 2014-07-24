@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_one :genre
   has_many :notifications, dependent: :destroy
 
-  scope :starts_with, -> (lambda) { where("name like ? OR location like ? OR description like ?", "%#{lambda}%", "%#{lambda}%", "%#{lambda}%") }
+  scope :starts_with, -> (lambda) { where("LOWER(name) like ? OR LOWER(location) like ? OR LOWER(description) like ?", "%#{lambda}%", "%#{lambda}%", "%#{lambda}%") }
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|

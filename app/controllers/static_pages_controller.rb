@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_filter :disable_footer, only: [:index]
+
 	def index
     if !current_user.nil?
       redirect_to groups_user_path(current_user)
