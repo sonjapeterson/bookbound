@@ -180,6 +180,19 @@ font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Helvetica, Arial,
   margin-top: -2em;
 }
 
+.notification {
+  margin-bottom: .5em;
+  img {
+    border-radius: .5em;
+    margin-right: .75em;
+    float: left;
+  }
+}
+
+.timestamp {
+  color: gray;
+  font-style: italic;
+}
 
 @media only screen and (min-width: 40.063em) {
 .top-bar-section .dropdown li:not(.has-form) a:not(.button) {

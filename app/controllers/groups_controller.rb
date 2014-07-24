@@ -34,7 +34,7 @@ class GroupsController < ApplicationController
     @request = Request.new(requester_id: current_user.id, requested_id: params[:newuser], group_id: @group.id, status: false)
     @request.save
 
-    notification = User.find_by(id: @request.requested_id).notifications.build(read: false, content: User.find_by(id: @request.requester_id).fname + " has requested to read with you", destination: "request")
+    notification = User.find_by(id: @request.requested_id).notifications.build(read: false, content: User.find_by(id: @request.requester_id).fname + " has requested to read with you", destination: "request", group: @group.id)
     notification.save
 
     redirect_to groups_user_path(current_user)
