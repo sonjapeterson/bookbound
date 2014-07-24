@@ -1,0 +1,7 @@
+<% if !@user.notifications.empty? %>
+	<% @user.notifications.each do |notification| %>
+		<%= notification.content %> at <%= notification.created_at %>
+	<% end %>
+<% else %>
+	No new notifications.
+<% end %>
