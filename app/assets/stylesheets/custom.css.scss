@@ -62,13 +62,8 @@ position: relative;
 }
 
 #hero {
-  position: relative;
-  background-color: white;
-  border-radius: 10px;
-  left: 55%;
-  top: 20%;
-  padding: 20px;
-  width: 30%;
+margin-top: 200px;
+background-color: white;
 }
 
 #hero h3 {
@@ -187,5 +182,20 @@ font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Helvetica, Arial,
   .pagenum {
     display: block;
   }
+
+  #hero {
+  margin-top: 120px;
+  }
+
+  #home {
+background: url(bookbench.jpg) no-repeat;
+background-size: 2000px;
+background-position: 25% 25%;
+height: 100%;
+width: 100%;
+overflow: hidden;
+top: -110px;
+position: relative;
+}
 
 }
