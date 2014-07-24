@@ -25,3 +25,72 @@
  	background-color: blue !important;
  }
 
+html, body {
+	height: 100%;
+}
+
+#wrap {
+	min-height: 100%;
+}
+
+#main {
+	overflow:auto;
+	padding-bottom: 120px;
+}  /* must be same height as the footer */
+
+#footer {
+	position: relative;
+	margin-top: -120px; /* negative value of footer height */
+	height: 120px;
+	clear:both;
+	background-color: #333;
+	padding: 50px;
+	color: #777;
+	-webkit-font-smoothing: antialiased;
+	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+} 
+
+/*Opera Fix*/
+body:before {
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;
+}
+
+a.bookbound-logo {
+	font-size: 32px;
+	color: #777;
+	font-weight: bold;
+}
+
+a.bookbound-logo:hover {
+	color: #A0A0A0;
+}
+
+.bookbound-links {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+.bookbound-links li {
+	font-size: 16px;
+	display: inline;
+	padding-left: 40px;
+}
+
+.bookbound-links li a {
+	color: #666;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: -0.04em;
+}
+
+.bookbound-links li a:hover {
+	color: #A0A0A0;
+}
+
+
