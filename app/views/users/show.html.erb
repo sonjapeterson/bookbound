@@ -8,13 +8,13 @@
 			Personal info <h4><%= @user.location %></h4>
 			<h4><%= @user.gender.capitalize + ', ' + @user.age.to_s %></h4>
 			<% else %>
-			No personal info yet!
+			This user has not completed profile info.
 			<%end %>
 		</div>
 
 
 		<div class="large-6 small-12 columns">
-		Description: <h5> <%= @user.description %> </h5>
+		About <h5> <%= @user.description %> </h5>
 			Favorite books <h5><%= @user.fav_books %></h5>
 			Favorite genres <h5>
 		<% result = "" %>
@@ -44,17 +44,24 @@
 <div class="row">
 <div class="large-12 small-12 columns roundbox outer">
 
-<h2>Currently Reading </h2>
+<h2>Currently Reading or Requested</h2>
 <div class="small-block-grid-3">
 <% @user.groups.each do |group| %>
 	<% if group.status == true %>
 			<li>
 			<%= link_to  group_path(group.id) do %>
-			<div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 200px; width: 200px; border-radius: 10%;" ></div><br>
-			<%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '% Complete' %><br>
-			<div class="progress small-#  radius round">
-  			<span class="meter" style="width: <%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '%' %>"></span>
-			</div>
+			<div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em; border-radius: 10%;" ></div><br>
+
+			<% if group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f != nil %>
+					<%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '% Complete' %><br>
+					<div class="progress small-#  radius round">
+		  			<span class="meter" style="width: <%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '%' %>"></span>
+					</div>
+
+				<% else %> 
+						No notes on this title yet. <br>
+						0% Complete
+				<%end %>
 			<%= group.book.title.split(":")[0] %><br>
 			<% end %>
 			</li>
