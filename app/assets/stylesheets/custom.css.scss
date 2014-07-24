@@ -38,9 +38,18 @@ div.grayback {
 .notice {
   background-color: #43AC6A;
   padding: 20px;
-  margin: 10px;
+  margin: 10px 0px;
   border-radius: 10px;
 }
+
+.alert, .error {
+  background-color: #f04124;
+   padding: 20px;
+  margin: 10px 0px;
+  border-radius: 10px;
+}
+
+.
 
 .thumbnail {
   border-radius: 10px;
