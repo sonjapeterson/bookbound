@@ -103,7 +103,7 @@ class GroupsController < ApplicationController
     current_group.update_attributes(status: false)
 
     partner = current_group.users.where.not(id: current_user.id)[0]
-    notification = partner.notifications.build(read: false, content: partner.fname + " has finished " + current_group.book.title)
+    notification = partner.notifications.build(read: false, content: partner.fname + " has marked " + current_group.book.title + " as finished ", destination: "note", group: current_group.id)
     notification.save
 
     redirect_to groups_user_path(current_user)
