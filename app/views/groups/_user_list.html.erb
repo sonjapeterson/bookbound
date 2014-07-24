@@ -1,0 +1,80 @@
+    <div class="row">
+      <div class="large-12 small-12 columns roundbox outer">
+        <table class="large-12 small-12 columns">
+          <% if @susers != nil %>
+          <% @susers.each do |user| %>
+            <tr>
+                <td class="show-for-medium-up"><img src=<%= user.image %>></td>
+                <td><%= link_to user.name, "#", "data-reveal-id" => "myModal" %></td>
+                <td class="show-for-medium-up"><%= user.age %></td>
+                <td><%= user.location %></td>
+                <td class="show-for-medium-up"><%= user.description %></td>
+                <td class="show-for-medium-up">
+                   <% if user.genre.attributes != nil %>
+              <% result = "" %>
+              <% user.genre.attributes.each_pair do |key, value| %>
+                <% if value == 1 && key != "user_id" && key != "id"%>
+                  <% result += key + ", " %>
+                <% end %>
+              <% end %>
+              <%= result[0..(result.length - 3)] %>
+              <br>
+              <% end %>
+            </td>
+                <% if user != current_user %>
+                <td>
+                  <%= form_for(@group) do |f| %>
+                    <%= hidden_field_tag("newuser", user.id) %>
+                    <%= hidden_field_tag("isbn", params[:isbn]) %>
+                    <%= f.submit "Select", :class => "button small radius" %>
+                  <% end %>
+                </td>
+                <% end %>
+            </tr>
+
+            <div id="myModal" class="reveal-modal" data-reveal>
+              <h2><%= user.name %></h2>
+              <p class="lead"><%= user.description %></p>
+              <img src=<%= user.image %>>
+              <br>
+
+              Email: <%= user.email %><br>
+              Location: <%= user.location %><br>
+              Gender: <%= user.gender %><br>
+              Age: <%= user.age %><br>
+              Description: <%= user.description %><br>
+              Favorite books: <%= user.fav_books %><br>
+
+              Favorite genres:
+               <% if user.genre.attributes != nil %>
+              <% result = "" %>
+              <% user.genre.attributes.each_pair do |key, value| %>
+                <% if value == 1 && key != "user_id" && key != "id"%>
+                  <% result += key + ", " %>
+                <% end %>
+              <% end %>
+              <%= result[0..(result.length - 3)] %>
+              <br>
+              <% end %>
+
+              Favorite authors: <%= user.fav_authors %><br>
+              Completed books:
+              <% user.groups.each do |group| %>
+                <% if group.status == false %>
+                  <%= group.book.title %><br>
+                <% end %>
+              <% end %><br>
+              Ongoing books:
+              <% user.groups.each do |group| %>
+                <% if group.status == true %>
+                  <%= group.book.title %><br>
+                <% end %>
+              <% end %><br>
+              <a class="close-reveal-modal">&#215;</a>
+            </div>
+
+          <% end %>
+          <% end %>
+        </table>
+      </div>
+    </div>

@@ -23,7 +23,7 @@ class GroupsController < ApplicationController
 
     chosenbook = @bookz.first
     @book = Book.new(title: chosenbook.title, author: chosenbook.authors, publisher: chosenbook.publisher, datepublished: chosenbook.published_date, pagecount: chosenbook.page_count, summary: chosenbook.description, imagelinklarge: chosenbook.image_link, imagelinksmall: chosenbook.image_link, previewlink: chosenbook.preview_link)
-    if @book.pagecount == nil do
+    if @book.pagecount == nil
       @book.pagecount = 1000
     end
     @group.book = @book
