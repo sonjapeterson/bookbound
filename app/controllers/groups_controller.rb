@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  helper_method :note_display, :find_last_page_read
 
   include GroupsHelper
 
@@ -57,11 +58,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @note = Note.new
     @notes = @group.notes.all
-    if Note.where(user_id: current_user.id, group_id: params[:id]).count > 0
-      last_page_read = Note.where(group_id: params[:id], user_id: current_user.id).order('pagenumber DESC').first.pagenumber
-    else
-      last_page_read = 0
-    end
+    last_page_read = find_last_page_read
 
     respond_to do |format|
     format.html # show.html.erb
@@ -103,12 +100,17 @@ class GroupsController < ApplicationController
   private
     def note_display(note, last_page_read)
       if note.pagenumber <= last_page_read
-        note.body
+        return note.body
       else
-        "Read further to unlock this note!"
+        return "Read further to unlock this note!"
       end
     end
-  # def group_params
-  #   params.require(:group).permit(:users, :book)
-  # end
+
+    def find_last_page_read
+      if Note.where(user_id: current_user.id, group_id: params[:id]).count > 0
+        return Note.where(group_id: params[:id], user_id: current_user.id).order('pagenumber DESC').first.pagenumber
+      else
+        return 0
+      end
+    end
 end
