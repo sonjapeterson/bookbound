@@ -1,18 +1,36 @@
-<h2>Edit Note</h2>
+<div class="row">
+    <div class="large-12 small-12 columns roundbox outer">
+		<div id="panel1" class="content">
+			<div class="row">
+	  			<div class="large-2 small-12 columns">
+	  				&nbsp;
+				</div>
+	  			<div class="large-8 small-12 columns text-center">
 
-<%= form_for(@note) do |f| %>
-	<%= f.label :body %>
-	<%= f.text_field :body %>
+					<h2>Edit Note</h2>
 
-	<%= f.label :pagenumber %>
-	<%= f.text_field :pagenumber %>
+					<%= form_for(@note) do |f| %>
 
-	<%= f.hidden_field(:group_id, value: @note.group_id) %>
-	<%= f.hidden_field(:user_id, value: current_user.id) %>
-	<%= f.hidden_field(:id, value: @note.id) %>
-	<%= f.hidden_field(:view_type, value: "list") %>
+						<%= f.number_field :pagenumber, :placeholder => "Page Number" %><br>
+			        	<%= f.text_area :body, :placeholder => "Your brilliant comment here...", :cols => 40, :rows => 5 %>
 
-	<%= f.submit "Submit" %>
-<% end %>
+						<%= f.hidden_field(:group_id, value: @note.group_id) %>
+						<%= f.hidden_field(:user_id, value: current_user.id) %>
+						<%= f.hidden_field(:id, value: @note.id) %>
+						<%= f.hidden_field(:view_type, value: "list") %>
 
-<%= link_to "Back to book", groups_list_path(@note.group) %>
+						<%= f.submit "Submit", :class => "button small radius text-center" %>
+					<% end %>
+
+				</div>
+				<div class="large-2 small-12 columns">
+					&nbsp;
+				</div>
+			</div>
+		</div>	
+	</div>
+</div><br>
+
+<p class="text-center">
+	<%= link_to "Back to book", groups_list_path(@note.group), :class => "button small radius text-center" %>
+</p>

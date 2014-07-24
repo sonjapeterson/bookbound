@@ -25,6 +25,9 @@
                 <% end %>
               </li>
               <li>
+                <%= link_to "View Profile", user_path(current_user), :class => "dropdownsmall" %>
+              </li>
+              <li>
                  <%= link_to "Edit Profile", edit_user_path(current_user), :class => "dropdownsmall" %>
               </li>
               <li>
