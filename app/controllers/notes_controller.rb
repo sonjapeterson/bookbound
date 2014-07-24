@@ -17,7 +17,7 @@ class NotesController < ApplicationController
 		else
 			params[:unsaved] == true
 		end
-
+		
 		if params[:note][:view_type] == "timeline"
 			redirect_to group_path(params[:note][:group_id])
 		elsif params[:note][:view_type] == "list"
