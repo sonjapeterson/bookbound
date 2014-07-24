@@ -8,7 +8,7 @@
 
 		<h2><%= @user.name %> </h2>
 		<div class="large-6 small-12 columns">
-			<div  style="background-image: url(<%= @user.image + '?type=large'%>); background-position: center center; background-size: cover; height:200px; width: 200px; border-radius: 10%;" ></div> <br>
+			<div  style="background-image: url(<%= @user.image + '?type=large'%>); background-position: center center; background-size: cover; height:200px; width: 200px; border-radius: 10%;" > </div> <br>
 			<% if (@user.age != nil && @user.location != nil && @user.location != '' ) %>
 			Personal info <h4><%= @user.location %></h4>
 			<h4><%= @user.gender.capitalize + ', ' + @user.age.to_s %></h4>
@@ -54,12 +54,14 @@
 <% @user.groups.each do |group| %>
 	<% if group.status == true %>
 			<li>
-			<div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 100px; width: 100px; border-radius: 10%;" ></div><br>
+			<%= link_to  group_path(group.id) do %>
+			<div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 200px; width: 200px; border-radius: 10%;" ></div><br>
 			<%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '% Complete' %><br>
 			<div class="progress small-#  radius round">
   			<span class="meter" style="width: <%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '%' %>"></span>
 			</div>
 			<%= group.book.title.split(":")[0] %><br>
+			<% end %>
 			</li>
 		<% end %>
 <% end %><br>
