@@ -40,6 +40,10 @@ class UsersController < ApplicationController
 	    redirect_to root_url
 	end
 
+	def notifications
+		@user = User.find(params[:id])
+	end
+
 	private
 		def user_params
 			params.require(:user).permit(:email, :location, :gender, :age, :fav_books, :fav_authors, :genre, :description, :zipcode)

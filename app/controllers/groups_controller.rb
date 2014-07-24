@@ -29,6 +29,10 @@ class GroupsController < ApplicationController
     @note.save
     @request = Request.new(requester_id: current_user.id, requested_id: params[:newuser], group_id: @group.id, status: false)
     @request.save
+
+    notification = User.find_by(id: @request.requested_id).notifications.build(read: false, content: User.find_by(id: @request.requester_id).fname + " has requested to read with you")
+    notification.save
+
     redirect_to groups_user_path(current_user)
   end
 
@@ -94,6 +98,11 @@ class GroupsController < ApplicationController
   def finish_book
     current_group = Group.find(params[:group])
     current_group.update_attributes(status: false)
+
+    partner = current_group.where.not(id: current_user.id)[0]
+    notification = partner.notifications.build(read: false, content: partner.fname + " has finished " + current_group.book)
+    notification.save
+
     redirect_to groups_user_path(current_user)
   end
 
