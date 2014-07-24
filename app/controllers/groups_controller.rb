@@ -22,6 +22,9 @@ class GroupsController < ApplicationController
 
     chosenbook = @bookz.first
     @book = Book.new(title: chosenbook.title, author: chosenbook.authors, publisher: chosenbook.publisher, datepublished: chosenbook.published_date, pagecount: chosenbook.page_count, summary: chosenbook.description, imagelinklarge: chosenbook.image_link, imagelinksmall: chosenbook.image_link, previewlink: chosenbook.preview_link)
+    if @book.pagecount == nil do
+      @book.pagecount = 1000
+    end
     @group.book = @book
     @group.save
     @note = Note.new(group_id: @group.id, pagenumber: 1, body: "This is an example of what a note looks like. Start writing notes to each other using the form below!", user_id: current_user.id)
