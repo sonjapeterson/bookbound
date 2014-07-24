@@ -102,8 +102,8 @@ class GroupsController < ApplicationController
     current_group = Group.find(params[:group])
     current_group.update_attributes(status: false)
 
-    partner = current_group.where.not(id: current_user.id)[0]
-    notification = partner.notifications.build(read: false, content: partner.fname + " has finished " + current_group.book)
+    partner = current_group.users.where.not(id: current_user.id)[0]
+    notification = partner.notifications.build(read: false, content: partner.fname + " has finished " + current_group.book.title)
     notification.save
 
     redirect_to groups_user_path(current_user)
