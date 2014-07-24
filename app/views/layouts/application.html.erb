@@ -15,8 +15,9 @@
   </head>
 
   <body>
-	<%= render 'layouts/navbar' %> 
- <div class="twelve columns">
+	<%= render 'layouts/navbar' %>
+  <div class="row">
+ <div class="large-12 small-12 columns">
     <% if flash[:error] %>
       <div class="error"><%= flash[:error] %></div>
     <% end %>
@@ -29,6 +30,7 @@
       <div class="alert"><%= flash[:alert] %></div>
     <% end %> 
   </div>
+</div>
 
   
     <%= yield %>

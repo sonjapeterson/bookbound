@@ -36,7 +36,7 @@ div.grayback {
 }
 
 .notice {
-  background-color: #8CC63F;
+  background-color: #43AC6A;
   padding: 20px;
   margin: 10px;
   border-radius: 10px;
@@ -169,6 +169,25 @@ font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Helvetica, Arial,
   float: right;
   margin-top: -2em;
 }
+
+
+@media only screen and (min-width: 40.063em) {
+.top-bar-section .dropdown li:not(.has-form) a:not(.button) {
+  padding-top: 20px;
+}
+
+.top-bar-section .dropdown li {
+  height: 70px !important;
+
+}
+
+.top-bar-section .dropdown li a {
+  height: 70px !important;
+  line-height: 1.2 !important; 
+}
+
+}
+
 
 @media only screen and (max-width: 40em) { 
   #editdelete {

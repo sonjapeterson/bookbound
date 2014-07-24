@@ -4,6 +4,8 @@
 <%= form_for(@user) do |f| %>
 
 <div class="row">
+	<div class="large-12 small-12 columns roundbox outer">
+		<div class="row">
 		<div class="large-3 small-3 columns " style="background-image: url(<%= @user.image + '?type=large'%>); background-position: center center; background-size: cover; height:250px; width: 250px; border-radius: 10%;" >
 		</div>
 
@@ -123,7 +125,8 @@
 </div>
 </div>
 <% end %>
-
+</div>
+</div>
 
 
 <div id="myModal" class="reveal-modal" data-reveal>
