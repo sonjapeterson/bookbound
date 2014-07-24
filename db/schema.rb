@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723232524) do
+ActiveRecord::Schema.define(version: 20140724174523) do
 
   create_table "books", force: true do |t|
     t.integer  "group_id"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 20140723232524) do
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "destination"
+    t.integer  "group"
   end
 
   create_table "requests", force: true do |t|

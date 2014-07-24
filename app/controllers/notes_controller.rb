@@ -25,7 +25,7 @@ class NotesController < ApplicationController
 
 		group = Group.find(params[:note][:group_id])
 		partner = group.users.where.not(id: current_user.id)[0]
-		notification = partner.notifications.build(read: false, content: current_user.fname + " has written a note for " + group.book.title)
+		notification = partner.notifications.build(read: false, content: current_user.fname + " has written a note for " + group.book.title, destination: "note", group: params[:note][:group_id])
 		notification.save
 	end
 
