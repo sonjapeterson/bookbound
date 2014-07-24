@@ -18,10 +18,20 @@
 
             <ul class="dropdown">
               <li>
-                <%= link_to "Edit Profile", edit_user_path(current_user) %>
+                <% if !current_user.notifications.where(read: false).empty? %>
+                  <%= link_to "New Notifications!", notifications_path(current_user), class: "new_notifications" %>
+                <% else %>
+                  <%= link_to "Notifications", notifications_path(current_user) %>
+                <% end %>
               </li>
               <li>
-                <%= link_to "Sign out", signout_path, id: "sign_out" %>
+                <%= link_to "View Profile", user_path(current_user), :class => "dropdownsmall" %>
+              </li>
+              <li>
+                 <%= link_to "Edit Profile", edit_user_path(current_user), :class => "dropdownsmall" %>
+              </li>
+              <li>
+                <%= link_to "Sign out", signout_path, id: "sign_out", :class => "dropdownsmall" %>
               </li>
             </ul>
           </li>

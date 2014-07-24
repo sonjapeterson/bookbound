@@ -57,3 +57,11 @@ h2.start {
 h2.date::before {
 	content: "Page " !important;
 }
+
+.accordion-icon:before {
+    content: "\25BD";
+}
+//The accordion is open
+.active .accordion-icon:before {
+    content: "\25B3";
+ }

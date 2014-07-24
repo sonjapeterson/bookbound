@@ -16,7 +16,8 @@
     });
 </script>
 <%= render 'groups/timelineactive' %>
-<%= render 'groups/addnote' %>
+
+<%= render 'groups/addnote', display_type: "timeline" %>
 
 <div class="row show-for-medium-up">
 <div class="large-12 small-12 columns roundbox outer">
@@ -25,9 +26,12 @@
 </div>
 
 <div class="show-for-small-only">
-<%= render 'groups/listview' %>
+    <%= render 'groups/listview' %>
 </div>
-<%= render 'groups/markbookcomplete' %>
+
+<% if @group.status == true %>
+    <%= render 'groups/markbookcomplete' %>
+<% end %>
 
 <script type="text/javascript">
     //Place as last thing before the closing </body> tag

@@ -36,11 +36,18 @@ div.grayback {
 }
 
 .notice {
-  background-color: #8CC63F;
+  background-color: #9EC646;
   padding: 20px;
-  margin: 10px;
+  margin: 10px 0px;
   border-radius: 10px;
 }
+
+/*.alert, .error {
+  background-color: #f04124;
+   padding: 20px;
+  margin: 10px 0px;
+  border-radius: 10px;
+}*/
 
 .thumbnail {
   border-radius: 10px;
@@ -99,8 +106,8 @@ h1, h2, h3 {
   vertical-align: middle;
 }
 
-.nobutton {
-  background-color: red;
+input[type=submit].nobutton {
+  background-color: #D51B36;
   height: 2em;
   width: 2em;
   border-radius: 1em;
@@ -111,8 +118,12 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.yesbutton {
- background-color: green;
+input[type=submit].nobutton:hover {
+  background-color: #E5BEC7; 
+}
+
+input[type=submit].yesbutton {
+ background-color: #9EC646;
   height: 2em;
   width: 2em;
   border-radius: 1em;
@@ -170,6 +181,25 @@ font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Helvetica, Arial,
   margin-top: -2em;
 }
 
+
+@media only screen and (min-width: 40.063em) {
+.top-bar-section .dropdown li:not(.has-form) a:not(.button) {
+  padding-top: 20px;
+}
+
+.top-bar-section .dropdown li {
+  height: 70px !important;
+
+}
+
+.top-bar-section .dropdown li a {
+  height: 70px !important;
+  line-height: 1.2 !important; 
+}
+
+}
+
+
 @media only screen and (max-width: 40em) { 
   #editdelete {
     margin-top: 0em;
@@ -193,7 +223,7 @@ background-size: 2000px;
 background-position: 25% 25%;
 height: 100%;
 width: 100%;
-overflow: hidden;
+overflow: visible;
 top: -110px;
 position: relative;
 }

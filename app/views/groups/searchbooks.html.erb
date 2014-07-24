@@ -7,10 +7,10 @@
 					<% if onebook.isbn != nil %>
 				<a href="/displayusersearch?isbn=<%= onebook.isbn %>">
 					<div class="row roundbox outer clickable">
-				 			<div class="large-1 small-2 columns">
+				 			<div class="large-1 small-4 columns">
 					 			<img src='<%= onebook.image_link %>' class="bookimage">
 							</div>
-							<div class="large-4 small-4 columns">
+							<div class="large-4 small-8 columns">
 								<b> <%= onebook.title %> </b>
 								<br>
 								by <%= onebook.authors %>
@@ -19,13 +19,14 @@
 								<br>
 								Published by: <%= onebook.publisher %>
 							</div>
-							<div class="large-7 small-6 columns">	
-								<% if onebook.description.to_s.length > 450 %>
-								<%= onebook.description.to_s[0..450] %> ..
-								<% else %>
-								<%= onebook.description %>
-								<% end %>
-							</div>
+								<div class="large-7 medium-7 columns show-for-medium-up">	
+									<% if onebook.description.to_s.length > 450 %>
+									<%= onebook.description.to_s[0..450] %> ..
+									<% else %>
+									<%= onebook.description %>
+									<% end %>
+								</div>
+							</span>
 						</div>
 						</a>
 
