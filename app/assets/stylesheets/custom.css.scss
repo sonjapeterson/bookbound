@@ -163,7 +163,16 @@ li {
 }
 
 h2.start {
-font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+h2.start a {
+  color: #000;
+}
+
+h2.start a:hover {
+  color: #777;
+  text-decoration: none;
 }
 
 #active {

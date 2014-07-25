@@ -73,7 +73,7 @@ class GroupsController < ApplicationController
     format.json { render json: json_out = {
         "timeline"=>
         {
-          "headline"=> @group.book.title,
+          "headline"=> "<a href='" + "/books/" + @group.book.id.to_s + "'>" + @group.book.title + "</a>",
           "type"=>"default",
           "text"=> (@group.users.count < 2 ? " " : ("with " + @group.users.where.not(id: current_user.id).first.name)),
 
