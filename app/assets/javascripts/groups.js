@@ -1,13 +1,3 @@
-// $(document).ready(function () {
-// 	$('#findbook').validate({
-// 		rules: {
-// 			query: {
-// 				required: true
-// 			}
-// 		}
-// 	});
-// });
-
 $(document).ready(function () {
 
     $('#findbook').validate({ // initialize the plugin
@@ -22,6 +12,17 @@ $(document).ready(function () {
         rules: {
             starts_with: {
                 required: true
+            }
+        }
+    });
+
+    $('#new_note').validate({ // initialize the plugin
+        rules: {
+            "note[pagenumber]": {
+                required: true
+            },
+            "note[body]": {
+                required: true,
             }
         }
     });
