@@ -8,45 +8,40 @@
 			Personal info <h4><%= @user.location %></h4>
 			<h4><%= @user.gender.capitalize + ', ' + @user.age.to_s %></h4>
 			<% else %>
-			This user has not completed profile info.
+			 &nbsp;
 			<%end %>
 		</div>
 
 
 		<div class="large-6 small-12 columns">
 		About <h5> <%= @user.description %> </h5>
-			Favorite books <h5><%= @user.fav_books %></h5>
-			Favorite genres <h5>
-		<% result = "" %>
-		<% @user.genre.attributes.each_pair do |key, value| %>
-			<% if value == 1 && key != "user_id" && key != "id"%>
-				<% result += key + ", " %>
+		Favorite books <h5><%= @user.fav_books %></h5>
+		Favorite genres
+		<h5>
+			<% result = "" %>
+			<% @user.genre.attributes.each_pair do |key, value| %>
+				<% if value == 1 && key != "user_id" && key != "id"%>
+					<% result += key + ", " %>
+				<% end %>
 			<% end %>
-		<% end %>
-		<%= result[0..(result.length - 3)] %> </h5>
-	
+			<%= result[0..(result.length - 3)] %>
+		</h5>
 
 		Favorite authors <h5><%= @user.fav_authors %></h5>
-		Completed books <h5>
-		<% @user.groups.each do |group| %>
-			<% if group.status == false %>
-				<%= group.book.title.split(":")[0]  %><br>
-			<% end %>
-		<% end %><br><h5>
-					<% if current_user.id == @user.id %><br>
-		<%= link_to "Edit Profile", edit_user_path(@user), :class => "button tiny radius" %>
-		<% end %> 
+
 
 	</div>
 		</div>
 </div>
 
-<div class="row">
-<div class="large-12 small-12 columns roundbox outer">
+<% if @user.groups.count > 0 %>
 
-<h2>Books</h2>
-<div class="large-block-grid-3 small-block-grid-1">
-<% @user.groups.each do |group| %>
+	<div class="row">
+		<div class="large-12 small-12 columns roundbox outer">
+
+		<h2>Books</h2>
+		<div class="large-block-grid-3 small-block-grid-1">
+		<% @user.groups.each do |group| %>
 			<li>
 			<%= link_to  book_path(group.book) do %>
 			<div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" >
@@ -69,10 +64,11 @@
 			</li>
 		<% end %>
 		<br>
+		</div>
+		</ul>
+		</div>
 	</div>
-</ul>
-</div>
-</div>
+<% end %>
 
 
 
