@@ -25,8 +25,11 @@
 					</div>
 
 				<% else %> 
-						<h6>0% complete<br>
-				<%end %>
+						<h6>0% Complete </h6>
+						<div class="progress small-#  radius round">
+		  			<span class="meter" style="width: 0%"></span>
+					</div>
+				<% end %>
 			<% end %>
 			</li>
 		<% end %>
@@ -46,7 +49,7 @@
 			<ul class="small-block-grid-1 large-block-grid-3 large-text-center">
 						<% @requests.where(requested_id: params[:id]).each do |request| %>
 							<li>
-								<%= link_to group_path(Group.find(request.group_id)) do %>	
+								<%= link_to book_path(Group.find(request.group_id).book) do %>	
 									<div  style="background-image: url(<%=Group.find(request.group_id).book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
 								<% end %>
 						
