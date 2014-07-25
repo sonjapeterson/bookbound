@@ -44,16 +44,15 @@
 <div class="row">
 <div class="large-12 small-12 columns roundbox outer">
 
-<h2>Currently Reading or Requested</h2>
+<h2>Books</h2>
 <div class="large-block-grid-3 small-block-grid-1">
 <% @user.groups.each do |group| %>
-	<% if group.status == true %>
 			<li>
-			<%= link_to  group_path(group.id) do %>
+			<%= link_to  book_path(group.book) do %>
 			<div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" >
 			</div><br>
 
-			<% if group.notes.where(user_id: @user.id).order('pagenumber DESC').first != nil %>
+				<% if group.notes.where(user_id: @user.id).order('pagenumber DESC').first != nil %>
 					<%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '% Complete' %><br>
 					<div class="progress small-#  radius round">
 		  			<span class="meter" style="width: <%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '%' %>"></span>
@@ -69,7 +68,7 @@
 			<% end %>
 			</li>
 		<% end %>
-<% end %><br>
+		<br>
 	</div>
 </ul>
 </div>
