@@ -1,6 +1,14 @@
-<h3>Invite your friend:</h3>
+<div class="row">
 
-<%= form_tag('sendinvite') do %>
-<%= email_field_tag("address") %>
-<%= submit_tag 'Send your invite' %>
-<% end %>
+	<div class="large-12 medium-12 small-12 columns roundbox outer text-center">
+
+		<h3>Invite your friend</h3>
+
+		<%= form_tag('sendinvite') do %>
+		<%= email_field_tag 'address', nil, :placeholder => "Email address" %>
+		<%= submit_tag 'Send your invite', :class => "button radius" %>
+		<% end %>
+
+	</div>
+
+</div>
