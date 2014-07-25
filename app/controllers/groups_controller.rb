@@ -98,7 +98,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @note = Note.new
   end
-
+ 
   def finish_book
     current_group = Group.find(params[:group])
     current_group.update_attributes(status: false)
