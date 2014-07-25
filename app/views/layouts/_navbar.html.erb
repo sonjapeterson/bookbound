@@ -15,7 +15,6 @@
               <li><%= link_to "Start a Book", displaybooksearch_path %></li>
           <li class="has-dropdown">
             <%= link_to image_tag(current_user.image, :class => "thumbnail") + current_user.name, current_user %>
-
             <ul class="dropdown">
               <li>
                 <% if !current_user.notifications.where(read: false).empty? %>
