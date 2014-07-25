@@ -1,9 +1,15 @@
-<img src="<%= @book.imagelinklarge %>"><br>
+<div class="row">
+<div class="large-12 small-12 columns roundbox outer">
+<img src="<%= @book.imagelinklarge %>" class="left floatspace"><br>
 
-Title: <%= @book.title %><br>
-Author: <%= @book.author %><br>
-Publisher: <%= @book.publisher %><br>
-Summary: <%= @book.summary %><br>
-Pages: <%= @book.pagecount %><br>
-Published: <%= @book.datepublished %><br>
-<%= link_to "Preview or buy book", @book.previewlink %>
+<h2><%= @book.title %></h2>
+<h4>by <%= @book.author %></h4>
+<h6>Publisher:</h6> <%= @book.publisher %><br>
+<h6>Summary:</h6> <%= @book.summary %><br>
+<h6>Pages:</h6> <%= @book.pagecount %><br>
+<h6>Published:</h6> <%= @book.datepublished %><br>
+<div class="text-center">
+<%= link_to "Preview or buy book", @book.previewlink, :class => "button radius" %>
+</div>
+</div>
+</div>
