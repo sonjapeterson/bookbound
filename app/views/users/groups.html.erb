@@ -32,11 +32,11 @@
 <div class="row">
 	<div class="large-6 small-12 columns roundbox">
 		<h3>Requests for you</h3>
-			<ul class="small-block-grid-4 large-block-grid-3 text-center">
+			<ul class="small-block-grid-2 large-block-grid-3 text-center">
 						<% @requests.where(requested_id: params[:id]).each do |request| %>
 							<li>
-								<%= link_to  group_path(Group.find(request.group_id)) do %>	
-									<div  style="background-image: url(<%= Group.find(request.group_id).book.imagelinksmall %>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em; border-radius: 10%;" ></div>
+								<%= link_to group_path(Group.find(request.group_id)) do %>	
+									<%= image_tag Group.find(request.group_id).book.imagelinksmall %>
 								<% end %>
 						
 							<%= link_to "with " + User.find(request.requester_id).name, group_path(Group.find(request.group_id)) %>
@@ -63,7 +63,7 @@
 						<% @requests.where(requester_id: params[:id]).each do |request| %>
 							<li>
 								<%= link_to  group_path(Group.find(request.group_id)) do %>	
-									<div  style="background-image: url(<%= Group.find(request.group_id).book.imagelinksmall %>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
+									<%= image_tag Group.find(request.group_id).book.imagelinksmall %>
 								<% end %>
 							
 							<%= link_to "with " + User.find(request.requested_id).name, group_path(Group.find(request.group_id)) %>
