@@ -50,7 +50,7 @@
 	<% if group.status == true %>
 			<li>
 			<%= link_to  group_path(group.id) do %>
-			<div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em; border-radius: 10%;" >
+			<div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" >
 			</div><br>
 
 			<% if group.notes.where(user_id: @user.id).order('pagenumber DESC').first != nil %>

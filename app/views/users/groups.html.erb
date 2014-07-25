@@ -10,14 +10,26 @@
 		<h6>These are books you're currently reading with a partner. </h6>
 	<% end %>
 
-<ul class="small-block-grid-3 large-block-grid-6 text-center">
+<ul class="small-block-grid-1 large-block-grid-6 large-text-center">
 
 
 	<% @groups.each do |group| %>
 		<% if group.users.count > 1 && group.status == true %>
-			<li><%= link_to image_tag(group.book.imagelinksmall), group_path(group.id) %>
-			<br>
-			<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %></li>
+					<%= link_to  group_path(group.id) do %>
+						<li><div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
+			<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %><br>
+			<% if group.notes.where(user_id: @user.id).order('pagenumber DESC').first != nil %>
+					<h6><%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '% Complete' %></h6>
+					<div class="progress small-#  radius round">
+		  			<span class="meter" style="width: <%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '%' %>"></span>
+					</div>
+
+				<% else %> 
+						<h6>No notes on this title yet. <br>
+						0% Complete </h6>
+				<%end %>
+			<% end %>
+			</li>
 		<% end %>
 	<% end %>
 </ul>
@@ -32,11 +44,11 @@
 <div class="row">
 	<div class="large-6 small-12 columns roundbox">
 		<h3>Requests for you</h3>
-			<ul class="small-block-grid-2 large-block-grid-3 text-center">
+			<ul class="small-block-grid-1 large-block-grid-3 large-text-center">
 						<% @requests.where(requested_id: params[:id]).each do |request| %>
 							<li>
 								<%= link_to group_path(Group.find(request.group_id)) do %>	
-									<%= image_tag Group.find(request.group_id).book.imagelinksmall %>
+									<div  style="background-image: url(<%=Group.find(request.group_id).book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
 								<% end %>
 						
 							<%= link_to "with " + User.find(request.requester_id).name, group_path(Group.find(request.group_id)) %>
@@ -59,11 +71,11 @@
 	</div>
 	<div class="large-6 small-12 columns roundbox">
 		<h3>Your Requests</h3>
-				<ul class="small-block-grid-2 large-block-grid-3 text-center">
+				<ul class="small-block-grid-1 large-block-grid-3 large-text-center">
 						<% @requests.where(requester_id: params[:id]).each do |request| %>
 							<li>
 								<%= link_to  group_path(Group.find(request.group_id)) do %>	
-									<%= image_tag Group.find(request.group_id).book.imagelinksmall %>
+									<div  style="background-image: url(<%=Group.find(request.group_id).book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
 								<% end %>
 							
 							<%= link_to "with " + User.find(request.requested_id).name, group_path(Group.find(request.group_id)) %>
@@ -71,6 +83,7 @@
 								<%= form_tag('requests/delete') do %>
 									<%= hidden_field_tag("request", request.id) %>
 									<%= submit_tag "&#x2717;".html_safe, :class => "nobutton", :confirm => 'Sure?' %>
+
 								<% end %>
 							</li>
 						<% end %>
@@ -90,14 +103,16 @@
 <% else %>
 		<h6>These are books you've completed.</h6>
 <% end %>
-<ul class="small-block-grid-3 large-block-grid-6 text-center roundbox">
+<ul class="small-block-grid-3 large-block-grid-6 large-text-center roundbox">
 	
 
 
 
 	<% @groups.each do |group| %>
 		<% if group.users.count > 1 && group.status == false %>
-			<li><%= link_to image_tag(group.book.imagelinksmall), group_path(group.id) %>
+			<li><%= link_to  group_path(Group.find(request.group_id)) do %>	
+									<div  style="background-image: url(<%=Group.find(request.group_id).book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
+								<% end %>
 			<br>
 			<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %></li>
 		<% end %>
