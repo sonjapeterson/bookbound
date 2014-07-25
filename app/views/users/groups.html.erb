@@ -15,8 +15,8 @@
 
 	<% @groups.each do |group| %>
 		<% if group.users.count > 1 && group.status == true %>
-					<%= link_to  group_path(group.id) do %>
-						<li><div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
+			<%= link_to  group_path(group.id) do %>
+				<li><div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
 			<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %><br>
 			<% if group.notes.where(user_id: @user.id).order('pagenumber DESC').first != nil %>
 					<h6><%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '% Complete' %></h6>
@@ -106,12 +106,14 @@
 <ul class="small-block-grid-3 large-block-grid-6 large-text-center roundbox">
 
 	<% @groups.each do |group| %>
-		<% if group.users.count > 1 && group.status == false %>
+		<% if group.status == false %>
 			<li><%= link_to group_path(group.id) do %>	
 				<div  style="background-image: url(<%= group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
 			<% end %>
+				<% if group.users.count > 1 %>
 			<br>
 			<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %></li>
+			<% end %>
 		<% end %>
 	<% end %>
 </ul>
