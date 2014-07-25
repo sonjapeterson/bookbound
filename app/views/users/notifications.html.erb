@@ -6,14 +6,14 @@
 	<div class="large-12 small-12 columns notification">
 		<!-- link "x requested you" notification to your books page so that you can confirm -->
 		<% if notification.destination == "request" %>
-			<%= image_tag Group.find(notification.group).users.first.image %> 
+		<%= image_tag Group.find(notification.group).users.where.not(id: params[:id]).first.image %> 
 			<%= link_to notification.content, groups_user_path(@user) %>
 			<p class="timestamp"><%= notification.updated_at.strftime("%I:%M%p, on %m/%d/%Y") %></p>
 		<% end %>
 
 		<!-- link "x confirmed your request" notification to the right group show page AND link "new note" notification to the right group show page -->
 		<% if notification.destination == "note" %> 
-		<%= image_tag Group.find(notification.group).users.first.image %> 
+		<%= image_tag Group.find(notification.group).users.where.not(id: params[:id]).first.image %> 
 			<%= link_to notification.content, group_path(notification.group) %><br>
 			<p class="timestamp"><%= notification.updated_at.strftime("%I:%M%p, on %m/%d/%Y") %></p>
 		<% end %>
@@ -30,13 +30,13 @@
 	<div class="large-12 small-12 columns notification">
 		<!-- link "x requested you" notification to your books page so that you can confirm -->
 		<% if notification.destination == "request" %> 
-			<%= image_tag Group.find(notification.group).users.first.image %> 
+		<%= image_tag Group.find(notification.group).users.where.not(id: params[:id]).first.image %> 
 			<%= link_to notification.content, groups_user_path(@user) %><br>
 			<p class="timestamp"><%= notification.updated_at.strftime("%I:%M%p, on %m/%d/%Y") %></p>
 <% end %>
 		<!-- link "x confirmed your request" notification to the right group show page AND link "new note" notification to the right group show page -->
 		<% if notification.destination == "note" %> 
-		<%= image_tag Group.find(notification.group).users.first.image %> 
+		<%= image_tag Group.find(notification.group).users.where.not(id: params[:id]).first.image %> 
 			<%= link_to notification.content, group_path(notification.group) %><br>
 			<p class="timestamp"><%= notification.updated_at.strftime("%I:%M%p, on %m/%d/%Y") %></p>
 		<% end %>
