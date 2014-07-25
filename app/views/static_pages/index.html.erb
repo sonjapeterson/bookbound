@@ -45,16 +45,16 @@
 	<div class ="large-5 large-offset-6 medium-5 medium-offset-5 small-12 columns roundbox outer" id="hero">
 	<h3>Read with anyone, anywhere</h3>
 		<ol>
-			<li><span class="num">1.</span> Pick a book</li>
-			<li><span class="num">2.</span> Pick a friend</li>
-			<li><span class="num">3.</span> Share your thoughts and progress with each other online as you read</li>
-      <a href="/about">Learn more</a><br>
+			<li><span class="num">1.</span> Pick a book.</li>
+			<li><span class="num">2.</span> Pick a friend.</li>
+			<li><span class="num">3.</span> Share your thoughts and progress with each other online as you read.</li>
 		</ol>
 
 		<% if current_user.nil? %>
 			<div class="centered">
 				<a href="/auth/facebook" class="button radius">Sign in with Facebook</a>
 			</div>
+            <div style="text-align: center"><br><a href="/about"><i>Learn more >></i></a></div>
 		<% end %>
     	</div>
     </div>
