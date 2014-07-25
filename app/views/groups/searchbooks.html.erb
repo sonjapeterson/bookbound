@@ -14,10 +14,14 @@
 								<b> <%= onebook.title %> </b>
 								<br>
 								by <%= onebook.authors %>
+								<br>
+								Pages: <%= onebook.page_count %>
 								<br> 
 								ISBN: <%= onebook.isbn %>
 								<br>
 								Published by: <%= onebook.publisher %>
+								<br>
+								Average rating: <%= onebook.average_rating %>
 							</div>
 								<div class="large-7 medium-7 columns show-for-medium-up">	
 									<% if onebook.description.to_s.length > 450 %>

@@ -1,65 +1,74 @@
 <div class="row">
 	<div class="large-12 small-12 columns roundbox outer">
 			<h1>Read With a Rando</h1>
+			<h6>BookBound readers who might enjoy reading this book with you. Fill out more profile info to improve compatibility score!</h6>
 				<table class="large-12 small-12 columns">
 					<% if @randos != nil %>
-					<% @randos.each do |rando, score| %>
-						<tr>
-						    <td class="show-for-medium-up"><img src=<%= rando.image %>></td>
-						    <td><%= link_to rando.name, "#", "data-reveal-id" => "myModal" %></td>
-						    <td class="show-for-medium-up"><%= rando.age %></td>
-						    <td class="show-for-medium-up"><%= rando.location %></td>
-						    <td class="show-for-medium-up"><%= rando.description %></td>
-						    <td><%= score.to_i %>% compatible</td>
-						    <td>
-						      <%= form_for(@group) do |f| %>
-						        <%= hidden_field_tag("newuser", rando.id) %>
-						        <%= hidden_field_tag("isbn", params[:isbn]) %>
-						        <%= f.submit "Select", :class => "button small radius" %>
-						      <% end %>
-						    </td>
-						</tr>
+						<% @randos.each_with_index do |(rando, score),index| %>
+							<tr>
+							    <td class="show-for-medium-up"><img src=<%= rando.image %>></td>
+							    <td><%= link_to rando.name, "#", "data-reveal-id" => "myModal-#{index}" %></td>
 
-						<div id="myModal" class="reveal-modal" data-reveal>
-						  <h2><%= rando.name %></h2>
-						  <p class="lead"><%= rando.description %></p>
-						  <img src=<%= rando.image %>>
-							<br>
+							    <!-- Rando profile modal starts here -->
+								<div id="myModal-<%= index %>" class="reveal-modal" data-reveal>
+								    <div class="row">
+										<div class="large-12 medium-12 small-12 columns roundbox outer">
 
-							Email: <%= rando.email %><br>
-							Location: <%= rando.location %><br>
-							Gender: <%= rando.gender %><br>
-							Age: <%= rando.age %><br>
-							Description: <%= rando.description %><br>
-							Favorite books: <%= rando.fav_books %><br>
+										<h2><%= rando.name %> </h2>
+										<div class="large-6 small-12 columns">
+											<div  style="background-image: url(<%= rando.image + '?type=large'%>); background-position: center center; background-size: cover; height:200px; width: 200px; border-radius: 10%;" > </div> <br>
+											<% if (rando.age != nil && rando.location != nil && rando.location != '' ) %>
+											Personal info <h4><%= rando.location %></h4>
+											<h4><%= rando.gender.capitalize + ', ' + rando.age.to_s %></h4>
+											<% else %>
+											This user has not completed profile info.
+											<%end %>
+										</div>
 
-							Favorite genres:
-							<% result = "" %>
-							<% rando.genre.attributes.each_pair do |key, value| %>
-								<% if value == 1 && key != "user_id" && key != "id"%>
-									<% result += key + ", " %>
-								<% end %>
-							<% end %>
-							<%= result[0..(result.length - 3)] %>
-							<br>
 
-							Favorite authors: <%= rando.fav_authors %><br>
-							Completed books:
-							<% rando.groups.each do |group| %>
-								<% if group.status == false %>
-									<%= group.book.title %><br>
-								<% end %>
-							<% end %><br>
-							Ongoing books:
-							<% rando.groups.each do |group| %>
-								<% if group.status == true %>
-									<%= group.book.title %><br>
-								<% end %>
-							<% end %><br>
-						  <a class="close-reveal-modal">&#215;</a>
-						</div>
+										<div class="large-6 small-12 columns">
+										About <h5> <%= rando.description %> </h5>
+											Favorite books <h5><%= rando.fav_books %></h5>
+											Favorite genres <h5>
+										<% result = "" %>
+										<% rando.genre.attributes.each_pair do |key, value| %>
+											<% if value == 1 && key != "user_id" && key != "id"%>
+												<% result += key + ", " %>
+											<% end %>
+										<% end %>
+										<%= result[0..(result.length - 3)] %> </h5>
+									
 
-					<% end %>
+										Favorite authors <h5><%= rando.fav_authors %></h5>
+										Completed books <h5>
+										<% rando.groups.each do |group| %>
+											<% if group.status == false %>
+												<%= group.book.title.split(":")[0]  %><br>
+											<% end %>
+										<% end %>
+
+									</div>
+										</div>
+								</div>
+								    <a class="close-reveal-modal">&#215;</a>
+								</div>
+								<!-- Rando profile modal ends -->
+
+							    <td class="show-for-medium-up"><%= rando.age %></td>
+							    <td class="show-for-medium-up"><%= rando.location %></td>
+							    <td class="show-for-medium-up"><%= rando.description %></td>
+							    <td><%= score.to_i %>% compatible</td>
+							    <td>
+							      <%= form_for(@group) do |f| %>
+							        <%= hidden_field_tag("newuser", rando.id) %>
+							        <%= hidden_field_tag("isbn", params[:isbn]) %>
+							        <%= f.submit "Select", :class => "button small radius" %>
+							      <% end %>
+							    </td>
+							</tr>
+
+
+						<% end %>
 					<% end %>
 				</table>
 			</div>
