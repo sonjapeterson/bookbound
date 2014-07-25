@@ -59,7 +59,10 @@ module GroupsHelper
 			# weigh the three scores, calculate total compatibility
 			totalCompatibility = (0.3 * genreCompatibility + 0.4 * bookCompatibility + 0.3 * locationCompatibility) * 100
 
-
+			if totalCompatibility <= 10
+				totalCompatibility += 10
+			end
+			
 			userScores[user] = totalCompatibility.to_f
 
 			# reset compatibility scores
