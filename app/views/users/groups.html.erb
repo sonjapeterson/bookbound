@@ -29,7 +29,7 @@
 						<div class="progress small-#  radius round">
 		  			<span class="meter" style="width: 0%"></span>
 					</div>
-				<%end %>
+				<% end %>
 			<% end %>
 			</li>
 		<% end %>
@@ -113,7 +113,6 @@
 				<div  style="background-image: url(<%= group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
 			<% end %>
 				<% if group.users.count > 1 %>
-			<br>
 			<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %></li>
 			<% end %>
 		<% end %>
