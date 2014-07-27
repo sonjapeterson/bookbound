@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
     end
     @group.book = @book
     @group.save
-    @note = Note.new(group_id: @group.id, pagenumber: 1, body: "This is an example of what a note looks like. Start writing notes to each other using the form below!", user_id: current_user.id)
+    @note = Note.new(group_id: @group.id, pagenumber: 1, body: "This is an example of what a note looks like. Start writing notes to each other by clicking 'Add a Note\' above!", user_id: current_user.id)
     @note.save
     @request = Request.new(requester_id: current_user.id, requested_id: params[:newuser], group_id: @group.id, status: false)
     @request.save
