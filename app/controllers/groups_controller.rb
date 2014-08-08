@@ -112,7 +112,7 @@ class GroupsController < ApplicationController
 
   private
     def note_display(note, last_page_read)
-      if note.pagenumber <= last_page_read
+      if note.pagenumber <= last_page_read || @group.status == false
         return note.body
       else
         return "Read further to unlock this note!"

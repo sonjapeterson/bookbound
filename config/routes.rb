@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get '/searchbooks', to: 'groups#searchbooks'
   post '/searchusers', to: 'groups#searchusers'
   get '/searchusers', to: 'groups#searchusers'
-  post 'groups/finish_book', to: 'groups#finish_book'
+  post 'groups/:id/finish_book', to: 'groups#finish_book'
   match 'groups/:id/list', to: 'groups#list', via: 'get', as: :groups_list
 
   get 'about', to: 'static_pages#about'
