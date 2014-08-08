@@ -1,5 +1,5 @@
 module GroupsHelper
-	def find_matching_users
+	def find_matching_users(searchfrom)
 
 		userScores = {}
 		genreCompatibility = 0
@@ -14,7 +14,7 @@ module GroupsHelper
 		end
 
 		# iterate through all users in the database
-		User.where.not(id: current_user.id).each do |user|
+		searchfrom.where.not(id: current_user.id).each do |user|
 
 			# calculate compatibility based on genres in common
 			Genre.column_names.each do |specificGenre|
@@ -77,8 +77,8 @@ module GroupsHelper
 
 		# return top 10 users
 		topMatches = {}
-		if User.all.count < 11
-			numberOfMatches = User.all.count - 1
+		if searchfrom.count < 11
+			numberOfMatches = searchfrom.count - 1
 		else
 			numberOfMatches = 10
 		end
