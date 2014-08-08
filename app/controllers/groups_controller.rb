@@ -48,8 +48,8 @@ class GroupsController < ApplicationController
     @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'}).first
     @randos = find_matching_users(User.all)
     @graph = Koala::Facebook::API.new(current_user.oauth_token)
-    @friends = @graph.get_connections("me", "friends") # API only returns friends who are also using Bookbound
-    @group = Group.new
+    @friends = find_matching_users(@graph.get_connections("me", "friends")) # API only returns friends who are also using Bookbound
+    @group = Group.new # does this line do anything?
   end
 
   def searchusers
