@@ -11,6 +11,7 @@ gem 'area'
 gem 'jquery-validation-rails'
 gem 'fabrication'
 gem 'faker'
+gem 'rtesseract'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
