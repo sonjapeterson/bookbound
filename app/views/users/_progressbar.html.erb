@@ -1,0 +1,12 @@
+<% if group.notes.where(user_id: @user.id).order('pagenumber DESC').first != nil %>
+	<h6><%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '% Complete' %></h6>
+	<div class="progress small-#  radius round">
+		<span class="meter" style="width: <%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '%' %>"></span>
+	</div>
+
+<% else %> 
+	<h6>0% Complete </h6>
+	<div class="progress small-#  radius round">
+		<span class="meter" style="width: 0%"></span>
+	</div>
+<% end %>

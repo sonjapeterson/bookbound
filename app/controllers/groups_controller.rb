@@ -44,22 +44,12 @@ class GroupsController < ApplicationController
     @sbooks = GoogleBooks.search(params[:query], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :count => 30, :country => 'US'})
   end
 
-  def displayusersearch
-    @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'}).first
-    @randos = find_matching_users
-    @group = Group.new
-  end
-
   def searchusers
      @book = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'}).first
-     @susers = User.where(nil) # creates an anonymous scope
-     @susers = @susers.starts_with(params[:starts_with].downcase) if params[:starts_with].present?
-     @susers = @susers.location_starts_with(params[:location].downcase) if params[:location].present?
+     @susers = User.starts_with(params[:starts_with].downcase) if params[:starts_with].present?
+     @randos = find_matching_users
      @group = Group.new
      @isbn = params[:isbn]
-  end
-
-  def displaybooksearch
   end
 
   def show

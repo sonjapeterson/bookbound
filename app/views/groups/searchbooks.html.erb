@@ -1,11 +1,11 @@
 <%= render 'groups/book_search' %>
-
+<% if !@sbooks.nil?  %>
 <div class="row">
 	<div class="large-12 small-12 columns">
-		<% if !@sbooks.nil?  %>
+		
 				<% @sbooks.each do |onebook| %>
 					<% if onebook.isbn != nil %>
-				<a href="/displayusersearch?isbn=<%= onebook.isbn %>">
+				<a href="/searchusers?isbn=<%= onebook.isbn %>">
 					<div class="row roundbox outer clickable">
 				 			<div class="large-1 small-4 columns">
 					 			<img src='<%= onebook.image_link %>' class="bookimage">
@@ -39,3 +39,5 @@
 		<% else %> 
 			Search failed.
 		<% end %> 
+</div>
+</div>

@@ -12,7 +12,7 @@
     <% if current_user %>
         <ul class="right">
               <li><%= link_to "My Books", groups_user_path(current_user) %></li>
-              <li><%= link_to "Start a Book", displaybooksearch_path %></li>
+              <li><%= link_to "Start a Book", searchbooks_path %></li>
           <li class="has-dropdown">
             <%= link_to image_tag(current_user.image, :class => "thumbnail") + current_user.name, current_user %>
             <ul class="dropdown">

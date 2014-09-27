@@ -1,82 +1,71 @@
-<div class="grayback">
 <div class="row">
 <div class="large-12 small-12 columns roundbox outer">
 
-<h2>Currently Reading</h2>
+	<h2>Currently Reading</h2>
 
-	<% if @groups.where(status: true).empty? %>
-		<h6>You are not reading any books. <%= link_to "Start a book!", displaybooksearch_path %></h6>
-	<% else %>
-		<h6>These are books you're currently reading with a partner. </h6>
-	<% end %>
+		<% if @currentlyreading.empty? %>
+			<h6>You are not reading any books. <%= link_to "Start a book!", searchbooks_path %></h6>
+		<% else %>
+			<h6>These are books you're currently reading with a partner. </h6>
+		<% end %>
 
-<ul class="small-block-grid-1 large-block-grid-6 large-text-center">
-
-
-	<% @groups.each do |group| %>
-		<% if group.users.count > 1 && group.status == true %>
-			<%= link_to  group_path(group.id) do %>
-				<li><div  style="background-image: url(<%=group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
-			<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %><br>
-			<% if group.notes.where(user_id: @user.id).order('pagenumber DESC').first != nil %>
-					<h6><%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '% Complete' %></h6>
-					<div class="progress small-#  radius round">
-		  			<span class="meter" style="width: <%= ((group.notes.where(user_id: @user.id).order('pagenumber DESC').first.pagenumber.to_f / group.book.pagecount.to_f)*100.0).to_i.to_s + '%' %>"></span>
-					</div>
-
-				<% else %> 
-						<h6>0% Complete </h6>
-						<div class="progress small-#  radius round">
-		  			<span class="meter" style="width: 0%"></span>
-					</div>
+		<ul class="small-block-grid-1 large-block-grid-6 small-text-center">
+			<% @currentlyreading.each do |group| %>
+				<% if group.users.count > 1 && group.status == true %>
+					<%= link_to  group_path(group.id) do %>
+						<li>
+							<%= render 'users/bookpic', group: group %>
+							<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %><br>
+							<%= render 'users/progressbar', group: group %>
+						</li>
+					<% end %>
 				<% end %>
 			<% end %>
-			</li>
-		<% end %>
-	<% end %>
-</ul>
+		</ul>
+</div>
+</div>
 
-</div>
-</div>
-<% if !@requests.where(requested_id: params[:id]).first.nil? || !@requests.where(requester_id: params[:id]).first.nil? %>
-<div class="row">
+<% if !@requestsforyou.empty? || !@yourrequests.empty? %>
+	<div class="row">
 	<div class="large-12 small-12 columns roundbox outer">
-<h2>To Read</h2>
-<h6>These are your pending pair requests.</h6>
-<div class="row">
-	<div class="large-6 small-12 columns roundbox">
-		<h3>Requests for you</h3>
-			<ul class="small-block-grid-1 large-block-grid-3 large-text-center">
-						<% @requests.where(requested_id: params[:id]).each do |request| %>
+		<% if !@requestsforyou.empty? %>
+			<h2>To Read</h2>
+			<h6>These are your pending pair requests.</h6>
+			<div class="row">
+			<div class="large-6 small-12 columns roundbox">
+				<h3>Requests for you</h3>
+				<ul class="small-block-grid-1 large-block-grid-3">
+						<% @requestsforyou.each do |request| %>
 							<li>
-								<%= link_to book_path(Group.find(request.group_id).book) do %>	
-									<div  style="background-image: url(<%=Group.find(request.group_id).book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
-								<% end %>
-						
-							<%= link_to "with " + User.find(request.requester_id).name, group_path(Group.find(request.group_id)) %>
-							<ul class="text-center buttonlist">
-								<li>
-									<%= form_tag('requests/confirm') do %>
-										<%= hidden_field_tag("request", request.id) %>
-										<%= submit_tag "&#x2713".html_safe, :class=> "yesbutton", :confirm => 'Sure?' %>
+									<%= link_to book_path(Group.find(request.group_id).book) do %>
+										<%= render 'users/bookpic', group: Group.find(request.group_id) %>	 
 									<% end %>
-								</li>
-								<li>
-									<%= form_tag('requests/delete') do %>
-										<%= hidden_field_tag("request", request.id) %>
-										<%= submit_tag "&#x2717;".html_safe, :class => "nobutton", :confirm => 'Sure?' %>
-									<% end %></li>
-								</ul>
-							</li>
-						<% end %>
-					</ul>
-	</div>
+									<%= link_to "with " + User.find(request.requester_id).name, group_path(Group.find(request.group_id)) %>
+									<ul class="large-text-center buttonlist">
+										<li>
+											<%= form_tag('requests/confirm') do %>
+												<%= hidden_field_tag("request", request.id) %>
+												<%= submit_tag "&#x2713".html_safe, :class=> "yesbutton", :confirm => 'Sure?' %>
+											<% end %>
+										</li>
+										<li>
+											<%= form_tag('requests/delete') do %>
+												<%= hidden_field_tag("request", request.id) %>
+												<%= submit_tag "&#x2717;".html_safe, :class => "nobutton", :confirm => 'Sure?' %>
+											<% end %></li>
+										</ul>
+									</li>
+							<% end %>
+						</ul>
+		</div>
+		<% end %>
+
 	<div class="large-6 small-12 columns roundbox">
 		<h3>Your Requests</h3>
 				<ul class="small-block-grid-1 large-block-grid-3 large-text-center">
 						<% @requests.where(requester_id: params[:id]).each do |request| %>
 							<li>
-								<%= link_to  group_path(Group.find(request.group_id)) do %>	
+								<%= link_to group_path(Group.find(request.group_id)) do %>	
 									<div  style="background-image: url(<%=Group.find(request.group_id).book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
 								<% end %>
 							
@@ -85,13 +74,12 @@
 								<%= form_tag('requests/delete') do %>
 									<%= hidden_field_tag("request", request.id) %>
 									<%= submit_tag "&#x2717;".html_safe, :class => "nobutton", :confirm => 'Sure?' %>
-
 								<% end %>
 							</li>
 						<% end %>
 					</ul>
+		</div>
 	</div>
-</div>
 </div>
 </div>
 <% end %>
@@ -110,10 +98,11 @@
 	<% @groups.each do |group| %>
 		<% if group.status == false %>
 			<li><%= link_to group_path(group.id) do %>	
-				<div  style="background-image: url(<%= group.book.imagelinksmall%>); background-position: center center; background-size: contain; background-repeat: no-repeat; height: 13em; width: 10em;" ></div>
+				<%= render 'users/bookpic', group: group %>
 			<% end %>
 				<% if group.users.count > 1 %>
-			<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %></li>
+				<%= link_to "with " + group.users.where.not(id: params[:id]).first.name, group_path(group.id) %>
+			</li>
 			<% end %>
 		<% end %>
 	<% end %>
@@ -123,5 +112,3 @@
 
 </div>
 </div>
-</div>
-

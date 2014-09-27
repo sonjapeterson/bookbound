@@ -4,9 +4,6 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'invite', to: 'static_pages#invite'
   match 'sendinvite', to: 'static_pages#sendinvite', via: 'post', as: :sendinvite
-  match 'displaybooksearch', to: 'groups#displaybooksearch', via: 'get', as: :displaybooksearch
-
-  match 'displayusersearch', to: 'groups#displayusersearch', via: 'get', as: :displayusersearch
   resources :users
   get 'users/dashboard'
 

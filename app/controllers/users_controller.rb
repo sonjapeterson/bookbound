@@ -31,6 +31,10 @@ class UsersController < ApplicationController
 	def groups
 		@groups = User.find(params[:id]).groups
 		@requests = Request.where(status: false)
+		@currentlyreading = @groups.where(status: true)
+		@requestsforyou = @requests.where(requested_id: params[:id])
+		@yourrequests = @requests.where(requester_id: params[:id])
+		@haveread = @groups.where(status: false)
 	end
 
 	def destroy
