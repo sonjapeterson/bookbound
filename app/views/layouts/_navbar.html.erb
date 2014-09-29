@@ -14,7 +14,11 @@
               <li><%= link_to "My Books", groups_user_path(current_user) %></li>
               <li><%= link_to "Start a Book", searchbooks_path %></li>
           <li class="has-dropdown">
+            <% if current_user.notifications.where(read: false).count > 0 %>
+            <%= link_to image_tag(current_user.image, :class => "thumbnail") + current_user.name + " " + content_tag(:span, current_user.notifications.where(read: false).count.to_s, :class => "notesquare"), current_user %>
+            <% else %>
             <%= link_to image_tag(current_user.image, :class => "thumbnail") + current_user.name, current_user %>
+            <% end %>
             <ul class="dropdown">
               <li>
                 <% if !current_user.notifications.where(read: false).empty? %>

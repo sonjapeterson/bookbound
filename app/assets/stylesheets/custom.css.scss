@@ -11,6 +11,7 @@
 
 body {
   background-color: #EAEAEA;
+  font-size: 16px;
 }
 
 div.grayback {
@@ -58,6 +59,15 @@ div.grayback {
   border: 2px solid #D51B36;
   border-radius: 10px;
   margin: 10px;
+}
+
+.notesquare {
+  background-color: black;
+  padding: 2px 8px;
+  margin-left: 2px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  line-height: 1em;
 }
 
 #logo {

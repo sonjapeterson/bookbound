@@ -19,14 +19,15 @@ class GroupsController < ApplicationController
     @group.save
     @group.users << current_user
 
-    @bookz = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'})
+    @books = GoogleBooks.search(params[:isbn], {:api_key => 'AIzaSyAs8X56EGpdbQnW5WswlTNcItzLZGP7uLI', :country => 'US'})
 
-    chosenbook = @bookz.first
+    chosenbook = @books.first
     @book = Book.new(title: chosenbook.title, author: chosenbook.authors, publisher: chosenbook.publisher, datepublished: chosenbook.published_date, pagecount: chosenbook.page_count, summary: chosenbook.description, imagelinklarge: chosenbook.image_link, imagelinksmall: chosenbook.image_link, previewlink: chosenbook.preview_link)
 
     if @book.pagecount.nil?
       @book.pagecount = 1000
     end
+    
     @group.book = @book
     @group.save
     @note = Note.new(group_id: @group.id, pagenumber: 1, body: "This is an example of what a note looks like. Start writing notes to each other by clicking 'Add a Note\' above!", user_id: current_user.id)
