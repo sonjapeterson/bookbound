@@ -47,6 +47,7 @@ group :development, :test do
     gem 'pry-rails'
     gem 'sqlite3'
     gem 'rspec-rails'
+    gem 'factory_girl_rails'
 end
 
 ruby '2.0.0'
