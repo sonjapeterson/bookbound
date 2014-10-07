@@ -46,6 +46,7 @@ group :development, :test do
     gem 'railroady'
     gem 'pry-rails'
     gem 'sqlite3'
+    gem 'rspec-rails'
 end
 
 ruby '2.0.0'
