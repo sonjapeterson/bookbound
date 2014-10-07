@@ -10,6 +10,8 @@ describe Book do
 
 	it { should respond_to(:title) }
 	it { should respond_to(:author) }
+	it { should respond_to(:pagecount) }
+	it { should respond_to(:summary) }
 
 	it "has a valid factory" do
 		expect(@book).to be_valid
