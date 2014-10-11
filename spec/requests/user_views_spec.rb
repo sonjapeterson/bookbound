@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe "User pages" do
+RSpec.describe "User pages", type: :request do
 
 	describe "Home page" do
 		before { visit root_path }
