@@ -19,11 +19,34 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'factory_girl'
+require 'capybara/rails'
+require 'require_all'
+require_rel 'support'
+
+OmniAuth.config.test_mode = true
+omniauth_hash = OmniAuth::AuthHash.new({ 'provider' => 'facebook',
+                  'uid' => '12345',
+                  'info' => {
+                      'name' => 'natasha',
+                      'email' => 'hi@natashatherobot.com',
+                      'nickname' => 'NatashaTheRobot'
+                  },
+                  'extra' => {'raw_info' =>
+                                  { 'location' => 'San Francisco',
+                                    'gravatar_id' => '123456789'
+                                  }
+                  }
+})
+ 
+OmniAuth.config.add_mock(:facebook, omniauth_hash)
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
+  config.include Capybara::DSL
+  config.include Rails.application.routes.url_helpers
+  # config.include(OmniauthMacros)
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
@@ -43,7 +66,6 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
-
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.

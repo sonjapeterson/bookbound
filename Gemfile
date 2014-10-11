@@ -23,7 +23,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
-
+gem 'require_all'
 # Use sqlite3 as the database for Active Record
 group :production do
 	gem 'pg'
@@ -48,6 +48,7 @@ group :development, :test do
     gem 'sqlite3'
     gem 'rspec-rails'
     gem 'factory_girl_rails'
+    gem 'capybara'
 end
 
 ruby '2.0.0'
